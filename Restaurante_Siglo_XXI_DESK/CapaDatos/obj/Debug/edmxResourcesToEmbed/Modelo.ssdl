@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BEBESTIBLE">
+    <Key>
+      <PropertyRef Name="ID_BEBESTIBLE" />
+    </Key>
+    <Property Name="ID_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO_BEBESTIBLE" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="PRECIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BOLETA">
+    <Key>
+      <PropertyRef Name="ID_BOLETA" />
+      <PropertyRef Name="MESA_ID_MESA" />
+    </Key>
+    <Property Name="ID_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TOTAL_PAGAR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MONTO_PAGADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHA_BOLETA" Type="date" Nullable="false" />
+    <Property Name="CAMBIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FACTURA_COMPRA">
+    <Key>
+      <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
+      <PropertyRef Name="PROD_U_MEDIDA_ID_MEDIDA" />
+      <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
+    </Key>
+    <Property Name="NRO_COMPRA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHA_PEDIDO" Type="date" Nullable="false" />
+    <Property Name="PRODUCTO_ID_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PROD_U_MEDIDA_ID_MEDIDA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PROVEEDOR_ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PRECIO_UNITARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MESA">
+    <Key>
+      <PropertyRef Name="ID_MESA" />
+    </Key>
+    <Property Name="ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NUM_ASIENTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ESTADO" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MESA_RESERVA">
+    <Key>
+      <PropertyRef Name="MESA_ID_MESA" />
+      <PropertyRef Name="RESERVA_ID_RESERVA" />
+      <PropertyRef Name="RESERVA_RUT" />
+      <PropertyRef Name="RESERVA_ID_ROL" />
+    </Key>
+    <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RESERVA_ID_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RESERVA_RUT" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="RESERVA_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="METODO_PAGO">
+    <Key>
+      <PropertyRef Name="ID_METODO_PAGO" />
+      <PropertyRef Name="BOLETA_ID_BOLETA" />
+      <PropertyRef Name="BOLETA_ID_MESA" />
+    </Key>
+    <Property Name="ID_METODO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO_PAGO" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="NRO_CLIENTES" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BOLETA_ID_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BOLETA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ORDEN">
+    <Key>
+      <PropertyRef Name="PLATO_ID_PLATO" />
+      <PropertyRef Name="PEDIDO_ID_PEDIDO" />
+      <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
+    </Key>
+    <Property Name="CANTIDAD_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PLATO_ID_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BEBESTIBLE_ID_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PEDIDO">
+    <Key>
+      <PropertyRef Name="ID_PEDIDO" />
+    </Key>
+    <Property Name="ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ESATADO_PEDIDO" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="TIEMPO" Type="date" Nullable="false" />
+    <Property Name="TIPO_PEDIDO" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PEDIDO_MESA">
+    <Key>
+      <PropertyRef Name="PEDIDO_ID_PEDIDO" />
+      <PropertyRef Name="MESA_ID_MESA" />
+    </Key>
+    <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PLATO">
+    <Key>
+      <PropertyRef Name="ID_PLATO" />
+    </Key>
+    <Property Name="ID_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RECETA" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="IMAGEN_PLATO" Type="blob" Nullable="false" />
+    <Property Name="PRECIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PREPARACION">
+    <Key>
+      <PropertyRef Name="PLATO_ID_PLATO" />
+      <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
+      <PropertyRef Name="PRODUCTO_ID_MEDIDA" />
+      <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
+    </Key>
+    <Property Name="CANTIDAD_PRO_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PLATO_ID_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PRODUCTO_ID_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PRODUCTO_ID_MEDIDA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_PRO_BEBEST" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BEBESTIBLE_ID_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_PRODUCTO" />
+      <PropertyRef Name="UNIDAD_MEDIDA_ID_MEDIDA" />
+    </Key>
+    <Property Name="ID_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STOCK" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="UNIDAD_MEDIDA_ID_MEDIDA" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="ID_PROVEEDOR" />
+    </Key>
+    <Property Name="ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO_PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="REPORTE_FINANZA">
+    <Key>
+      <PropertyRef Name="ID_REPORTE" />
+      <PropertyRef Name="USUARIO_RUT" />
+      <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+    </Key>
+    <Property Name="ID_REPORTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHA" Type="date" Nullable="false" />
+    <Property Name="TOTAL_GASTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TOTAL_BRUTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="GANANCIA_NETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RESERVA">
+    <Key>
+      <PropertyRef Name="ID_RESERVA" />
+      <PropertyRef Name="USUARIO_RUT" />
+      <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+    </Key>
+    <Property Name="ID_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="HORA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHA" Type="date" Nullable="false" />
+    <Property Name="ESTADO_RESERVA" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+    </Key>
+    <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO_ROL" Type="varchar2" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UNIDAD_MEDIDA">
+    <Key>
+      <PropertyRef Name="ID_MEDIDA" />
+    </Key>
+    <Property Name="ID_MEDIDA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="RUT" />
+      <PropertyRef Name="ROL_ID_ROL" />
+    </Key>
+    <Property Name="RUT" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="APELLIDO_P" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="APELLIDO_M" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="CLAVE" Type="varchar2" MaxLength="50" />
+  </EntityType>
+  <Association Name="BOLETA_MESA_FK">
+    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MESA">
+        <PropertyRef Name="ID_MESA" />
+      </Principal>
+      <Dependent Role="BOLETA">
+        <PropertyRef Name="MESA_ID_MESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FACTURA_COMPRA_PRODUCTO_FK">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="FACTURA_COMPRA" Type="Self.FACTURA_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="ID_PRODUCTO" />
+        <PropertyRef Name="UNIDAD_MEDIDA_ID_MEDIDA" />
+      </Principal>
+      <Dependent Role="FACTURA_COMPRA">
+        <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
+        <PropertyRef Name="PROD_U_MEDIDA_ID_MEDIDA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FACTURA_COMPRA_PROVEEDOR_FK">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="FACTURA_COMPRA" Type="Self.FACTURA_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="FACTURA_COMPRA">
+        <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="METODO_PAGO_BOLETA_FK">
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
+    <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOLETA">
+        <PropertyRef Name="ID_BOLETA" />
+        <PropertyRef Name="MESA_ID_MESA" />
+      </Principal>
+      <Dependent Role="METODO_PAGO">
+        <PropertyRef Name="BOLETA_ID_BOLETA" />
+        <PropertyRef Name="BOLETA_ID_MESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ORDEN_BEBESTIBLE_FK">
+    <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BEBESTIBLE">
+        <PropertyRef Name="ID_BEBESTIBLE" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ORDEN_PEDIDO_FK">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="ID_PEDIDO" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="PEDIDO_ID_PEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ORDEN_PLATO_FK">
+    <End Role="PLATO" Type="Self.PLATO" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLATO">
+        <PropertyRef Name="ID_PLATO" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="PLATO_ID_PLATO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PEDIDO_USUARIO_FK">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="RUT" />
+        <PropertyRef Name="ROL_ID_ROL" />
+      </Principal>
+      <Dependent Role="PEDIDO">
+        <PropertyRef Name="USUARIO_RUT" />
+        <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PREPARACION_BEBESTIBLE_FK">
+    <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="1" />
+    <End Role="PREPARACION" Type="Self.PREPARACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BEBESTIBLE">
+        <PropertyRef Name="ID_BEBESTIBLE" />
+      </Principal>
+      <Dependent Role="PREPARACION">
+        <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PREPARACION_PLATO_FK">
+    <End Role="PLATO" Type="Self.PLATO" Multiplicity="1" />
+    <End Role="PREPARACION" Type="Self.PREPARACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLATO">
+        <PropertyRef Name="ID_PLATO" />
+      </Principal>
+      <Dependent Role="PREPARACION">
+        <PropertyRef Name="PLATO_ID_PLATO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PREPARACION_PRODUCTO_FK">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="PREPARACION" Type="Self.PREPARACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="ID_PRODUCTO" />
+        <PropertyRef Name="UNIDAD_MEDIDA_ID_MEDIDA" />
+      </Principal>
+      <Dependent Role="PREPARACION">
+        <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
+        <PropertyRef Name="PRODUCTO_ID_MEDIDA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PRODUCTO_UNIDAD_MEDIDA_FK">
+    <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UNIDAD_MEDIDA">
+        <PropertyRef Name="ID_MEDIDA" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="UNIDAD_MEDIDA_ID_MEDIDA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RELATION_13_MESA_FK">
+    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+    <End Role="MESA_RESERVA" Type="Self.MESA_RESERVA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MESA">
+        <PropertyRef Name="ID_MESA" />
+      </Principal>
+      <Dependent Role="MESA_RESERVA">
+        <PropertyRef Name="MESA_ID_MESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RELATION_13_RESERVA_FK">
+    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+    <End Role="MESA_RESERVA" Type="Self.MESA_RESERVA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RESERVA">
+        <PropertyRef Name="ID_RESERVA" />
+        <PropertyRef Name="USUARIO_RUT" />
+        <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+      </Principal>
+      <Dependent Role="MESA_RESERVA">
+        <PropertyRef Name="RESERVA_ID_RESERVA" />
+        <PropertyRef Name="RESERVA_RUT" />
+        <PropertyRef Name="RESERVA_ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RELATION_7_MESA_FK">
+    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+    <End Role="PEDIDO_MESA" Type="Self.PEDIDO_MESA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MESA">
+        <PropertyRef Name="ID_MESA" />
+      </Principal>
+      <Dependent Role="PEDIDO_MESA">
+        <PropertyRef Name="MESA_ID_MESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RELATION_7_PEDIDO_FK">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="PEDIDO_MESA" Type="Self.PEDIDO_MESA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="ID_PEDIDO" />
+      </Principal>
+      <Dependent Role="PEDIDO_MESA">
+        <PropertyRef Name="PEDIDO_ID_PEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="REPORTE_FINANZA_USUARIO_FK">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="REPORTE_FINANZA" Type="Self.REPORTE_FINANZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="RUT" />
+        <PropertyRef Name="ROL_ID_ROL" />
+      </Principal>
+      <Dependent Role="REPORTE_FINANZA">
+        <PropertyRef Name="USUARIO_RUT" />
+        <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RESERVA_USUARIO_FK">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="RUT" />
+        <PropertyRef Name="ROL_ID_ROL" />
+      </Principal>
+      <Dependent Role="RESERVA">
+        <PropertyRef Name="USUARIO_RUT" />
+        <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USUARIO_ROL_FK">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID_ROL" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="ROL_ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AGREGARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDMESA" Type="number" Mode="In" />
+    <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
+    <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
+  </Function>
+  <Function Name="AGREGARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="STOCK" Type="number" Mode="In" />
+    <Parameter Name="TIPOPRODUCTO" Type="varchar2" Mode="In" />
+    <Parameter Name="UNIDADMEDIDAID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="AGREGARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDPROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="TIPOPROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="AGREGARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
+    <Parameter Name="HORAS" Type="number" Mode="In" />
+    <Parameter Name="FECHAS" Type="date" Mode="In" />
+    <Parameter Name="ESTADORESERVA" Type="varchar2" Mode="In" />
+    <Parameter Name="USUARIORUT" Type="varchar2" Mode="In" />
+    <Parameter Name="USUARIOROL" Type="number" Mode="In" />
+  </Function>
+  <Function Name="AGREGARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="RUT" Type="varchar2" Mode="In" />
+    <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDOP" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDOM" Type="varchar2" Mode="In" />
+    <Parameter Name="ROLIDROL" Type="number" Mode="In" />
+    <Parameter Name="CORREOS" Type="varchar2" Mode="In" />
+    <Parameter Name="DIRECCIONES" Type="varchar2" Mode="In" />
+    <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDMESA" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDPRODUCTO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDPROVEEDOR" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="RUT" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="LISTARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
+  <Function Name="LISTARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
+  <Function Name="LISTARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
+  <Function Name="LISTARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
+  <Function Name="LISTARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
+  <Function Name="MODIFICARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDMESA" Type="number" Mode="In" />
+    <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
+    <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
+  </Function>
+  <Function Name="MODIFICARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="STOCK" Type="number" Mode="In" />
+    <Parameter Name="TIPOPRODUCTO" Type="varchar2" Mode="In" />
+    <Parameter Name="UNIDADMEDIDAID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="MODIFICARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDPROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="TIPOPROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="MODIFICARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
+    <Parameter Name="HORAS" Type="number" Mode="In" />
+    <Parameter Name="FECHAS" Type="date" Mode="In" />
+    <Parameter Name="ESTADORESERVA" Type="varchar2" Mode="In" />
+    <Parameter Name="USUARIORUT" Type="varchar2" Mode="In" />
+    <Parameter Name="USUARIOROL" Type="number" Mode="In" />
+  </Function>
+  <Function Name="MODIFICARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="RUT" Type="varchar2" Mode="In" />
+    <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDOP" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDOM" Type="varchar2" Mode="In" />
+    <Parameter Name="ROLIDROL" Type="number" Mode="In" />
+    <Parameter Name="CORREOS" Type="varchar2" Mode="In" />
+    <Parameter Name="DIRECCIONES" Type="varchar2" Mode="In" />
+    <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="P_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="NOM_USER" Type="varchar2" Mode="In" />
+    <Parameter Name="PASS" Type="varchar2" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="BEBESTIBLE" EntityType="Self.BEBESTIBLE" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="FACTURA_COMPRA" EntityType="Self.FACTURA_COMPRA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="MESA" EntityType="Self.MESA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="MESA_RESERVA" EntityType="Self.MESA_RESERVA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="METODO_PAGO" EntityType="Self.METODO_PAGO" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="PEDIDO_MESA" EntityType="Self.PEDIDO_MESA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="PLATO" EntityType="Self.PLATO" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="PREPARACION" EntityType="Self.PREPARACION" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="REPORTE_FINANZA" EntityType="Self.REPORTE_FINANZA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" Schema="ANGEL" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="ANGEL" store:Type="Tables" />
+    <AssociationSet Name="BOLETA_MESA_FK" Association="Self.BOLETA_MESA_FK">
+      <End Role="MESA" EntitySet="MESA" />
+      <End Role="BOLETA" EntitySet="BOLETA" />
+    </AssociationSet>
+    <AssociationSet Name="FACTURA_COMPRA_PRODUCTO_FK" Association="Self.FACTURA_COMPRA_PRODUCTO_FK">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="FACTURA_COMPRA" EntitySet="FACTURA_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FACTURA_COMPRA_PROVEEDOR_FK" Association="Self.FACTURA_COMPRA_PROVEEDOR_FK">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="FACTURA_COMPRA" EntitySet="FACTURA_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="METODO_PAGO_BOLETA_FK" Association="Self.METODO_PAGO_BOLETA_FK">
+      <End Role="BOLETA" EntitySet="BOLETA" />
+      <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
+    </AssociationSet>
+    <AssociationSet Name="ORDEN_BEBESTIBLE_FK" Association="Self.ORDEN_BEBESTIBLE_FK">
+      <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="ORDEN_PEDIDO_FK" Association="Self.ORDEN_PEDIDO_FK">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="ORDEN_PLATO_FK" Association="Self.ORDEN_PLATO_FK">
+      <End Role="PLATO" EntitySet="PLATO" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="PEDIDO_USUARIO_FK" Association="Self.PEDIDO_USUARIO_FK">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="PREPARACION_BEBESTIBLE_FK" Association="Self.PREPARACION_BEBESTIBLE_FK">
+      <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
+      <End Role="PREPARACION" EntitySet="PREPARACION" />
+    </AssociationSet>
+    <AssociationSet Name="PREPARACION_PLATO_FK" Association="Self.PREPARACION_PLATO_FK">
+      <End Role="PLATO" EntitySet="PLATO" />
+      <End Role="PREPARACION" EntitySet="PREPARACION" />
+    </AssociationSet>
+    <AssociationSet Name="PREPARACION_PRODUCTO_FK" Association="Self.PREPARACION_PRODUCTO_FK">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PREPARACION" EntitySet="PREPARACION" />
+    </AssociationSet>
+    <AssociationSet Name="PRODUCTO_UNIDAD_MEDIDA_FK" Association="Self.PRODUCTO_UNIDAD_MEDIDA_FK">
+      <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="RELATION_13_MESA_FK" Association="Self.RELATION_13_MESA_FK">
+      <End Role="MESA" EntitySet="MESA" />
+      <End Role="MESA_RESERVA" EntitySet="MESA_RESERVA" />
+    </AssociationSet>
+    <AssociationSet Name="RELATION_13_RESERVA_FK" Association="Self.RELATION_13_RESERVA_FK">
+      <End Role="RESERVA" EntitySet="RESERVA" />
+      <End Role="MESA_RESERVA" EntitySet="MESA_RESERVA" />
+    </AssociationSet>
+    <AssociationSet Name="RELATION_7_MESA_FK" Association="Self.RELATION_7_MESA_FK">
+      <End Role="MESA" EntitySet="MESA" />
+      <End Role="PEDIDO_MESA" EntitySet="PEDIDO_MESA" />
+    </AssociationSet>
+    <AssociationSet Name="RELATION_7_PEDIDO_FK" Association="Self.RELATION_7_PEDIDO_FK">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="PEDIDO_MESA" EntitySet="PEDIDO_MESA" />
+    </AssociationSet>
+    <AssociationSet Name="REPORTE_FINANZA_USUARIO_FK" Association="Self.REPORTE_FINANZA_USUARIO_FK">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="REPORTE_FINANZA" EntitySet="REPORTE_FINANZA" />
+    </AssociationSet>
+    <AssociationSet Name="RESERVA_USUARIO_FK" Association="Self.RESERVA_USUARIO_FK">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="RESERVA" EntitySet="RESERVA" />
+    </AssociationSet>
+    <AssociationSet Name="USUARIO_ROL_FK" Association="Self.USUARIO_ROL_FK">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

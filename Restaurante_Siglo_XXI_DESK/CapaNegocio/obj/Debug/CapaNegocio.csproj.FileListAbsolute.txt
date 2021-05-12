@@ -1,0 +1,14 @@
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\obj\Debug\CapaNegocio.csprojAssemblyReference.cache
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\obj\Debug\CapaNegocio.csproj.CoreCompileInputs.cache
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\CapaNegocio.dll.config
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\CapaNegocio.dll
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\CapaNegocio.pdb
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\CapaDatos.dll
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\EntityFramework.dll
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\CapaDatos.pdb
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\CapaDatos.dll.config
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\bin\Debug\EntityFramework.xml
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\obj\Debug\CapaNegocio.csproj.CopyComplete
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\obj\Debug\CapaNegocio.dll
+C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaNegocio\obj\Debug\CapaNegocio.pdb
