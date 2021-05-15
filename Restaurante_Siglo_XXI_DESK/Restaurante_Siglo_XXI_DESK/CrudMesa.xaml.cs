@@ -44,9 +44,9 @@ namespace Restaurante_Siglo_XXI_DESK
                 {
                     int id = Convert.ToInt32(tbox_idMesa.Text);
                     int numAsientos = Convert.ToInt32(tbox_numAsientos.Text);
-                    string estadoMesa = tbox_estadoMesa.Text;
+                    string estadoMesa = tbox_estadoMesa.Text; 
 
-                    u.agregarMesa(id, numAsientos, estadoMesa);
+                    //u.agregarMesa(id, numAsientos, estadoMesa,rut,rol);
                     await this.ShowMessageAsync("Exito!", "La mesa se agrego correctamente");
                     Limpiar();
                 }
@@ -72,7 +72,7 @@ namespace Restaurante_Siglo_XXI_DESK
                     int numAsientos = Convert.ToInt32(tbox_numAsientos.Text);
                     string estadoMesa = tbox_estadoMesa.Text;
 
-                    u.modificarMesa(id, numAsientos, estadoMesa);
+                    //u.modificarMesa(id, numAsientos, estadoMesa);
                     await this.ShowMessageAsync("Exito!", "La mesa se Modifico correctamente");
                     Limpiar();
                 }

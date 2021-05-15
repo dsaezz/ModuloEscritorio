@@ -12,17 +12,16 @@ namespace CapaDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class ROL
+    public partial class DETALLE_F
     {
-        public ROL()
-        {
-            this.USUARIO = new HashSet<USUARIO>();
-        }
+        public decimal CANTIDAD_PEDIDO { get; set; }
+        public decimal PRECIO_UNITARIO { get; set; }
+        public decimal PRODUCTO_ID_PRODUCTO { get; set; }
+        public decimal PRODUCTO_UNIDAD_MEDIDA_ID_M { get; set; }
+        public decimal FACTURA_PROV_ID_PROVEEDOR { get; set; }
+        public decimal FACTURA_PROVEEDOR_ID_FACTURA { get; set; }
     
-        public decimal ID_ROL { get; set; }
-        public string TIPO_ROL { get; set; }
-        public string ACTIVO { get; set; }
-    
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public virtual FACTURA_PROVEEDOR FACTURA_PROVEEDOR { get; set; }
+        public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }

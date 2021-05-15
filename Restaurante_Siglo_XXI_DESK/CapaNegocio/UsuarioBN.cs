@@ -50,30 +50,7 @@ namespace CapaNegocio
 
         public void ValidarUsuario(string usuario, string clave)
         {
-            //angel
-            conexion.P_USUARIO(usuario, clave);
-
-            /* try
-             {
-
-                 conexion.Open();
-                 OracleCommand cmd = new OracleCommand("p_usuario", conexion);
-                 cmd.CommandType = CommandType.StoredProcedure;
-                 cmd.Parameters.Add("nom_user", OracleDbType.Varchar2).Value = usuario;
-                 cmd.Parameters.Add("pass", OracleDbType.Varchar2).Value = clave;
-                 cmd.ExecuteNonQuery();
-
-
-             }
-             catch (OracleException e)
-             {
-                 string errorMessage = "Code: " + e.ErrorCode + "\n" + "Message: " + e.Message;
-
-             }
-             finally
-             {
-                 conexion.Close();
-             }*/
+           
 
         }
 
@@ -96,7 +73,7 @@ namespace CapaNegocio
         }
         public void agregarUsuario(string rut,string nombre, string apellidoM, string apellidoP,Int32 rol,string correo,string direccion, string clave)
         {
-            conexion.AGREGARUSUARIO(rut,nombre,apellidoP,apellidoM,rol,correo,direccion,clave);
+            conexion.AGREGARUSUARIO(rut,nombre,apellidoP,apellidoM,rol,correo,direccion,clave,"1");
             conexion.SaveChanges();
         }
 
@@ -108,7 +85,7 @@ namespace CapaNegocio
 
         public void modificarUsuario(string rut, string nombre, string apellidoM, string apellidoP, Int32 rol, string correo, string direccion, string clave)
         {
-            conexion.MODIFICARUSUARIO(rut, nombre, apellidoP, apellidoM, rol, correo, direccion, clave);
+            conexion.MODIFICARUSUARIO(rut, nombre, apellidoP, apellidoM, rol, correo, direccion, clave,"1");
             conexion.SaveChanges();
         }
     }

@@ -36,7 +36,7 @@ namespace CapaNegocio
         }
         public void agregarStock(Int32 id, Int32 stock, string tipoProducto, Int32 idUnidadMedida)
         {
-            conexion.AGREGARPRODUCTO(id,stock,tipoProducto,idUnidadMedida);
+            conexion.AGREGARPRODUCTO(id,stock,tipoProducto,idUnidadMedida,"1");
             conexion.SaveChanges();
         }
 
@@ -48,7 +48,7 @@ namespace CapaNegocio
 
         public void modificarStock(Int32 id, Int32 stock, string tipoProducto, Int32 idUnidadMedida)
         {
-            conexion.MODIFICARPRODUCTO(id, stock, tipoProducto, idUnidadMedida);
+            conexion.MODIFICARPRODUCTO(id, stock, tipoProducto, idUnidadMedida,"1");
             conexion.SaveChanges();
         }
     }

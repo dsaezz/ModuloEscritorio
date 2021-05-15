@@ -33,9 +33,9 @@ namespace CapaNegocio
             conn.Close();
             return dt;
         }
-        public void agregarProveedor(Int32 id, string tipo, string nombre)
+        public void agregarProveedor(Int32 id, string tipo, string nombre,string rut, string apellido,string fono,string direccion)
         {
-            conexion.AGREGARPROVEEDOR(id,tipo,nombre);
+            conexion.AGREGARPROVEEDOR(id,tipo,nombre,rut,apellido,fono,direccion,"1");
             conexion.SaveChanges();
         }
 
@@ -45,9 +45,9 @@ namespace CapaNegocio
             conexion.SaveChanges();
         }
 
-        public void modificarProveedor(Int32 id, string tipo, string nombre)
+        public void modificarProveedor(Int32 id, string tipo, string nombre, string rut, string apellido, string fono, string direccion)
         {
-            conexion.MODIFICARPROVEEDOR(id,tipo,nombre);
+            conexion.MODIFICARPROVEEDOR(id,tipo,nombre,rut,apellido,fono,direccion,"1");
             conexion.SaveChanges();
         }
     }

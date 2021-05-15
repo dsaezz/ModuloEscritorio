@@ -12,17 +12,22 @@ namespace CapaDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class ROL
+    public partial class CLIENTE
     {
-        public ROL()
+        public CLIENTE()
         {
-            this.USUARIO = new HashSet<USUARIO>();
+            this.RESERVA = new HashSet<RESERVA>();
         }
     
-        public decimal ID_ROL { get; set; }
-        public string TIPO_ROL { get; set; }
+        public decimal ID_CLIENTE { get; set; }
+        public string RUT { get; set; }
+        public string NOMBRE { get; set; }
+        public string APELLIDO { get; set; }
+        public string CORREO { get; set; }
+        public string DIRECCION { get; set; }
+        public string CLAVE { get; set; }
         public string ACTIVO { get; set; }
     
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public virtual ICollection<RESERVA> RESERVA { get; set; }
     }
 }

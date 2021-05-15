@@ -12,16 +12,16 @@ namespace CapaDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class REPORTE_FINANZA
+    public partial class PREP_BEBESTIBLE
     {
-        public decimal ID_REPORTE { get; set; }
-        public System.DateTime FECHA { get; set; }
-        public decimal TOTAL_GASTADO { get; set; }
-        public decimal TOTAL_BRUTA { get; set; }
-        public decimal GANANCIA_NETA { get; set; }
-        public string USUARIO_RUT { get; set; }
-        public decimal USUARIO_ROL_ID_ROL { get; set; }
+        public decimal PRODUCTO_ID_PRODUCTO { get; set; }
+        public decimal PRODUCTO_UNIDAD_MEDIDA_ID_M { get; set; }
+        public decimal CANTIDAD_PRO_BEBEST { get; set; }
+        public decimal BEBESTIBLE_ID_BEBESTIBLE { get; set; }
+        public string DESCRIPCION { get; set; }
+        public decimal TIEMPO { get; set; }
     
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual BEBESTIBLE BEBESTIBLE { get; set; }
+        public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }

@@ -16,17 +16,20 @@ namespace CapaDatos
     {
         public PRODUCTO()
         {
-            this.FACTURA_COMPRA = new HashSet<FACTURA_COMPRA>();
-            this.PREPARACION = new HashSet<PREPARACION>();
+            this.DETALLE_F = new HashSet<DETALLE_F>();
+            this.PREP_BEBESTIBLE = new HashSet<PREP_BEBESTIBLE>();
+            this.PREP_PLATO = new HashSet<PREP_PLATO>();
         }
     
         public decimal ID_PRODUCTO { get; set; }
         public decimal STOCK { get; set; }
         public string TIPO_PRODUCTO { get; set; }
-        public decimal UNIDAD_MEDIDA_ID_MEDIDA { get; set; }
+        public decimal UNIDAD_MEDIDA_ID_M { get; set; }
+        public string ACTIVO { get; set; }
     
-        public virtual ICollection<FACTURA_COMPRA> FACTURA_COMPRA { get; set; }
-        public virtual ICollection<PREPARACION> PREPARACION { get; set; }
+        public virtual ICollection<DETALLE_F> DETALLE_F { get; set; }
+        public virtual ICollection<PREP_BEBESTIBLE> PREP_BEBESTIBLE { get; set; }
+        public virtual ICollection<PREP_PLATO> PREP_PLATO { get; set; }
         public virtual UNIDAD_MEDIDA UNIDAD_MEDIDA { get; set; }
     }
 }

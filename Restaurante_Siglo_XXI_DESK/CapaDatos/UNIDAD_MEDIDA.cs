@@ -19,8 +19,9 @@ namespace CapaDatos
             this.PRODUCTO = new HashSet<PRODUCTO>();
         }
     
-        public decimal ID_MEDIDA { get; set; }
+        public decimal ID_M { get; set; }
         public string DESCRIPCION { get; set; }
+        public string ACTIVO { get; set; }
     
         public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }
     }

@@ -12,16 +12,15 @@ namespace CapaDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class PREPARACION
+    public partial class PREP_PLATO
     {
         public decimal CANTIDAD_PRO_PLATO { get; set; }
         public decimal PLATO_ID_PLATO { get; set; }
         public decimal PRODUCTO_ID_PRODUCTO { get; set; }
-        public decimal PRODUCTO_ID_MEDIDA { get; set; }
-        public decimal CANTIDAD_PRO_BEBEST { get; set; }
-        public decimal BEBESTIBLE_ID_BEBESTIBLE { get; set; }
+        public decimal PRODUCTO_UNIDAD_MEDIDA_ID_M { get; set; }
+        public string DESCRIPCION { get; set; }
+        public decimal TIEMPO { get; set; }
     
-        public virtual BEBESTIBLE BEBESTIBLE { get; set; }
         public virtual PLATO PLATO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
     }

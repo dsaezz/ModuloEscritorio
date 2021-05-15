@@ -16,9 +16,9 @@ namespace CapaDatos
     {
         public USUARIO()
         {
-            this.PEDIDO = new HashSet<PEDIDO>();
-            this.REPORTE_FINANZA = new HashSet<REPORTE_FINANZA>();
-            this.RESERVA = new HashSet<RESERVA>();
+            this.BEBESTIBLE = new HashSet<BEBESTIBLE>();
+            this.MESA = new HashSet<MESA>();
+            this.PLATO = new HashSet<PLATO>();
         }
     
         public string RUT { get; set; }
@@ -29,10 +29,11 @@ namespace CapaDatos
         public string CORREO { get; set; }
         public string DIRECCION { get; set; }
         public string CLAVE { get; set; }
+        public string ACTIVO { get; set; }
     
-        public virtual ICollection<PEDIDO> PEDIDO { get; set; }
-        public virtual ICollection<REPORTE_FINANZA> REPORTE_FINANZA { get; set; }
-        public virtual ICollection<RESERVA> RESERVA { get; set; }
+        public virtual ICollection<BEBESTIBLE> BEBESTIBLE { get; set; }
+        public virtual ICollection<MESA> MESA { get; set; }
+        public virtual ICollection<PLATO> PLATO { get; set; }
         public virtual ROL ROL { get; set; }
     }
 }

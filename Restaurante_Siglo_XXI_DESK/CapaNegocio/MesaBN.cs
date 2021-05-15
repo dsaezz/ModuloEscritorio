@@ -36,9 +36,9 @@ namespace CapaNegocio
             conn.Close();
             return dt;
         }
-        public void agregarMesa(Int32 id, Int32 num_asiento, string estadoMesa)
+        public void agregarMesa(Int32 id, Int32 num_asiento, string estadoMesa,string rut,Int32 rol)
         {
-            conexion.AGREGARMESA( id,  num_asiento,  estadoMesa);
+            conexion.AGREGARMESA( id,  num_asiento,  estadoMesa,rut,rol,"1");
             conexion.SaveChanges();
         }
         public void eliminarMesa(Int32 id)
@@ -46,9 +46,9 @@ namespace CapaNegocio
             conexion.ELIMINARMESA(id);
             conexion.SaveChanges();
         }
-        public void modificarMesa(Int32 id, Int32 num_asiento, string estadoMesa)
+        public void modificarMesa(Int32 id, Int32 num_asiento, string estadoMesa, string rut, Int32 rol)
         {
-            conexion.MODIFICARMESA(id, num_asiento, estadoMesa);
+            conexion.MODIFICARMESA(id, num_asiento, estadoMesa, rol, rut, "1");
             conexion.SaveChanges();
 
         }
