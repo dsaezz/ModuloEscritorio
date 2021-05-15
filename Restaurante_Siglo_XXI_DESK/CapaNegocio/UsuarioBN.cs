@@ -50,7 +50,7 @@ namespace CapaNegocio
 
         public void ValidarUsuario(string usuario, string clave)
         {
-
+            //angel
             conexion.P_USUARIO(usuario, clave);
 
             /* try
