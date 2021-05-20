@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\
 Restaurante_Siglo_XXI_DESK
 none
 false
 DEBUG;TRACE
-C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\App.xaml
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\App.xaml
 71459514815
 
 11-2043725260
-54-1339231332
+56890209595
 CrudMesa.xaml;CrudProveedor.xaml;CrudStock.xaml;CrudUsuario.xaml;MainWindow.xaml;MenuAdmin.xaml;Resources\Icons.xaml;
 
-True
+False
 

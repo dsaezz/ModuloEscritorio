@@ -186,7 +186,6 @@ namespace Restaurante_Siglo_XXI_DESK
         {
             ValidarRut v = new ValidarRut();
             string rut = tbox_rut.Text;
-            rut = "0";
             tbox_rut.Text = v.formatoRut(rut);
         }
 
