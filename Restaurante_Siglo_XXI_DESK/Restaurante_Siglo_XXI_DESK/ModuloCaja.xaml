@@ -14,7 +14,7 @@
             <Label x:Name="lbl_dinero" Content="$ DINERO" HorizontalAlignment="Left" Margin="28,133,0,0" VerticalAlignment="Top" FontSize="36"/>
             <Button x:Name="btn_pagar" Content="Pagar" HorizontalAlignment="Left" Margin="319,151,0,0" VerticalAlignment="Top" Width="112" Click="btn_pagar_Click" IsEnabled="False"/>
             <Label x:Name="lbl_fecha" Content="FECHA" HorizontalAlignment="Left" Margin="15,7,0,0" VerticalAlignment="Top" FontSize="14"/>
-            <TextBox x:Name="tbox_monto_i" Controls:TextBoxHelper.Watermark="Pago" Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="23" Margin="304,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" LostFocus="tbox_monto_i_LostFocus"/>
+            <TextBox x:Name="tbox_monto_i" Controls:TextBoxHelper.Watermark="Pago" Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="23" Margin="304,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" LostFocus="tbox_monto_i_LostFocus" IsEnabled="False"/>
             <Label x:Name="lbl_vuelto" Content="$ VUELTO" HorizontalAlignment="Left" Margin="27,59,0,0" VerticalAlignment="Top" Width="175" FontSize="36"/>
             <ComboBox x:Name="cbox_tipo_pago" HorizontalAlignment="Left" Margin="302,73,0,0" VerticalAlignment="Top" Width="159"/>
         </Grid>

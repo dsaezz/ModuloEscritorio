@@ -50,6 +50,7 @@ namespace Restaurante_Siglo_XXI_DESK
         ServiceReference1.ServiciosClient servicios = new ServiceReference1.ServiciosClient();
         MesaBN m = new MesaBN();
         int idpedido = 0;
+        int idmesa = 0;
         public void BotonMesas()
         {
 
@@ -84,7 +85,8 @@ namespace Restaurante_Siglo_XXI_DESK
                 {
                     b.Background = Brushes.Red;
                     b.Click += (s, e) => {
-                        idpedido = item.id;
+                        idmesa = item.id;
+
                         dg_orden.ItemsSource = m.detalleOrden(item.id).DefaultView;
                         
                         var t = m.detalleOrden(item.id);
@@ -128,13 +130,19 @@ namespace Restaurante_Siglo_XXI_DESK
                                     precio_cant_b = precio_b * cantidad_B;
                                     total_b = total_b + precio_cant_b;
                                 }
-
+                                if (column.ToString().Equals("NRO_PEDIDO"))
+                                {
+                                    idpedido = Convert.ToInt32(row[column]);
+                                }
+                                
                             }
                         }
                         total = total_b + total_p;
                         lbl_dinero.Content = total;
 
-                        btn_pagar.IsEnabled = true;
+                        tbox_monto_i.IsEnabled = true;
+                        
+                        
                     };
 
                 }
@@ -142,22 +150,54 @@ namespace Restaurante_Siglo_XXI_DESK
             }                    
         }
 
-        private void btn_pagar_Click(object sender, RoutedEventArgs e)
+        private async void btn_pagar_Click(object sender, RoutedEventArgs e)
         {
             BoletaBN b = new BoletaBN();
+            try
+            {
+                int dinero = Convert.ToInt32(lbl_dinero.Content);
+                int pagado = Convert.ToInt32(tbox_monto_i.Text);
+                DateTime fecha = Convert.ToDateTime(lbl_fecha.Content);
+                int vuelto = Convert.ToInt32(lbl_vuelto.Content);
+                int nropago = Convert.ToInt32(cbox_tipo_pago.SelectedValue);
+                b.agregarBoleta(dinero, pagado, fecha, vuelto, idpedido, idmesa, nropago);
 
-            int dinero = Convert.ToInt32(lbl_dinero.Content);
-            int pagado = Convert.ToInt32(tbox_monto_i.Text);
-            DateTime fecha = Convert.ToDateTime(lbl_fecha.Content);
-            int vuelto = Convert.ToInt32(lbl_vuelto.Content);
-            b.agregarBoleta(dinero,pagado,fecha,vuelto,);
+                await this.ShowMessageAsync("Exito!", "La boleta se agrego correctamente al sistema");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("" + ex);
+            }
         }
 
-        private void tbox_monto_i_LostFocus(object sender, RoutedEventArgs e)
+        private async void tbox_monto_i_LostFocus(object sender, RoutedEventArgs e)
         {
-            var pago = Convert.ToInt32(tbox_monto_i.Text);
-            var tot = Convert.ToInt32(lbl_dinero.Content);
-            lbl_vuelto.Content = (tot - pago).ToString();
+            
+            
+
+            if (string.IsNullOrEmpty(tbox_monto_i.Text))
+            {
+                tbox_monto_i.Text = "0";
+                
+            }
+            else
+            {
+                var pago = Convert.ToInt32(tbox_monto_i.Text);
+                var tot = Convert.ToInt32(lbl_dinero.Content);
+                if (pago >= tot)
+                {
+                    lbl_vuelto.Content = (pago - tot).ToString();
+                    btn_pagar.IsEnabled = true;
+                }
+                else
+                {
+                    await this.ShowMessageAsync("Error", "El pago ingresado debe ser igual o mayor al costo total");
+                }
+               
+
+
+            }
+            
         }
     }
 }
