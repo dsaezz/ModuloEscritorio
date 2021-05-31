@@ -4,7 +4,6 @@
     <EntitySetMapping Name="BEBESTIBLE">
       <EntityTypeMapping TypeName="Model.BEBESTIBLE">
         <MappingFragment StoreEntitySet="BEBESTIBLE">
-          <ScalarProperty Name="CANTIDAD_BE" ColumnName="CANTIDAD_BE" />
           <ScalarProperty Name="ID_BEBESTIBLE" ColumnName="ID_BEBESTIBLE" />
           <ScalarProperty Name="TIPO_BEBESTIBLE" ColumnName="TIPO_BEBESTIBLE" />
           <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -15,6 +14,7 @@
           <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
           <ScalarProperty Name="USUARIO_RUT" ColumnName="USUARIO_RUT" />
           <ScalarProperty Name="USUARIO_ROL_ID_ROL" ColumnName="USUARIO_ROL_ID_ROL" />
+          <ScalarProperty Name="CANTIDAD_BE" ColumnName="CANTIDAD_BE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -28,6 +28,7 @@
           <ScalarProperty Name="CAMBIO" ColumnName="CAMBIO" />
           <ScalarProperty Name="PEDIDO_ID_PEDIDO" ColumnName="PEDIDO_ID_PEDIDO" />
           <ScalarProperty Name="PEDIDO_MESA_ID_MESA" ColumnName="PEDIDO_MESA_ID_MESA" />
+          <ScalarProperty Name="NRO_PAGO" ColumnName="NRO_PAGO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -83,7 +84,6 @@
         <MappingFragment StoreEntitySet="METODO_PAGO">
           <ScalarProperty Name="NRO_PAGO" ColumnName="NRO_PAGO" />
           <ScalarProperty Name="TIPO_PAGO" ColumnName="TIPO_PAGO" />
-          <ScalarProperty Name="BOLETA_ID_BOLETA" ColumnName="BOLETA_ID_BOLETA" />
           <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -110,7 +110,6 @@
     <EntitySetMapping Name="PLATO">
       <EntityTypeMapping TypeName="Model.PLATO">
         <MappingFragment StoreEntitySet="PLATO">
-          <ScalarProperty Name="CANTIDAD_PLA" ColumnName="CANTIDAD_PLA" />
           <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
           <ScalarProperty Name="IMAGEN_PLATO" ColumnName="IMAGEN_PLATO" />
           <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -120,6 +119,7 @@
           <ScalarProperty Name="NOMBRE_PLATO" ColumnName="NOMBRE_PLATO" />
           <ScalarProperty Name="USUARIO_RUT" ColumnName="USUARIO_RUT" />
           <ScalarProperty Name="USUARIO_ROL_ID_ROL" ColumnName="USUARIO_ROL_ID_ROL" />
+          <ScalarProperty Name="CANTIDAD_PLA" ColumnName="CANTIDAD_PLA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -225,6 +225,7 @@
         <ScalarProperty Name="ID_RESERVA" ColumnName="RESERVA_ID_RESERVA" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="AGREGARBOLETA" FunctionName="Model.Store.AGREGARBOLETA" />
     <FunctionImportMapping FunctionImportName="AGREGARCLIENTE" FunctionName="Model.Store.AGREGARCLIENTE" />
     <FunctionImportMapping FunctionImportName="AGREGARMESA" FunctionName="Model.Store.AGREGARMESA" />
     <FunctionImportMapping FunctionImportName="AGREGARMETODOPAGO" FunctionName="Model.Store.AGREGARMETODOPAGO" />
@@ -234,6 +235,7 @@
     <FunctionImportMapping FunctionImportName="AGREGARROL" FunctionName="Model.Store.AGREGARROL" />
     <FunctionImportMapping FunctionImportName="AGREGARUNIDADMEDIDA" FunctionName="Model.Store.AGREGARUNIDADMEDIDA" />
     <FunctionImportMapping FunctionImportName="AGREGARUSUARIO" FunctionName="Model.Store.AGREGARUSUARIO" />
+    <FunctionImportMapping FunctionImportName="DETALLEORDEN" FunctionName="Model.Store.DETALLEORDEN" />
     <FunctionImportMapping FunctionImportName="ELIMINARCLIENTE" FunctionName="Model.Store.ELIMINARCLIENTE" />
     <FunctionImportMapping FunctionImportName="ELIMINARMESA" FunctionName="Model.Store.ELIMINARMESA" />
     <FunctionImportMapping FunctionImportName="ELIMINARMETODOPAGO" FunctionName="Model.Store.ELIMINARMETODOPAGO" />
@@ -261,7 +263,5 @@
     <FunctionImportMapping FunctionImportName="MODIFICARROL" FunctionName="Model.Store.MODIFICARROL" />
     <FunctionImportMapping FunctionImportName="MODIFICARUNIDADMEDIDA" FunctionName="Model.Store.MODIFICARUNIDADMEDIDA" />
     <FunctionImportMapping FunctionImportName="MODIFICARUSUARIO" FunctionName="Model.Store.MODIFICARUSUARIO" />
-    <FunctionImportMapping FunctionImportName="AGREGARBOLETA" FunctionName="Model.Store.AGREGARBOLETA" />
-    <FunctionImportMapping FunctionImportName="DETALLEORDEN" FunctionName="Model.Store.DETALLEORDEN" />
   </EntityContainerMapping>
 </Mapping>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BEBESTIBLE">
           <Key>
             <PropertyRef Name="ID_BEBESTIBLE" />
@@ -32,6 +32,7 @@
           <Property Name="CAMBIO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NRO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
@@ -91,11 +92,9 @@
         <EntityType Name="METODO_PAGO">
           <Key>
             <PropertyRef Name="NRO_PAGO" />
-            <PropertyRef Name="BOLETA_ID_BOLETA" />
           </Key>
           <Property Name="NRO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="TIPO_PAGO" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="BOLETA_ID_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ACTIVO" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="ORDEN">
@@ -255,6 +254,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="BOLETA_METODO_PAGO_FK1">
+          <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="1" />
+          <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METODO_PAGO">
+              <PropertyRef Name="NRO_PAGO" />
+            </Principal>
+            <Dependent Role="BOLETA">
+              <PropertyRef Name="NRO_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="BOLETA_PEDIDO_FK">
           <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
           <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
@@ -320,18 +331,6 @@
             <Dependent Role="MESA">
               <PropertyRef Name="USUARIO_RUT" />
               <PropertyRef Name="USUARIO_ROL_ID_ROL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="METODO_PAGO_BOLETA_FK">
-          <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
-          <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BOLETA">
-              <PropertyRef Name="ID_BOLETA" />
-            </Principal>
-            <Dependent Role="METODO_PAGO">
-              <PropertyRef Name="BOLETA_ID_BOLETA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -510,6 +509,7 @@
           <Parameter Name="CAMBIO" Type="number" Mode="In" />
           <Parameter Name="IDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="IDMESA" Type="number" Mode="In" />
+          <Parameter Name="NROPAGO" Type="number" Mode="In" />
         </Function>
         <Function Name="AGREGARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
           <Parameter Name="RUT" Type="varchar2" Mode="In" />
@@ -712,6 +712,10 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
           </AssociationSet>
+          <AssociationSet Name="BOLETA_METODO_PAGO_FK1" Association="Self.BOLETA_METODO_PAGO_FK1">
+            <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
+            <End Role="BOLETA" EntitySet="BOLETA" />
+          </AssociationSet>
           <AssociationSet Name="BOLETA_PEDIDO_FK" Association="Self.BOLETA_PEDIDO_FK">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="BOLETA" EntitySet="BOLETA" />
@@ -731,10 +735,6 @@
           <AssociationSet Name="MESA_USUARIO_FK" Association="Self.MESA_USUARIO_FK">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="MESA" EntitySet="MESA" />
-          </AssociationSet>
-          <AssociationSet Name="METODO_PAGO_BOLETA_FK" Association="Self.METODO_PAGO_BOLETA_FK">
-            <End Role="BOLETA" EntitySet="BOLETA" />
-            <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
           </AssociationSet>
           <AssociationSet Name="ORDEN_PEDIDO_FK" Association="Self.ORDEN_PEDIDO_FK">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
@@ -789,7 +789,8 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -807,10 +808,10 @@
           <Property Name="IMAGEN" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="USUARIO_RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUARIO_ROL_ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD_BE" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="ORDEN" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="BEBESTIBLE" ToRole="ORDEN" />
           <NavigationProperty Name="USUARIO" Relationship="Self.BEBESTIBLE_USUARIO_FK" FromRole="BEBESTIBLE" ToRole="USUARIO" />
           <NavigationProperty Name="PREP_BEBESTIBLE" Relationship="Self.PREP_BEBESTIBLE_BEBESTIBLE_FK" FromRole="BEBESTIBLE" ToRole="PREP_BEBESTIBLE" />
-          <Property Name="CANTIDAD_BE" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="BOLETA">
           <Key>
@@ -823,8 +824,9 @@
           <Property Name="CAMBIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NRO_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="METODO_PAGO" Relationship="Self.BOLETA_METODO_PAGO_FK1" FromRole="BOLETA" ToRole="METODO_PAGO" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.BOLETA_PEDIDO_FK" FromRole="BOLETA" ToRole="PEDIDO" />
-          <NavigationProperty Name="METODO_PAGO" Relationship="Self.METODO_PAGO_BOLETA_FK" FromRole="BOLETA" ToRole="METODO_PAGO" />
         </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
@@ -884,13 +886,11 @@
         <EntityType Name="METODO_PAGO">
           <Key>
             <PropertyRef Name="NRO_PAGO" />
-            <PropertyRef Name="BOLETA_ID_BOLETA" />
           </Key>
           <Property Name="NRO_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="TIPO_PAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BOLETA_ID_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ACTIVO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="BOLETA" Relationship="Self.METODO_PAGO_BOLETA_FK" FromRole="METODO_PAGO" ToRole="BOLETA" />
+          <NavigationProperty Name="BOLETA" Relationship="Self.BOLETA_METODO_PAGO_FK1" FromRole="METODO_PAGO" ToRole="BOLETA" />
         </EntityType>
         <EntityType Name="ORDEN">
           <Key>
@@ -931,10 +931,10 @@
           <Property Name="NOMBRE_PLATO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUARIO_RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUARIO_ROL_ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD_PLA" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="ORDEN" Relationship="Self.PLATO_ORDEN_FK" FromRole="PLATO" ToRole="ORDEN" />
           <NavigationProperty Name="USUARIO" Relationship="Self.PLATO_USUARIO_FK" FromRole="PLATO" ToRole="USUARIO" />
           <NavigationProperty Name="PREP_PLATO" Relationship="Self.PREP_PLATO_PLATO_FK" FromRole="PLATO" ToRole="PREP_PLATO" />
-          <Property Name="CANTIDAD_PLA" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="PREP_BEBESTIBLE">
           <Key>
@@ -1087,6 +1087,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="BOLETA_METODO_PAGO_FK1">
+          <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="1" />
+          <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METODO_PAGO">
+              <PropertyRef Name="NRO_PAGO" />
+            </Principal>
+            <Dependent Role="BOLETA">
+              <PropertyRef Name="NRO_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="BOLETA_PEDIDO_FK">
           <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
           <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
@@ -1098,18 +1110,6 @@
             <Dependent Role="BOLETA">
               <PropertyRef Name="PEDIDO_ID_PEDIDO" />
               <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="METODO_PAGO_BOLETA_FK">
-          <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
-          <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BOLETA">
-              <PropertyRef Name="ID_BOLETA" />
-            </Principal>
-            <Dependent Role="METODO_PAGO">
-              <PropertyRef Name="BOLETA_ID_BOLETA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1334,13 +1334,13 @@
             <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
             <End Role="PREP_BEBESTIBLE" EntitySet="PREP_BEBESTIBLE" />
           </AssociationSet>
+          <AssociationSet Name="BOLETA_METODO_PAGO_FK1" Association="Self.BOLETA_METODO_PAGO_FK1">
+            <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
+            <End Role="BOLETA" EntitySet="BOLETA" />
+          </AssociationSet>
           <AssociationSet Name="BOLETA_PEDIDO_FK" Association="Self.BOLETA_PEDIDO_FK">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="BOLETA" EntitySet="BOLETA" />
-          </AssociationSet>
-          <AssociationSet Name="METODO_PAGO_BOLETA_FK" Association="Self.METODO_PAGO_BOLETA_FK">
-            <End Role="BOLETA" EntitySet="BOLETA" />
-            <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
           </AssociationSet>
           <AssociationSet Name="RESERVA_CLIENTE_FK" Association="Self.RESERVA_CLIENTE_FK">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
@@ -1402,6 +1402,15 @@
             <End Role="MESA" EntitySet="MESA" />
             <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
+          <FunctionImport Name="AGREGARBOLETA">
+            <Parameter Name="TOTALPAGAR" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTOPAGADO" Mode="In" Type="Decimal" />
+            <Parameter Name="FECHABOLETA" Mode="In" Type="DateTime" />
+            <Parameter Name="CAMBIO" Mode="In" Type="Decimal" />
+            <Parameter Name="IDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
+            <Parameter Name="NROPAGO" Mode="In" Type="Decimal" />
+          </FunctionImport>
           <FunctionImport Name="AGREGARCLIENTE">
             <Parameter Name="RUT" Mode="In" Type="String" />
             <Parameter Name="NOMBRES" Mode="In" Type="String" />
@@ -1469,32 +1478,35 @@
             <Parameter Name="CLAVES" Mode="In" Type="String" />
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="DETALLEORDEN">
+            <Parameter Name="ID_MESA" Mode="In" Type="Decimal" />
+          </FunctionImport>
           <FunctionImport Name="ELIMINARCLIENTE">
-          <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
+            <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARMESA">
-          <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
+            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARMETODOPAGO">
-          <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARPRODUCTO">
-          <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
+            <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARPROVEEDOR">
-          <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
+            <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARRESERVA">
-          <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARROL">
-          <Parameter Name="IDROL" Mode="In" Type="Decimal" />
+            <Parameter Name="IDROL" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARUNIDADMEDIDA">
-          <Parameter Name="IDUNIDAD" Mode="In" Type="Decimal" />
+            <Parameter Name="IDUNIDAD" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARUSUARIO">
-          <Parameter Name="RUT" Mode="In" Type="String" />
+            <Parameter Name="RUT" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="LISTARCLIENTE" />
           <FunctionImport Name="LISTARMESA" />
@@ -1572,17 +1584,6 @@
             <Parameter Name="CLAVES" Mode="In" Type="String" />
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="AGREGARBOLETA">
-            <Parameter Name="TOTALPAGAR" Mode="In" Type="Decimal" />
-            <Parameter Name="MONTOPAGADO" Mode="In" Type="Decimal" />
-            <Parameter Name="FECHABOLETA" Mode="In" Type="DateTime" />
-            <Parameter Name="CAMBIO" Mode="In" Type="Decimal" />
-            <Parameter Name="IDPEDIDO" Mode="In" Type="Decimal" />
-            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
-          </FunctionImport>
-          <FunctionImport Name="DETALLEORDEN">
-            <Parameter Name="ID_MESA" Mode="In" Type="Decimal" />
-          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1593,7 +1594,6 @@
           <EntitySetMapping Name="BEBESTIBLE">
             <EntityTypeMapping TypeName="Model.BEBESTIBLE">
               <MappingFragment StoreEntitySet="BEBESTIBLE">
-                <ScalarProperty Name="CANTIDAD_BE" ColumnName="CANTIDAD_BE" />
                 <ScalarProperty Name="ID_BEBESTIBLE" ColumnName="ID_BEBESTIBLE" />
                 <ScalarProperty Name="TIPO_BEBESTIBLE" ColumnName="TIPO_BEBESTIBLE" />
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -1604,6 +1604,7 @@
                 <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
                 <ScalarProperty Name="USUARIO_RUT" ColumnName="USUARIO_RUT" />
                 <ScalarProperty Name="USUARIO_ROL_ID_ROL" ColumnName="USUARIO_ROL_ID_ROL" />
+                <ScalarProperty Name="CANTIDAD_BE" ColumnName="CANTIDAD_BE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1617,6 +1618,7 @@
                 <ScalarProperty Name="CAMBIO" ColumnName="CAMBIO" />
                 <ScalarProperty Name="PEDIDO_ID_PEDIDO" ColumnName="PEDIDO_ID_PEDIDO" />
                 <ScalarProperty Name="PEDIDO_MESA_ID_MESA" ColumnName="PEDIDO_MESA_ID_MESA" />
+                <ScalarProperty Name="NRO_PAGO" ColumnName="NRO_PAGO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1672,7 +1674,6 @@
               <MappingFragment StoreEntitySet="METODO_PAGO">
                 <ScalarProperty Name="NRO_PAGO" ColumnName="NRO_PAGO" />
                 <ScalarProperty Name="TIPO_PAGO" ColumnName="TIPO_PAGO" />
-                <ScalarProperty Name="BOLETA_ID_BOLETA" ColumnName="BOLETA_ID_BOLETA" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1699,7 +1700,6 @@
           <EntitySetMapping Name="PLATO">
             <EntityTypeMapping TypeName="Model.PLATO">
               <MappingFragment StoreEntitySet="PLATO">
-                <ScalarProperty Name="CANTIDAD_PLA" ColumnName="CANTIDAD_PLA" />
                 <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
                 <ScalarProperty Name="IMAGEN_PLATO" ColumnName="IMAGEN_PLATO" />
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -1709,6 +1709,7 @@
                 <ScalarProperty Name="NOMBRE_PLATO" ColumnName="NOMBRE_PLATO" />
                 <ScalarProperty Name="USUARIO_RUT" ColumnName="USUARIO_RUT" />
                 <ScalarProperty Name="USUARIO_ROL_ID_ROL" ColumnName="USUARIO_ROL_ID_ROL" />
+                <ScalarProperty Name="CANTIDAD_PLA" ColumnName="CANTIDAD_PLA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1814,6 +1815,7 @@
               <ScalarProperty Name="ID_RESERVA" ColumnName="RESERVA_ID_RESERVA" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="AGREGARBOLETA" FunctionName="Model.Store.AGREGARBOLETA" />
           <FunctionImportMapping FunctionImportName="AGREGARCLIENTE" FunctionName="Model.Store.AGREGARCLIENTE" />
           <FunctionImportMapping FunctionImportName="AGREGARMESA" FunctionName="Model.Store.AGREGARMESA" />
           <FunctionImportMapping FunctionImportName="AGREGARMETODOPAGO" FunctionName="Model.Store.AGREGARMETODOPAGO" />
@@ -1823,6 +1825,7 @@
           <FunctionImportMapping FunctionImportName="AGREGARROL" FunctionName="Model.Store.AGREGARROL" />
           <FunctionImportMapping FunctionImportName="AGREGARUNIDADMEDIDA" FunctionName="Model.Store.AGREGARUNIDADMEDIDA" />
           <FunctionImportMapping FunctionImportName="AGREGARUSUARIO" FunctionName="Model.Store.AGREGARUSUARIO" />
+          <FunctionImportMapping FunctionImportName="DETALLEORDEN" FunctionName="Model.Store.DETALLEORDEN" />
           <FunctionImportMapping FunctionImportName="ELIMINARCLIENTE" FunctionName="Model.Store.ELIMINARCLIENTE" />
           <FunctionImportMapping FunctionImportName="ELIMINARMESA" FunctionName="Model.Store.ELIMINARMESA" />
           <FunctionImportMapping FunctionImportName="ELIMINARMETODOPAGO" FunctionName="Model.Store.ELIMINARMETODOPAGO" />
@@ -1850,8 +1853,6 @@
           <FunctionImportMapping FunctionImportName="MODIFICARROL" FunctionName="Model.Store.MODIFICARROL" />
           <FunctionImportMapping FunctionImportName="MODIFICARUNIDADMEDIDA" FunctionName="Model.Store.MODIFICARUNIDADMEDIDA" />
           <FunctionImportMapping FunctionImportName="MODIFICARUSUARIO" FunctionName="Model.Store.MODIFICARUSUARIO" />
-          <FunctionImportMapping FunctionImportName="AGREGARBOLETA" FunctionName="Model.Store.AGREGARBOLETA" />
-          <FunctionImportMapping FunctionImportName="DETALLEORDEN" FunctionName="Model.Store.DETALLEORDEN" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1867,7 +1868,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>

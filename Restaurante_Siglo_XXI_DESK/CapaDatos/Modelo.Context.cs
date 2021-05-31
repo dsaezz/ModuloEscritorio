@@ -47,6 +47,39 @@ namespace CapaDatos
         public DbSet<UNIDAD_MEDIDA> UNIDAD_MEDIDA { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
     
+        public virtual int AGREGARBOLETA(Nullable<decimal> tOTALPAGAR, Nullable<decimal> mONTOPAGADO, Nullable<System.DateTime> fECHABOLETA, Nullable<decimal> cAMBIO, Nullable<decimal> iDPEDIDO, Nullable<decimal> iDMESA, Nullable<decimal> nROPAGO)
+        {
+            var tOTALPAGARParameter = tOTALPAGAR.HasValue ?
+                new ObjectParameter("TOTALPAGAR", tOTALPAGAR) :
+                new ObjectParameter("TOTALPAGAR", typeof(decimal));
+    
+            var mONTOPAGADOParameter = mONTOPAGADO.HasValue ?
+                new ObjectParameter("MONTOPAGADO", mONTOPAGADO) :
+                new ObjectParameter("MONTOPAGADO", typeof(decimal));
+    
+            var fECHABOLETAParameter = fECHABOLETA.HasValue ?
+                new ObjectParameter("FECHABOLETA", fECHABOLETA) :
+                new ObjectParameter("FECHABOLETA", typeof(System.DateTime));
+    
+            var cAMBIOParameter = cAMBIO.HasValue ?
+                new ObjectParameter("CAMBIO", cAMBIO) :
+                new ObjectParameter("CAMBIO", typeof(decimal));
+    
+            var iDPEDIDOParameter = iDPEDIDO.HasValue ?
+                new ObjectParameter("IDPEDIDO", iDPEDIDO) :
+                new ObjectParameter("IDPEDIDO", typeof(decimal));
+    
+            var iDMESAParameter = iDMESA.HasValue ?
+                new ObjectParameter("IDMESA", iDMESA) :
+                new ObjectParameter("IDMESA", typeof(decimal));
+    
+            var nROPAGOParameter = nROPAGO.HasValue ?
+                new ObjectParameter("NROPAGO", nROPAGO) :
+                new ObjectParameter("NROPAGO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARBOLETA", tOTALPAGARParameter, mONTOPAGADOParameter, fECHABOLETAParameter, cAMBIOParameter, iDPEDIDOParameter, iDMESAParameter, nROPAGOParameter);
+        }
+    
         public virtual int AGREGARCLIENTE(string rUT, string nOMBRES, string aPELLIDO, string cORREOS, string dIRECCIONES, string cLAVES, string aCTIVO)
         {
             var rUTParameter = rUT != null ?
@@ -286,6 +319,15 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARUSUARIO", rUTParameter, nOMBRESParameter, aPELLIDOPParameter, aPELLIDOMParameter, rOLIDROLParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
+        }
+    
+        public virtual int DETALLEORDEN(Nullable<decimal> iD_MESA)
+        {
+            var iD_MESAParameter = iD_MESA.HasValue ?
+                new ObjectParameter("ID_MESA", iD_MESA) :
+                new ObjectParameter("ID_MESA", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DETALLEORDEN", iD_MESAParameter);
         }
     
         public virtual int ELIMINARCLIENTE(Nullable<decimal> iDCLIENTE)
@@ -653,44 +695,6 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARUSUARIO", rUTParameter, nOMBRESParameter, aPELLIDOPParameter, aPELLIDOMParameter, rOLIDROLParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
-        }
-    
-        public virtual int AGREGARBOLETA(Nullable<decimal> tOTALPAGAR, Nullable<decimal> mONTOPAGADO, Nullable<System.DateTime> fECHABOLETA, Nullable<decimal> cAMBIO, Nullable<decimal> iDPEDIDO, Nullable<decimal> iDMESA)
-        {
-            var tOTALPAGARParameter = tOTALPAGAR.HasValue ?
-                new ObjectParameter("TOTALPAGAR", tOTALPAGAR) :
-                new ObjectParameter("TOTALPAGAR", typeof(decimal));
-    
-            var mONTOPAGADOParameter = mONTOPAGADO.HasValue ?
-                new ObjectParameter("MONTOPAGADO", mONTOPAGADO) :
-                new ObjectParameter("MONTOPAGADO", typeof(decimal));
-    
-            var fECHABOLETAParameter = fECHABOLETA.HasValue ?
-                new ObjectParameter("FECHABOLETA", fECHABOLETA) :
-                new ObjectParameter("FECHABOLETA", typeof(System.DateTime));
-    
-            var cAMBIOParameter = cAMBIO.HasValue ?
-                new ObjectParameter("CAMBIO", cAMBIO) :
-                new ObjectParameter("CAMBIO", typeof(decimal));
-    
-            var iDPEDIDOParameter = iDPEDIDO.HasValue ?
-                new ObjectParameter("IDPEDIDO", iDPEDIDO) :
-                new ObjectParameter("IDPEDIDO", typeof(decimal));
-    
-            var iDMESAParameter = iDMESA.HasValue ?
-                new ObjectParameter("IDMESA", iDMESA) :
-                new ObjectParameter("IDMESA", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARBOLETA", tOTALPAGARParameter, mONTOPAGADOParameter, fECHABOLETAParameter, cAMBIOParameter, iDPEDIDOParameter, iDMESAParameter);
-        }
-    
-        public virtual int DETALLEORDEN(Nullable<decimal> iD_MESA)
-        {
-            var iD_MESAParameter = iD_MESA.HasValue ?
-                new ObjectParameter("ID_MESA", iD_MESA) :
-                new ObjectParameter("ID_MESA", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DETALLEORDEN", iD_MESAParameter);
         }
     }
 }

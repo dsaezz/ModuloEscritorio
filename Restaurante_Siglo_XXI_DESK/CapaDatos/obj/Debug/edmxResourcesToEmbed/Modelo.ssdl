@@ -27,6 +27,7 @@
     <Property Name="CAMBIO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NRO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="CLIENTE">
     <Key>
@@ -86,11 +87,9 @@
   <EntityType Name="METODO_PAGO">
     <Key>
       <PropertyRef Name="NRO_PAGO" />
-      <PropertyRef Name="BOLETA_ID_BOLETA" />
     </Key>
     <Property Name="NRO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TIPO_PAGO" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="BOLETA_ID_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ACTIVO" Type="char" MaxLength="1" Nullable="false" />
   </EntityType>
   <EntityType Name="ORDEN">
@@ -250,6 +249,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="BOLETA_METODO_PAGO_FK1">
+    <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="METODO_PAGO">
+        <PropertyRef Name="NRO_PAGO" />
+      </Principal>
+      <Dependent Role="BOLETA">
+        <PropertyRef Name="NRO_PAGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="BOLETA_PEDIDO_FK">
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
     <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
@@ -315,18 +326,6 @@
       <Dependent Role="MESA">
         <PropertyRef Name="USUARIO_RUT" />
         <PropertyRef Name="USUARIO_ROL_ID_ROL" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="METODO_PAGO_BOLETA_FK">
-    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
-    <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOLETA">
-        <PropertyRef Name="ID_BOLETA" />
-      </Principal>
-      <Dependent Role="METODO_PAGO">
-        <PropertyRef Name="BOLETA_ID_BOLETA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -505,6 +504,7 @@
     <Parameter Name="CAMBIO" Type="number" Mode="In" />
     <Parameter Name="IDPEDIDO" Type="number" Mode="In" />
     <Parameter Name="IDMESA" Type="number" Mode="In" />
+    <Parameter Name="NROPAGO" Type="number" Mode="In" />
   </Function>
   <Function Name="AGREGARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
@@ -707,6 +707,10 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
     </AssociationSet>
+    <AssociationSet Name="BOLETA_METODO_PAGO_FK1" Association="Self.BOLETA_METODO_PAGO_FK1">
+      <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
+      <End Role="BOLETA" EntitySet="BOLETA" />
+    </AssociationSet>
     <AssociationSet Name="BOLETA_PEDIDO_FK" Association="Self.BOLETA_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
       <End Role="BOLETA" EntitySet="BOLETA" />
@@ -726,10 +730,6 @@
     <AssociationSet Name="MESA_USUARIO_FK" Association="Self.MESA_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="MESA" EntitySet="MESA" />
-    </AssociationSet>
-    <AssociationSet Name="METODO_PAGO_BOLETA_FK" Association="Self.METODO_PAGO_BOLETA_FK">
-      <End Role="BOLETA" EntitySet="BOLETA" />
-      <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
     </AssociationSet>
     <AssociationSet Name="ORDEN_PEDIDO_FK" Association="Self.ORDEN_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />

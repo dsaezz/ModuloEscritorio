@@ -75,13 +75,13 @@
       <DependentUpon>Modelo.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Modelo.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="ORDEN.cs">
@@ -141,8 +141,8 @@
     </Content>
     <Content Include="Modelo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
+      <DependentUpon>Modelo.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

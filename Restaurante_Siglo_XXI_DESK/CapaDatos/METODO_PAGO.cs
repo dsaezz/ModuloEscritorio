@@ -14,11 +14,15 @@ namespace CapaDatos
     
     public partial class METODO_PAGO
     {
+        public METODO_PAGO()
+        {
+            this.BOLETA = new HashSet<BOLETA>();
+        }
+    
         public decimal NRO_PAGO { get; set; }
         public string TIPO_PAGO { get; set; }
-        public decimal BOLETA_ID_BOLETA { get; set; }
         public string ACTIVO { get; set; }
     
-        public virtual BOLETA BOLETA { get; set; }
+        public virtual ICollection<BOLETA> BOLETA { get; set; }
     }
 }

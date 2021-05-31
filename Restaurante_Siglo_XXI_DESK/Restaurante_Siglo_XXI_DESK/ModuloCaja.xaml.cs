@@ -38,11 +38,18 @@ namespace Restaurante_Siglo_XXI_DESK
             InitializeComponent();
             BotonMesas();
             fecha();
-            
+
+            MetodoPagoBN m = new MetodoPagoBN();
+            cbox_tipo_pago.ItemsSource = m.obtenerMetodo();
+
+            cbox_tipo_pago.DisplayMemberPath = "tipo_pago";
+            cbox_tipo_pago.SelectedValuePath = "nro_pago";
+            cbox_tipo_pago.SelectedIndex = 0;
 
         }
         ServiceReference1.ServiciosClient servicios = new ServiceReference1.ServiciosClient();
         MesaBN m = new MesaBN();
+        int idpedido = 0;
         public void BotonMesas()
         {
 
@@ -77,9 +84,9 @@ namespace Restaurante_Siglo_XXI_DESK
                 {
                     b.Background = Brushes.Red;
                     b.Click += (s, e) => {
-
+                        idpedido = item.id;
                         dg_orden.ItemsSource = m.detalleOrden(item.id).DefaultView;
-
+                        
                         var t = m.detalleOrden(item.id);
                         int precio_cant_p, precio_cant_b;
                         int cantidad_p = 0;
@@ -137,7 +144,13 @@ namespace Restaurante_Siglo_XXI_DESK
 
         private void btn_pagar_Click(object sender, RoutedEventArgs e)
         {
-            
+            BoletaBN b = new BoletaBN();
+
+            int dinero = Convert.ToInt32(lbl_dinero.Content);
+            int pagado = Convert.ToInt32(tbox_monto_i.Text);
+            DateTime fecha = Convert.ToDateTime(lbl_fecha.Content);
+            int vuelto = Convert.ToInt32(lbl_vuelto.Content);
+            b.agregarBoleta(dinero,pagado,fecha,vuelto,);
         }
 
         private void tbox_monto_i_LostFocus(object sender, RoutedEventArgs e)
