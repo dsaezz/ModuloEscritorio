@@ -14,6 +14,7 @@
     <Property Name="IMAGEN" Type="blob" Nullable="false" />
     <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_BE" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="BOLETA">
     <Key>
@@ -99,9 +100,7 @@
       <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
     </Key>
     <Property Name="NRO_ORDEN" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PEDIDO">
@@ -127,6 +126,7 @@
     <Property Name="NOMBRE_PLATO" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_PLA" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="PREP_BEBESTIBLE">
     <Key>
@@ -498,6 +498,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="AGREGARBOLETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="TOTALPAGAR" Type="number" Mode="In" />
+    <Parameter Name="MONTOPAGADO" Type="number" Mode="In" />
+    <Parameter Name="FECHABOLETA" Type="date" Mode="In" />
+    <Parameter Name="CAMBIO" Type="number" Mode="In" />
+    <Parameter Name="IDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="IDMESA" Type="number" Mode="In" />
+  </Function>
   <Function Name="AGREGARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
@@ -508,7 +516,6 @@
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
   <Function Name="AGREGARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDMESA" Type="number" Mode="In" />
     <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
     <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
     <Parameter Name="USERRUT" Type="varchar2" Mode="In" />
@@ -539,7 +546,6 @@
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
   <Function Name="AGREGARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
     <Parameter Name="HORALLEGADA" Type="date" Mode="In" />
     <Parameter Name="HORASALIDA" Type="date" Mode="In" />
     <Parameter Name="ESTADORESERVA" Type="char" Mode="In" />
@@ -566,6 +572,9 @@
     <Parameter Name="DIRECCIONES" Type="varchar2" Mode="In" />
     <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
+  </Function>
+  <Function Name="DETALLEORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+    <Parameter Name="ID_MESA" Type="number" Mode="In" />
   </Function>
   <Function Name="ELIMINARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
     <Parameter Name="IDCLIENTE" Type="number" Mode="In" />
@@ -613,11 +622,10 @@
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
   <Function Name="MODIFICARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDMESA" Type="number" Mode="In" />
     <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
     <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
-    <Parameter Name="USERIDROL" Type="number" Mode="In" />
     <Parameter Name="USERRUT" Type="varchar2" Mode="In" />
+    <Parameter Name="USERIDROL" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
   <Function Name="MODIFICARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
@@ -644,7 +652,6 @@
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
   <Function Name="MODIFICARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
     <Parameter Name="HORALLEGADA" Type="date" Mode="In" />
     <Parameter Name="HORASALIDA" Type="date" Mode="In" />
     <Parameter Name="ESTADORESERVA" Type="char" Mode="In" />

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://ServicioWeb/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="Servicios" targetNamespace="http://ServicioWeb/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/ServicioWeb/Servicios?xsd=1" namespace="http://ServicioWeb/" />
+    </xsd:schema>
+  </types>
+  <message name="ListaReserva">
+    <part name="parameters" element="tns:ListaReserva" />
+  </message>
+  <message name="ListaReservaResponse">
+    <part name="parameters" element="tns:ListaReservaResponse" />
+  </message>
+  <message name="ListaMesaWS">
+    <part name="parameters" element="tns:ListaMesaWS" />
+  </message>
+  <message name="ListaMesaWSResponse">
+    <part name="parameters" element="tns:ListaMesaWSResponse" />
+  </message>
+  <message name="AgregarReserva">
+    <part name="parameters" element="tns:AgregarReserva" />
+  </message>
+  <message name="AgregarReservaResponse">
+    <part name="parameters" element="tns:AgregarReservaResponse" />
+  </message>
+  <message name="ListaReservaWS">
+    <part name="parameters" element="tns:ListaReservaWS" />
+  </message>
+  <message name="ListaReservaWSResponse">
+    <part name="parameters" element="tns:ListaReservaWSResponse" />
+  </message>
+  <message name="AgregarBoleta">
+    <part name="parameters" element="tns:AgregarBoleta" />
+  </message>
+  <message name="AgregarBoletaResponse">
+    <part name="parameters" element="tns:AgregarBoletaResponse" />
+  </message>
+  <message name="ListDetalle">
+    <part name="parameters" element="tns:ListDetalle" />
+  </message>
+  <message name="ListDetalleResponse">
+    <part name="parameters" element="tns:ListDetalleResponse" />
+  </message>
+  <portType name="Servicios">
+    <operation name="ListaReserva">
+      <input wsam:Action="http://ServicioWeb/Servicios/ListaReservaRequest" message="tns:ListaReserva" />
+      <output wsam:Action="http://ServicioWeb/Servicios/ListaReservaResponse" message="tns:ListaReservaResponse" />
+    </operation>
+    <operation name="ListaMesaWS">
+      <input wsam:Action="http://ServicioWeb/Servicios/ListaMesaWSRequest" message="tns:ListaMesaWS" />
+      <output wsam:Action="http://ServicioWeb/Servicios/ListaMesaWSResponse" message="tns:ListaMesaWSResponse" />
+    </operation>
+    <operation name="AgregarReserva">
+      <input wsam:Action="http://ServicioWeb/Servicios/AgregarReservaRequest" message="tns:AgregarReserva" />
+      <output wsam:Action="http://ServicioWeb/Servicios/AgregarReservaResponse" message="tns:AgregarReservaResponse" />
+    </operation>
+    <operation name="ListaReservaWS">
+      <input wsam:Action="http://ServicioWeb/Servicios/ListaReservaWSRequest" message="tns:ListaReservaWS" />
+      <output wsam:Action="http://ServicioWeb/Servicios/ListaReservaWSResponse" message="tns:ListaReservaWSResponse" />
+    </operation>
+    <operation name="AgregarBoleta">
+      <input wsam:Action="http://ServicioWeb/Servicios/AgregarBoletaRequest" message="tns:AgregarBoleta" />
+      <output wsam:Action="http://ServicioWeb/Servicios/AgregarBoletaResponse" message="tns:AgregarBoletaResponse" />
+    </operation>
+    <operation name="ListDetalle">
+      <input wsam:Action="http://ServicioWeb/Servicios/ListDetalleRequest" message="tns:ListDetalle" />
+      <output wsam:Action="http://ServicioWeb/Servicios/ListDetalleResponse" message="tns:ListDetalleResponse" />
+    </operation>
+  </portType>
+  <binding name="ServiciosPortBinding" type="tns:Servicios">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="ListaReserva">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListaMesaWS">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AgregarReserva">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListaReservaWS">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AgregarBoleta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListDetalle">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Servicios">
+    <port name="ServiciosPort" binding="tns:ServiciosPortBinding">
+      <soap:address location="http://localhost:8080/ServicioWeb/Servicios" />
+    </port>
+  </service>
+</definitions>

@@ -28,6 +28,7 @@ namespace CapaDatos
         public string NOMBRE_PLATO { get; set; }
         public string USUARIO_RUT { get; set; }
         public decimal USUARIO_ROL_ID_ROL { get; set; }
+        public Nullable<decimal> CANTIDAD_PLA { get; set; }
     
         public virtual ORDEN ORDEN { get; set; }
         public virtual USUARIO USUARIO { get; set; }

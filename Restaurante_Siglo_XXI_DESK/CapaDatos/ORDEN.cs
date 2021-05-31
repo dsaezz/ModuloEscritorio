@@ -21,9 +21,7 @@ namespace CapaDatos
         }
     
         public decimal NRO_ORDEN { get; set; }
-        public decimal CANTIDAD_PLATO { get; set; }
         public decimal PEDIDO_ID_PEDIDO { get; set; }
-        public decimal CANTIDAD_BEBESTIBLE { get; set; }
         public decimal PEDIDO_MESA_ID_MESA { get; set; }
     
         public virtual ICollection<BEBESTIBLE> BEBESTIBLE { get; set; }

@@ -278,3 +278,5 @@ D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\De
 D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\Restaurante_Siglo_XXI_DESK.csproj.CopyComplete
 D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\Restaurante_Siglo_XXI_DESK.exe
 D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\Restaurante_Siglo_XXI_DESK.pdb
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\ModuloCaja.g.cs
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\Restaurante_Siglo_XXI_DESK\obj\Debug\ModuloCaja.baml

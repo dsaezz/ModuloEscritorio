@@ -4,6 +4,7 @@
     <EntitySetMapping Name="BEBESTIBLE">
       <EntityTypeMapping TypeName="Model.BEBESTIBLE">
         <MappingFragment StoreEntitySet="BEBESTIBLE">
+          <ScalarProperty Name="CANTIDAD_BE" ColumnName="CANTIDAD_BE" />
           <ScalarProperty Name="ID_BEBESTIBLE" ColumnName="ID_BEBESTIBLE" />
           <ScalarProperty Name="TIPO_BEBESTIBLE" ColumnName="TIPO_BEBESTIBLE" />
           <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -91,9 +92,7 @@
       <EntityTypeMapping TypeName="Model.ORDEN">
         <MappingFragment StoreEntitySet="ORDEN">
           <ScalarProperty Name="NRO_ORDEN" ColumnName="NRO_ORDEN" />
-          <ScalarProperty Name="CANTIDAD_PLATO" ColumnName="CANTIDAD_PLATO" />
           <ScalarProperty Name="PEDIDO_ID_PEDIDO" ColumnName="PEDIDO_ID_PEDIDO" />
-          <ScalarProperty Name="CANTIDAD_BEBESTIBLE" ColumnName="CANTIDAD_BEBESTIBLE" />
           <ScalarProperty Name="PEDIDO_MESA_ID_MESA" ColumnName="PEDIDO_MESA_ID_MESA" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -111,6 +110,7 @@
     <EntitySetMapping Name="PLATO">
       <EntityTypeMapping TypeName="Model.PLATO">
         <MappingFragment StoreEntitySet="PLATO">
+          <ScalarProperty Name="CANTIDAD_PLA" ColumnName="CANTIDAD_PLA" />
           <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
           <ScalarProperty Name="IMAGEN_PLATO" ColumnName="IMAGEN_PLATO" />
           <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -261,5 +261,7 @@
     <FunctionImportMapping FunctionImportName="MODIFICARROL" FunctionName="Model.Store.MODIFICARROL" />
     <FunctionImportMapping FunctionImportName="MODIFICARUNIDADMEDIDA" FunctionName="Model.Store.MODIFICARUNIDADMEDIDA" />
     <FunctionImportMapping FunctionImportName="MODIFICARUSUARIO" FunctionName="Model.Store.MODIFICARUSUARIO" />
+    <FunctionImportMapping FunctionImportName="AGREGARBOLETA" FunctionName="Model.Store.AGREGARBOLETA" />
+    <FunctionImportMapping FunctionImportName="DETALLEORDEN" FunctionName="Model.Store.DETALLEORDEN" />
   </EntityContainerMapping>
 </Mapping>

@@ -17,6 +17,7 @@
     <NavigationProperty Name="ORDEN" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="BEBESTIBLE" ToRole="ORDEN" />
     <NavigationProperty Name="USUARIO" Relationship="Self.BEBESTIBLE_USUARIO_FK" FromRole="BEBESTIBLE" ToRole="USUARIO" />
     <NavigationProperty Name="PREP_BEBESTIBLE" Relationship="Self.PREP_BEBESTIBLE_BEBESTIBLE_FK" FromRole="BEBESTIBLE" ToRole="PREP_BEBESTIBLE" />
+    <Property Name="CANTIDAD_BE" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="BOLETA">
     <Key>
@@ -105,9 +106,7 @@
       <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
     </Key>
     <Property Name="NRO_ORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_PLATO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_BEBESTIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="BEBESTIBLE" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="ORDEN" ToRole="BEBESTIBLE" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.ORDEN_PEDIDO_FK" FromRole="ORDEN" ToRole="PEDIDO" />
@@ -142,6 +141,7 @@
     <NavigationProperty Name="ORDEN" Relationship="Self.PLATO_ORDEN_FK" FromRole="PLATO" ToRole="ORDEN" />
     <NavigationProperty Name="USUARIO" Relationship="Self.PLATO_USUARIO_FK" FromRole="PLATO" ToRole="USUARIO" />
     <NavigationProperty Name="PREP_PLATO" Relationship="Self.PREP_PLATO_PLATO_FK" FromRole="PLATO" ToRole="PREP_PLATO" />
+    <Property Name="CANTIDAD_PLA" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="PREP_BEBESTIBLE">
     <Key>
@@ -619,7 +619,6 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AGREGARMESA">
-      <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
       <Parameter Name="NUMASIENTO" Mode="In" Type="Decimal" />
       <Parameter Name="ESTADOMESA" Mode="In" Type="String" />
       <Parameter Name="USERRUT" Mode="In" Type="String" />
@@ -650,7 +649,6 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AGREGARRESERVA">
-      <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
       <Parameter Name="HORALLEGADA" Mode="In" Type="DateTime" />
       <Parameter Name="HORASALIDA" Mode="In" Type="DateTime" />
       <Parameter Name="ESTADORESERVA" Mode="In" Type="String" />
@@ -724,11 +722,10 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARMESA">
-      <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
       <Parameter Name="NUMASIENTO" Mode="In" Type="Decimal" />
       <Parameter Name="ESTADOMESA" Mode="In" Type="String" />
-      <Parameter Name="USERIDROL" Mode="In" Type="Decimal" />
       <Parameter Name="USERRUT" Mode="In" Type="String" />
+      <Parameter Name="USERIDROL" Mode="In" Type="Decimal" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARMETODOPAGO">
@@ -755,7 +752,6 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARRESERVA">
-      <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
       <Parameter Name="HORALLEGADA" Mode="In" Type="DateTime" />
       <Parameter Name="HORASALIDA" Mode="In" Type="DateTime" />
       <Parameter Name="ESTADORESERVA" Mode="In" Type="String" />
@@ -782,6 +778,17 @@
       <Parameter Name="DIRECCIONES" Mode="In" Type="String" />
       <Parameter Name="CLAVES" Mode="In" Type="String" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AGREGARBOLETA">
+      <Parameter Name="TOTALPAGAR" Mode="In" Type="Decimal" />
+      <Parameter Name="MONTOPAGADO" Mode="In" Type="Decimal" />
+      <Parameter Name="FECHABOLETA" Mode="In" Type="DateTime" />
+      <Parameter Name="CAMBIO" Mode="In" Type="Decimal" />
+      <Parameter Name="IDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="DETALLEORDEN">
+      <Parameter Name="ID_MESA" Mode="In" Type="Decimal" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

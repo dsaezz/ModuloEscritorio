@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BEBESTIBLE">
           <Key>
             <PropertyRef Name="ID_BEBESTIBLE" />
@@ -19,6 +19,7 @@
           <Property Name="IMAGEN" Type="blob" Nullable="false" />
           <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD_BE" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="BOLETA">
           <Key>
@@ -104,9 +105,7 @@
             <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
           </Key>
           <Property Name="NRO_ORDEN" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="CANTIDAD_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="CANTIDAD_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PEDIDO">
@@ -132,6 +131,7 @@
           <Property Name="NOMBRE_PLATO" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD_PLA" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="PREP_BEBESTIBLE">
           <Key>
@@ -503,6 +503,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AGREGARBOLETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+          <Parameter Name="TOTALPAGAR" Type="number" Mode="In" />
+          <Parameter Name="MONTOPAGADO" Type="number" Mode="In" />
+          <Parameter Name="FECHABOLETA" Type="date" Mode="In" />
+          <Parameter Name="CAMBIO" Type="number" Mode="In" />
+          <Parameter Name="IDPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="IDMESA" Type="number" Mode="In" />
+        </Function>
         <Function Name="AGREGARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
           <Parameter Name="RUT" Type="varchar2" Mode="In" />
           <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
@@ -513,7 +521,6 @@
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
         </Function>
         <Function Name="AGREGARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-          <Parameter Name="IDMESA" Type="number" Mode="In" />
           <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
           <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
           <Parameter Name="USERRUT" Type="varchar2" Mode="In" />
@@ -544,7 +551,6 @@
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
         </Function>
         <Function Name="AGREGARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-          <Parameter Name="IDRESERVA" Type="number" Mode="In" />
           <Parameter Name="HORALLEGADA" Type="date" Mode="In" />
           <Parameter Name="HORASALIDA" Type="date" Mode="In" />
           <Parameter Name="ESTADORESERVA" Type="char" Mode="In" />
@@ -571,6 +577,9 @@
           <Parameter Name="DIRECCIONES" Type="varchar2" Mode="In" />
           <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
+        </Function>
+        <Function Name="DETALLEORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+          <Parameter Name="ID_MESA" Type="number" Mode="In" />
         </Function>
         <Function Name="ELIMINARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
           <Parameter Name="IDCLIENTE" Type="number" Mode="In" />
@@ -618,11 +627,10 @@
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
         </Function>
         <Function Name="MODIFICARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-          <Parameter Name="IDMESA" Type="number" Mode="In" />
           <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
           <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
-          <Parameter Name="USERIDROL" Type="number" Mode="In" />
           <Parameter Name="USERRUT" Type="varchar2" Mode="In" />
+          <Parameter Name="USERIDROL" Type="number" Mode="In" />
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
         </Function>
         <Function Name="MODIFICARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
@@ -649,7 +657,6 @@
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
         </Function>
         <Function Name="MODIFICARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-          <Parameter Name="IDRESERVA" Type="number" Mode="In" />
           <Parameter Name="HORALLEGADA" Type="date" Mode="In" />
           <Parameter Name="HORASALIDA" Type="date" Mode="In" />
           <Parameter Name="ESTADORESERVA" Type="char" Mode="In" />
@@ -782,8 +789,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -804,6 +810,7 @@
           <NavigationProperty Name="ORDEN" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="BEBESTIBLE" ToRole="ORDEN" />
           <NavigationProperty Name="USUARIO" Relationship="Self.BEBESTIBLE_USUARIO_FK" FromRole="BEBESTIBLE" ToRole="USUARIO" />
           <NavigationProperty Name="PREP_BEBESTIBLE" Relationship="Self.PREP_BEBESTIBLE_BEBESTIBLE_FK" FromRole="BEBESTIBLE" ToRole="PREP_BEBESTIBLE" />
+          <Property Name="CANTIDAD_BE" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="BOLETA">
           <Key>
@@ -892,9 +899,7 @@
             <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
           </Key>
           <Property Name="NRO_ORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="CANTIDAD_PLATO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="CANTIDAD_BEBESTIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PEDIDO_MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="BEBESTIBLE" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="ORDEN" ToRole="BEBESTIBLE" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.ORDEN_PEDIDO_FK" FromRole="ORDEN" ToRole="PEDIDO" />
@@ -929,6 +934,7 @@
           <NavigationProperty Name="ORDEN" Relationship="Self.PLATO_ORDEN_FK" FromRole="PLATO" ToRole="ORDEN" />
           <NavigationProperty Name="USUARIO" Relationship="Self.PLATO_USUARIO_FK" FromRole="PLATO" ToRole="USUARIO" />
           <NavigationProperty Name="PREP_PLATO" Relationship="Self.PREP_PLATO_PLATO_FK" FromRole="PLATO" ToRole="PREP_PLATO" />
+          <Property Name="CANTIDAD_PLA" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="PREP_BEBESTIBLE">
           <Key>
@@ -1406,7 +1412,6 @@
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AGREGARMESA">
-            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
             <Parameter Name="NUMASIENTO" Mode="In" Type="Decimal" />
             <Parameter Name="ESTADOMESA" Mode="In" Type="String" />
             <Parameter Name="USERRUT" Mode="In" Type="String" />
@@ -1437,7 +1442,6 @@
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AGREGARRESERVA">
-            <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
             <Parameter Name="HORALLEGADA" Mode="In" Type="DateTime" />
             <Parameter Name="HORASALIDA" Mode="In" Type="DateTime" />
             <Parameter Name="ESTADORESERVA" Mode="In" Type="String" />
@@ -1466,31 +1470,31 @@
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARCLIENTE">
-            <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
+          <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARMESA">
-            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
+          <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARMETODOPAGO">
-            <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
+          <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARPRODUCTO">
-            <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
+          <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARPROVEEDOR">
-            <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
+          <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARRESERVA">
-            <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
+          <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARROL">
-            <Parameter Name="IDROL" Mode="In" Type="Decimal" />
+          <Parameter Name="IDROL" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARUNIDADMEDIDA">
-            <Parameter Name="IDUNIDAD" Mode="In" Type="Decimal" />
+          <Parameter Name="IDUNIDAD" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARUSUARIO">
-            <Parameter Name="RUT" Mode="In" Type="String" />
+          <Parameter Name="RUT" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="LISTARCLIENTE" />
           <FunctionImport Name="LISTARMESA" />
@@ -1511,11 +1515,10 @@
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="MODIFICARMESA">
-            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
             <Parameter Name="NUMASIENTO" Mode="In" Type="Decimal" />
             <Parameter Name="ESTADOMESA" Mode="In" Type="String" />
-            <Parameter Name="USERIDROL" Mode="In" Type="Decimal" />
             <Parameter Name="USERRUT" Mode="In" Type="String" />
+            <Parameter Name="USERIDROL" Mode="In" Type="Decimal" />
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="MODIFICARMETODOPAGO">
@@ -1542,7 +1545,6 @@
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="MODIFICARRESERVA">
-            <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
             <Parameter Name="HORALLEGADA" Mode="In" Type="DateTime" />
             <Parameter Name="HORASALIDA" Mode="In" Type="DateTime" />
             <Parameter Name="ESTADORESERVA" Mode="In" Type="String" />
@@ -1570,6 +1572,17 @@
             <Parameter Name="CLAVES" Mode="In" Type="String" />
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="AGREGARBOLETA">
+            <Parameter Name="TOTALPAGAR" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTOPAGADO" Mode="In" Type="Decimal" />
+            <Parameter Name="FECHABOLETA" Mode="In" Type="DateTime" />
+            <Parameter Name="CAMBIO" Mode="In" Type="Decimal" />
+            <Parameter Name="IDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="DETALLEORDEN">
+            <Parameter Name="ID_MESA" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1580,6 +1593,7 @@
           <EntitySetMapping Name="BEBESTIBLE">
             <EntityTypeMapping TypeName="Model.BEBESTIBLE">
               <MappingFragment StoreEntitySet="BEBESTIBLE">
+                <ScalarProperty Name="CANTIDAD_BE" ColumnName="CANTIDAD_BE" />
                 <ScalarProperty Name="ID_BEBESTIBLE" ColumnName="ID_BEBESTIBLE" />
                 <ScalarProperty Name="TIPO_BEBESTIBLE" ColumnName="TIPO_BEBESTIBLE" />
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -1667,9 +1681,7 @@
             <EntityTypeMapping TypeName="Model.ORDEN">
               <MappingFragment StoreEntitySet="ORDEN">
                 <ScalarProperty Name="NRO_ORDEN" ColumnName="NRO_ORDEN" />
-                <ScalarProperty Name="CANTIDAD_PLATO" ColumnName="CANTIDAD_PLATO" />
                 <ScalarProperty Name="PEDIDO_ID_PEDIDO" ColumnName="PEDIDO_ID_PEDIDO" />
-                <ScalarProperty Name="CANTIDAD_BEBESTIBLE" ColumnName="CANTIDAD_BEBESTIBLE" />
                 <ScalarProperty Name="PEDIDO_MESA_ID_MESA" ColumnName="PEDIDO_MESA_ID_MESA" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1687,6 +1699,7 @@
           <EntitySetMapping Name="PLATO">
             <EntityTypeMapping TypeName="Model.PLATO">
               <MappingFragment StoreEntitySet="PLATO">
+                <ScalarProperty Name="CANTIDAD_PLA" ColumnName="CANTIDAD_PLA" />
                 <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
                 <ScalarProperty Name="IMAGEN_PLATO" ColumnName="IMAGEN_PLATO" />
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
@@ -1837,6 +1850,8 @@
           <FunctionImportMapping FunctionImportName="MODIFICARROL" FunctionName="Model.Store.MODIFICARROL" />
           <FunctionImportMapping FunctionImportName="MODIFICARUNIDADMEDIDA" FunctionName="Model.Store.MODIFICARUNIDADMEDIDA" />
           <FunctionImportMapping FunctionImportName="MODIFICARUSUARIO" FunctionName="Model.Store.MODIFICARUSUARIO" />
+          <FunctionImportMapping FunctionImportName="AGREGARBOLETA" FunctionName="Model.Store.AGREGARBOLETA" />
+          <FunctionImportMapping FunctionImportName="DETALLEORDEN" FunctionName="Model.Store.DETALLEORDEN" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1852,7 +1867,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
