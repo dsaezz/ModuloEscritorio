@@ -24,7 +24,6 @@
         <TextBox x:Name="tbox_apellidoM" Controls:TextBoxHelper.Watermark="Ingresar Apellido Materno" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="0.2,180,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193" Grid.Column="1"/>
         <TextBox x:Name="tbox_correo" Controls:TextBoxHelper.Watermark="Correo Electronico" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="0.2,257,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193" Grid.Column="1"/>
         <TextBox x:Name="tbox_direccion" Controls:TextBoxHelper.Watermark="Direccion" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="0.2,294,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193" Grid.Column="1"/>
-        <TextBox x:Name="tbox_contrasena" Controls:TextBoxHelper.Watermark="Contraseña" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="0.2,332,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193" Grid.Column="1"/>
         <Button x:Name="btn_agregar" ToolTip="Agregar Usuario" Grid.Column="1" HorizontalAlignment="Left" Margin="103.2,8,0,0" VerticalAlignment="Top" Width="50" Height="45" Click="btn_agregar_Click" Style="{DynamicResource MahApps.Styles.Button.Circle}" Background="{x:Null}" BorderBrush="Black">
             <Image Source="Iconos/Guardar.png" Height="44" Width="29"/>
         </Button>
@@ -43,6 +42,7 @@
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center" />
         </Button>
+        <PasswordBox x:Name="tbox_contrasena" Grid.Column="1" HorizontalAlignment="Left" Margin="2.2,339,0,0" VerticalAlignment="Top" Height="30" Width="191"/>
 
 
 

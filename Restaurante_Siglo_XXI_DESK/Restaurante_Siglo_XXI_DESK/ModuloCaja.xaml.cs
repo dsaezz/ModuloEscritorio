@@ -199,5 +199,12 @@ namespace Restaurante_Siglo_XXI_DESK
             }
             
         }
+
+        private void btn_boleta_Click(object sender, RoutedEventArgs e)
+        {
+            BoletaInforme form = new BoletaInforme();
+            form.Show();
+            this.Hide();
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurante_Siglo_XXI_DESK"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="528.8" Icon="Iconos/Restaurante_LOGO.png">
+        Title="Inicio" Height="450" Width="528.8" Icon="Iconos/Restaurante_LOGO.png">
     <Grid>
         <Label Content="Usuario" HorizontalAlignment="Left" Margin="121,218,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.133,0.574"/>
         <Label Content="Contraseña" HorizontalAlignment="Left" Margin="119,262,0,0" VerticalAlignment="Top"/>

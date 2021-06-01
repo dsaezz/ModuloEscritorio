@@ -25,7 +25,7 @@ namespace CapaNegocio
             nro_pago = metodoBD.NRO_PAGO;
             tipo_pago = metodoBD.TIPO_PAGO;
         }
-
+        
         public List<MetodoPagoBN> obtenerMetodo()
         {
             List<METODO_PAGO> lista = conexion.METODO_PAGO.ToList();

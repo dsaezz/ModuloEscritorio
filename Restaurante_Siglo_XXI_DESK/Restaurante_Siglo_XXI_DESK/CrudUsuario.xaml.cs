@@ -53,7 +53,7 @@ namespace Restaurante_Siglo_XXI_DESK
             tbox_apellidoM.Text = string.Empty;
             tbox_correo.Text = string.Empty; 
             tbox_direccion.Text = string.Empty; 
-            tbox_contrasena.Text = string.Empty;
+            tbox_contrasena.Password = string.Empty;
 
 
         }
@@ -69,7 +69,7 @@ namespace Restaurante_Siglo_XXI_DESK
         private async void btn_agregar_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(tbox_rut.Text) && !string.IsNullOrEmpty(tbox_nombre.Text) && !string.IsNullOrEmpty(tbox_apellidoP.Text) && !string.IsNullOrEmpty(tbox_apellidoM.Text) &&
-               !string.IsNullOrEmpty(tbox_correo.Text) && !string.IsNullOrEmpty(tbox_direccion.Text) && !string.IsNullOrEmpty(tbox_contrasena.Text))
+               !string.IsNullOrEmpty(tbox_correo.Text) && !string.IsNullOrEmpty(tbox_direccion.Text) && !string.IsNullOrEmpty(tbox_contrasena.Password))
             {
                 bool respuesta = false;
                 ValidarRut v = new ValidarRut();
@@ -86,7 +86,7 @@ namespace Restaurante_Siglo_XXI_DESK
                         int rol = Convert.ToInt32(cbx_rol.SelectedValue);
                         string correo = tbox_correo.Text;
                         string direccion = tbox_direccion.Text;
-                        string contrasena = tbox_contrasena.Text;
+                        string contrasena = ValidarRut.GetSHA256(tbox_contrasena.Password);
 
 
                         u.agregarUsuario(rut, nombre, apellido_m, apellido_p, rol, correo, direccion, contrasena);
@@ -118,7 +118,7 @@ namespace Restaurante_Siglo_XXI_DESK
         {
             
             if (!string.IsNullOrEmpty(tbox_rut.Text) && !string.IsNullOrEmpty(tbox_nombre.Text) && !string.IsNullOrEmpty(tbox_apellidoP.Text) && !string.IsNullOrEmpty(tbox_apellidoM.Text) &&
-                !string.IsNullOrEmpty(tbox_correo.Text) && !string.IsNullOrEmpty(tbox_direccion.Text) && !string.IsNullOrEmpty(tbox_contrasena.Text))
+                !string.IsNullOrEmpty(tbox_correo.Text) && !string.IsNullOrEmpty(tbox_direccion.Text) && !string.IsNullOrEmpty(tbox_contrasena.Password))
             {
                 
                     try
@@ -130,7 +130,7 @@ namespace Restaurante_Siglo_XXI_DESK
                         int rol = Convert.ToInt32(cbx_rol.SelectedValue);
                         string correo = tbox_correo.Text;
                         string direccion = tbox_direccion.Text;
-                        string contrasena = tbox_contrasena.Text;
+                        string contrasena = tbox_contrasena.Password;
                         u.modificarUsuario(rut, nombre, apellido_m, apellido_p, rol, correo, direccion, contrasena);
                         await this.ShowMessageAsync("Exito!", "Los datos del Usuario fueron Modificados");
                         Limpiar();

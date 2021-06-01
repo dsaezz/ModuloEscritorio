@@ -48,9 +48,23 @@ namespace CapaNegocio
         }*/
 
 
-        public void ValidarUsuario(string usuario, string clave)
+        public string ValidarUsuario(string usuario, string clave)
         {
-           
+            string msj = "";
+            var resultado = (from u in conexion.USUARIO
+                             where u.CORREO == usuario && u.CLAVE == clave
+                             select u).FirstOrDefault();
+            if (resultado != null)
+            {
+                msj = "Bienvenido";
+                return msj;
+            }
+            else
+            {
+                msj = "Error: Los datos son incorrectos";
+                return msj;
+            }
+            
 
         }
 

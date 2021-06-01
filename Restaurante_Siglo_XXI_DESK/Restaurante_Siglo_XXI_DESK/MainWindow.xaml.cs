@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using CapaNegocio;
 //INTERFAZ METRO
 using MahApps.Metro.Controls;
-
+using MahApps.Metro.Controls.Dialogs;
 
 namespace Restaurante_Siglo_XXI_DESK
 {
@@ -29,21 +29,23 @@ namespace Restaurante_Siglo_XXI_DESK
             InitializeComponent();
         }
 
-        private void btn_ingresar_Click(object sender, RoutedEventArgs e)
+        private async void btn_ingresar_Click(object sender, RoutedEventArgs e)
         {
-            string clave = tb_clave.Password;
-            // UsuarioBN usuario = new UsuarioBN().ValidarUsuario(tb_clave.Text, tb_usuario.Text);
-            try
-            {
-                UsuarioBN usuario = new UsuarioBN();
-                usuario.ValidarUsuario("19895900-6", "123");
-                MessageBox.Show("COREcto");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("error" + ex);
-            }
             
+            string clave = tb_clave.Password;
+            string password = ValidarRut.GetSHA256(clave);
+            string usuario = tb_usuario.Text;
+            // UsuarioBN usuario = new UsuarioBN().ValidarUsuario(tb_clave.Text, tb_usuario.Text);
+            UsuarioBN u = new UsuarioBN();
+
+        
+                await this.ShowMessageAsync("","" + u.ValidarUsuario(usuario, password));
+
+            ModuloCaja form = new ModuloCaja();
+            form.Show();
+            this.Hide();
+
+
         }
     }
 }
