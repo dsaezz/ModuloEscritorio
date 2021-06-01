@@ -8,3 +8,13 @@ C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debu
 C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debug\EntityFramework.xml
 C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
 C:\Users\Victor Angel\source\repos\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.csproj.CopyComplete
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debug\CapaDatos.dll.config
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debug\CapaDatos.dll
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debug\CapaDatos.pdb
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debug\EntityFramework.dll
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\bin\Debug\EntityFramework.xml
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.csproj.CopyComplete
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.dll
+D:\ModuloEscritorio\Restaurante_Siglo_XXI_DESK\CapaDatos\obj\Debug\CapaDatos.pdb

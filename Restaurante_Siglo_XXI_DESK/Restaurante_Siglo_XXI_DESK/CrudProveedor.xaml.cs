@@ -75,7 +75,7 @@ namespace Restaurante_Siglo_XXI_DESK
                     string nombre = tbox_nombre.Text;
                     string tipoProveedor = tbox_tipoProveedor.Text;
 
-                    p.modificarProveedor(id, tipoProveedor, nombre);
+                    //p.modificarProveedor(id, tipoProveedor, nombre);
                     await this.ShowMessageAsync("Exito!", "El proveedor se Modifico correctamente");
                     Limpiar();
                 }
@@ -101,7 +101,7 @@ namespace Restaurante_Siglo_XXI_DESK
                     string nombre = tbox_nombre.Text;
                     string tipoProveedor = tbox_tipoProveedor.Text;
 
-                    p.agregarProveedor(id,tipoProveedor,nombre);
+                    //p.agregarProveedor(id,tipoProveedor,nombre);
                     await this.ShowMessageAsync("Exito!", "El proveedor se agrego correctamente");
                     Limpiar();
                 }

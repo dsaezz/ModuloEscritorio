@@ -20,13 +20,13 @@ namespace CapaDatos
         }
     
         public decimal ID_RESERVA { get; set; }
-        public decimal HORA { get; set; }
-        public System.DateTime FECHA { get; set; }
+        public System.DateTime FHORA_LLEGADA { get; set; }
+        public System.DateTime FHORA_SALIDA { get; set; }
         public string ESTADO_RESERVA { get; set; }
-        public string USUARIO_RUT { get; set; }
-        public decimal USUARIO_ROL_ID_ROL { get; set; }
+        public decimal CLIENTE_ID_CLIENTE { get; set; }
+        public string ACTIVO { get; set; }
     
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<MESA> MESA { get; set; }
     }
 }

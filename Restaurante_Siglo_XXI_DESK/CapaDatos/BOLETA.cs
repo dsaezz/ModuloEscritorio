@@ -14,19 +14,16 @@ namespace CapaDatos
     
     public partial class BOLETA
     {
-        public BOLETA()
-        {
-            this.METODO_PAGO = new HashSet<METODO_PAGO>();
-        }
-    
         public decimal ID_BOLETA { get; set; }
         public decimal TOTAL_PAGAR { get; set; }
         public decimal MONTO_PAGADO { get; set; }
         public System.DateTime FECHA_BOLETA { get; set; }
         public decimal CAMBIO { get; set; }
-        public decimal MESA_ID_MESA { get; set; }
+        public decimal PEDIDO_ID_PEDIDO { get; set; }
+        public decimal PEDIDO_MESA_ID_MESA { get; set; }
+        public decimal NRO_PAGO { get; set; }
     
-        public virtual MESA MESA { get; set; }
-        public virtual ICollection<METODO_PAGO> METODO_PAGO { get; set; }
+        public virtual METODO_PAGO METODO_PAGO { get; set; }
+        public virtual PEDIDO PEDIDO { get; set; }
     }
 }

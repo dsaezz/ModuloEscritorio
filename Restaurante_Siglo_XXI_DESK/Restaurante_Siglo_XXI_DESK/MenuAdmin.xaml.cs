@@ -25,6 +25,8 @@ namespace Restaurante_Siglo_XXI_DESK
         public MenuAdmin()
         {
             InitializeComponent();
+            //ServidorJava.ModuloCajaClient serv = new ServidorJava.ModuloCajaClient();
+            //MessageBox.Show(serv.hello("Angel")) ;
         }
 
         private void btn_usuario_Click(object sender, RoutedEventArgs e)
@@ -32,6 +34,7 @@ namespace Restaurante_Siglo_XXI_DESK
             CrudUsuario form = new CrudUsuario();
             form.Show();
             this.Hide();
+            
         }
 
         private void btn_proveedor_Click(object sender, RoutedEventArgs e)

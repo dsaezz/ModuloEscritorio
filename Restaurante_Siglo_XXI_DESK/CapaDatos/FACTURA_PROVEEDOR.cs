@@ -12,17 +12,18 @@ namespace CapaDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class FACTURA_COMPRA
+    public partial class FACTURA_PROVEEDOR
     {
-        public decimal NRO_COMPRA { get; set; }
-        public System.DateTime FECHA_PEDIDO { get; set; }
-        public decimal PRODUCTO_ID_PRODUCTO { get; set; }
-        public decimal PROD_U_MEDIDA_ID_MEDIDA { get; set; }
-        public decimal PROVEEDOR_ID_PROVEEDOR { get; set; }
-        public decimal CANTIDAD_PEDIDO { get; set; }
-        public decimal PRECIO_UNITARIO { get; set; }
+        public FACTURA_PROVEEDOR()
+        {
+            this.DETALLE_F = new HashSet<DETALLE_F>();
+        }
     
-        public virtual PRODUCTO PRODUCTO { get; set; }
+        public decimal ID_FACTURA { get; set; }
+        public System.DateTime FECHA_PEDIDO { get; set; }
+        public decimal PROVEEDOR_ID_PROVEEDOR { get; set; }
+    
+        public virtual ICollection<DETALLE_F> DETALLE_F { get; set; }
         public virtual PROVEEDOR PROVEEDOR { get; set; }
     }
 }

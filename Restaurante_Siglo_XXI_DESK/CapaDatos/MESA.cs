@@ -16,17 +16,19 @@ namespace CapaDatos
     {
         public MESA()
         {
-            this.BOLETA = new HashSet<BOLETA>();
-            this.RESERVA = new HashSet<RESERVA>();
             this.PEDIDO = new HashSet<PEDIDO>();
+            this.RESERVA = new HashSet<RESERVA>();
         }
     
         public decimal ID_MESA { get; set; }
         public decimal NUM_ASIENTO { get; set; }
         public string ESTADO { get; set; }
+        public string USUARIO_RUT { get; set; }
+        public decimal USUARIO_ROL_ID_ROL { get; set; }
+        public string ACTIVO { get; set; }
     
-        public virtual ICollection<BOLETA> BOLETA { get; set; }
-        public virtual ICollection<RESERVA> RESERVA { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }
+        public virtual ICollection<RESERVA> RESERVA { get; set; }
     }
 }

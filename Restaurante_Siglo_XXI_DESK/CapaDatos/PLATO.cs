@@ -16,16 +16,22 @@ namespace CapaDatos
     {
         public PLATO()
         {
-            this.ORDEN = new HashSet<ORDEN>();
-            this.PREPARACION = new HashSet<PREPARACION>();
+            this.PREP_PLATO = new HashSet<PREP_PLATO>();
         }
     
         public decimal ID_PLATO { get; set; }
-        public string RECETA { get; set; }
         public byte[] IMAGEN_PLATO { get; set; }
         public decimal PRECIO { get; set; }
+        public decimal ORDEN_PEDIDO_ID_PEDIDO { get; set; }
+        public decimal ORDEN_PEDIDO_ID_MESA { get; set; }
+        public decimal ORDEN_NRO_ORDEN { get; set; }
+        public string NOMBRE_PLATO { get; set; }
+        public string USUARIO_RUT { get; set; }
+        public decimal USUARIO_ROL_ID_ROL { get; set; }
+        public Nullable<decimal> CANTIDAD_PLA { get; set; }
     
-        public virtual ICollection<ORDEN> ORDEN { get; set; }
-        public virtual ICollection<PREPARACION> PREPARACION { get; set; }
+        public virtual ORDEN ORDEN { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
+        public virtual ICollection<PREP_PLATO> PREP_PLATO { get; set; }
     }
 }

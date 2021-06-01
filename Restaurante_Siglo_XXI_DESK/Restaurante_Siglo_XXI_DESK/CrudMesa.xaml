@@ -11,8 +11,7 @@
     <Grid>
         <TextBox x:Name="tbox_idMesa" Controls:TextBoxHelper.Watermark="Ingresar id Mesa" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="527,135,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193"/>
         <TextBox x:Name="tbox_numAsientos" Controls:TextBoxHelper.Watermark="Ingresar Cantidad Asientos" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="527,173,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193"/>
-        <TextBox x:Name="tbox_estadoMesa" Controls:TextBoxHelper.Watermark="Ingresar estado mesa" Controls:TextBoxHelper.ClearTextButton="True"  HorizontalAlignment="Left" Height="23" Margin="527,209,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="193"/>
-        <DataGrid x:Name="dg_mesa" HorizontalAlignment="Left" Height="73" Margin="45,141,0,0" VerticalAlignment="Top" Width="364"/>
+        <DataGrid x:Name="dg_mesa" HorizontalAlignment="Left" Height="194" Margin="45,141,0,0" VerticalAlignment="Top" Width="364"/>
         <Button x:Name="btn_agregar" Content="Agregar" HorizontalAlignment="Left" Margin="518,56,0,0" VerticalAlignment="Top" Width="75" Click="btn_agregar_Click"/>
         <Button x:Name="btn_Modificar" Content="Modificar" HorizontalAlignment="Left" Margin="610,57,0,0" VerticalAlignment="Top" Width="75" Click="btn_Modificar_Click"/>
         <Button x:Name="btn_eliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="699,56,0,0" VerticalAlignment="Top" Width="75" Click="btn_eliminar_Click"/>
@@ -22,7 +21,12 @@
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center" />
         </Button>
-        
+        <ComboBox x:Name="cb_estado" HorizontalAlignment="Left" Margin="529,208,0,0" VerticalAlignment="Top" Width="189" SelectedIndex="0">
+            <ComboBoxItem>Disponible</ComboBoxItem>
+
+            <ComboBoxItem>Ocupado</ComboBoxItem>
+        </ComboBox>
+
 
     </Grid>
 </Controls:MetroWindow>

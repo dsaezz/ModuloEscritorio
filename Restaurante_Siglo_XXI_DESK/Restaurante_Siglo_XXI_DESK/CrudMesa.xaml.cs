@@ -30,7 +30,7 @@ namespace Restaurante_Siglo_XXI_DESK
         }
         public void Limpiar()
         {
-            tbox_estadoMesa.Text = string.Empty;
+            
             tbox_idMesa.Text = string.Empty;
             tbox_numAsientos.Text = string.Empty;
 
@@ -38,17 +38,24 @@ namespace Restaurante_Siglo_XXI_DESK
         MesaBN u = new MesaBN();
         private async void btn_agregar_Click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(tbox_estadoMesa.Text) && !string.IsNullOrEmpty(tbox_numAsientos.Text) &&
+            if(!string.IsNullOrEmpty(tbox_numAsientos.Text) &&
                 !string.IsNullOrEmpty(tbox_idMesa.Text)){
                 try
                 {
                     int id = Convert.ToInt32(tbox_idMesa.Text);
                     int numAsientos = Convert.ToInt32(tbox_numAsientos.Text);
-                    string estadoMesa = tbox_estadoMesa.Text;
 
-                    u.agregarMesa(id, numAsientos, estadoMesa);
-                    await this.ShowMessageAsync("Exito!", "La mesa se agrego correctamente");
-                    Limpiar();
+                    if (cb_estado.SelectedIndex.Equals(0)) {
+                        u.agregarMesa(id, numAsientos,"1");
+                        await this.ShowMessageAsync("Exito!", "La mesa se agrego correctamente");
+                        Limpiar();
+                    }
+                    else
+                    {
+                        u.agregarMesa(id, numAsientos,"0");
+                        await this.ShowMessageAsync("Exito!", "La mesa se agrego correctamente");
+                        Limpiar();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -60,19 +67,20 @@ namespace Restaurante_Siglo_XXI_DESK
                 await this.ShowMessageAsync("Error", "Debe rellenar todos los campos");
             }
         }
-
+        ///arreglar modificar hacer aparecer los atributos rut y asignar el rol
         private async void btn_Modificar_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(tbox_estadoMesa.Text) && !string.IsNullOrEmpty(tbox_numAsientos.Text) &&
+            if (!string.IsNullOrEmpty(tbox_numAsientos.Text) &&
                 !string.IsNullOrEmpty(tbox_idMesa.Text))
             {
                 try
                 {
                     int id = Convert.ToInt32(tbox_idMesa.Text);
                     int numAsientos = Convert.ToInt32(tbox_numAsientos.Text);
-                    string estadoMesa = tbox_estadoMesa.Text;
+                    
 
-                    u.modificarMesa(id, numAsientos, estadoMesa);
+                    
+                    //u.modificarMesa(id, numAsientos,);
                     await this.ShowMessageAsync("Exito!", "La mesa se Modifico correctamente");
                     Limpiar();
                 }

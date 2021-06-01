@@ -14,14 +14,18 @@ namespace CapaDatos
     
     public partial class ORDEN
     {
-        public decimal CANTIDAD_PLATO { get; set; }
-        public decimal PLATO_ID_PLATO { get; set; }
-        public decimal PEDIDO_ID_PEDIDO { get; set; }
-        public decimal BEBESTIBLE_ID_BEBESTIBLE { get; set; }
-        public decimal CANTIDAD_BEBESTIBLE { get; set; }
+        public ORDEN()
+        {
+            this.BEBESTIBLE = new HashSet<BEBESTIBLE>();
+            this.PLATO = new HashSet<PLATO>();
+        }
     
-        public virtual BEBESTIBLE BEBESTIBLE { get; set; }
+        public decimal NRO_ORDEN { get; set; }
+        public decimal PEDIDO_ID_PEDIDO { get; set; }
+        public decimal PEDIDO_MESA_ID_MESA { get; set; }
+    
+        public virtual ICollection<BEBESTIBLE> BEBESTIBLE { get; set; }
         public virtual PEDIDO PEDIDO { get; set; }
-        public virtual PLATO PLATO { get; set; }
+        public virtual ICollection<PLATO> PLATO { get; set; }
     }
 }

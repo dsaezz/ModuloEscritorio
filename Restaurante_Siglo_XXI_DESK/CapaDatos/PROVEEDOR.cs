@@ -16,13 +16,18 @@ namespace CapaDatos
     {
         public PROVEEDOR()
         {
-            this.FACTURA_COMPRA = new HashSet<FACTURA_COMPRA>();
+            this.FACTURA_PROVEEDOR = new HashSet<FACTURA_PROVEEDOR>();
         }
     
         public decimal ID_PROVEEDOR { get; set; }
         public string TIPO_PROVEEDOR { get; set; }
         public string NOMBRE { get; set; }
+        public string RUT_PROVEEDOR { get; set; }
+        public string APELLIDO { get; set; }
+        public string TELEFONO { get; set; }
+        public string DIRECCION { get; set; }
+        public string ACTIVO { get; set; }
     
-        public virtual ICollection<FACTURA_COMPRA> FACTURA_COMPRA { get; set; }
+        public virtual ICollection<FACTURA_PROVEEDOR> FACTURA_PROVEEDOR { get; set; }
     }
 }

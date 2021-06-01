@@ -21,6 +21,7 @@ namespace CapaDatos
     
         public decimal ID_ROL { get; set; }
         public string TIPO_ROL { get; set; }
+        public string ACTIVO { get; set; }
     
         public virtual ICollection<USUARIO> USUARIO { get; set; }
     }
