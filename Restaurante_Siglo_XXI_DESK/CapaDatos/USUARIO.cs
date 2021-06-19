@@ -28,8 +28,8 @@ namespace CapaDatos
         public decimal ROL_ID_ROL { get; set; }
         public string CORREO { get; set; }
         public string DIRECCION { get; set; }
-        public string CLAVE { get; set; }
         public string ACTIVO { get; set; }
+        public string CLAVE { get; set; }
     
         public virtual ICollection<BEBESTIBLE> BEBESTIBLE { get; set; }
         public virtual ICollection<MESA> MESA { get; set; }

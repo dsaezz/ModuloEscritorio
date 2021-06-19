@@ -19,10 +19,9 @@ namespace CapaDatos
             this.FACTURA_PROVEEDOR = new HashSet<FACTURA_PROVEEDOR>();
         }
     
-        public decimal ID_PROVEEDOR { get; set; }
+        public string RUT_PROVEEDOR { get; set; }
         public string TIPO_PROVEEDOR { get; set; }
         public string NOMBRE { get; set; }
-        public string RUT_PROVEEDOR { get; set; }
         public string APELLIDO { get; set; }
         public string TELEFONO { get; set; }
         public string DIRECCION { get; set; }

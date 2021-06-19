@@ -20,8 +20,8 @@ namespace CapaDatos
         public System.DateTime FECHA_BOLETA { get; set; }
         public decimal CAMBIO { get; set; }
         public decimal PEDIDO_ID_PEDIDO { get; set; }
-        public decimal PEDIDO_MESA_ID_MESA { get; set; }
-        public decimal NRO_PAGO { get; set; }
+        public decimal PEDIDO_ID_MESA { get; set; }
+        public decimal METODO_PAGO_NRO_PAGO { get; set; }
     
         public virtual METODO_PAGO METODO_PAGO { get; set; }
         public virtual PEDIDO PEDIDO { get; set; }

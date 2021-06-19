@@ -51,6 +51,8 @@ namespace Restaurante_Siglo_XXI_DESK
         MesaBN m = new MesaBN();
         int idpedido = 0;
         int idmesa = 0;
+        int numasiento = 0;
+        string btnNom = "";
         public void BotonMesas()
         {
 
@@ -58,8 +60,8 @@ namespace Restaurante_Siglo_XXI_DESK
             
             foreach (var item in list)
             {
-                
-                
+
+
                 Button b = new Button();
                 Grid g = new Grid();
                 b.Content = "Mesa " + item.id.ToString();
@@ -86,9 +88,12 @@ namespace Restaurante_Siglo_XXI_DESK
                     b.Background = Brushes.Red;
                     b.Click += (s, e) => {
                         idmesa = item.id;
-
-                        dg_orden.ItemsSource = m.detalleOrden(item.id).DefaultView;
+                        btnNom = b.Name;
+                        numasiento = item.nr_mesa;
                         
+                        //cargar datos datagrid
+                        dg_orden.ItemsSource = m.detalleOrden(item.id).DefaultView;
+                        //Manipular datos del DATATABLE
                         var t = m.detalleOrden(item.id);
                         int precio_cant_p, precio_cant_b;
                         int cantidad_p = 0;
@@ -141,33 +146,38 @@ namespace Restaurante_Siglo_XXI_DESK
                         lbl_dinero.Content = total;
 
                         tbox_monto_i.IsEnabled = true;
+
                         
-                        
-                    };
+                        };
 
                 }
 
-            }                    
+            }
+            
         }
 
         private async void btn_pagar_Click(object sender, RoutedEventArgs e)
         {
-            BoletaBN b = new BoletaBN();
-            try
-            {
-                int dinero = Convert.ToInt32(lbl_dinero.Content);
-                int pagado = Convert.ToInt32(tbox_monto_i.Text);
-                DateTime fecha = Convert.ToDateTime(lbl_fecha.Content);
-                int vuelto = Convert.ToInt32(lbl_vuelto.Content);
-                int nropago = Convert.ToInt32(cbox_tipo_pago.SelectedValue);
-                b.agregarBoleta(dinero, pagado, fecha, vuelto, idpedido, idmesa, nropago);
 
-                await this.ShowMessageAsync("Exito!", "La boleta se agrego correctamente al sistema");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("" + ex);
-            }
+            MessageBox.Show(""+ idmesa);
+                    BoletaBN bo = new BoletaBN();
+                    MesaBN m = new MesaBN();
+                    try
+                    {
+                        int dinero = Convert.ToInt32(lbl_dinero.Content);
+                        int pagado = Convert.ToInt32(tbox_monto_i.Text);
+                        DateTime fecha = Convert.ToDateTime(lbl_fecha.Content);
+                        int vuelto = Convert.ToInt32(lbl_vuelto.Content);
+                        int nropago = Convert.ToInt32(cbox_tipo_pago.SelectedValue);
+                        bo.agregarBoleta(dinero, pagado, fecha, vuelto, idpedido, idmesa, nropago);
+                        //m.modificarMesa(idmesa, numasiento, "D", "00.000.000-0", 2);
+
+                        await this.ShowMessageAsync("Exito!", "La boleta se agrego correctamente al sistema");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("" + ex);
+                    }
         }
 
         private async void tbox_monto_i_LostFocus(object sender, RoutedEventArgs e)
@@ -206,5 +216,7 @@ namespace Restaurante_Siglo_XXI_DESK
             form.Show();
             this.Hide();
         }
+
+       
     }
 }

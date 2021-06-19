@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,39 +21,39 @@ namespace Restaurante_Siglo_XXI_DESK
     /// <summary>
     /// Lógica de interacción para BoletaInforme.xaml
     /// </summary>
-    public partial class BoletaInforme 
+    public partial class BoletaInforme
     {
         BoletaBN b = new BoletaBN();
         public BoletaInforme()
         {
             InitializeComponent();
             dg_boleta.ItemsSource = b.listarBoleta();
-           }
+        }
 
         private void btn_listar_Click(object sender, RoutedEventArgs e)
         {
-            DateTime fechaD = Convert.ToDateTime( dp_fecha.SelectedDate);
-            
-            
+            DateTime fechaD = Convert.ToDateTime(dp_fecha.SelectedDate);
+
+
             dg_boleta.ItemsSource = b.listaDia(fechaD);
 
-            
+
         }
         //columnas auto generadas
         private void dg_boleta_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-        
+
 
             if (e.Column.Header.Equals("id_boleta") || e.Column.Header.Equals("pedido_id_pedido") || e.Column.Header.Equals("pedido_mesa_id_mesa") || e.Column.Header.Equals("nro_pago"))
             {
                 e.Column.Visibility = Visibility.Collapsed;
             }
 
-           //cambiar formato fecha
+            //cambiar formato fecha
             if (e.PropertyType == typeof(System.DateTime))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
 
-           
+
 
 
         }
@@ -62,26 +63,25 @@ namespace Restaurante_Siglo_XXI_DESK
             DateTime fechaM = Convert.ToDateTime(dp_fecha.SelectedDate);
 
             dg_boleta.ItemsSource = b.listaMes(fechaM);
-            
-            int total = 0;
 
 
-            /*foreach (DataGridColumn column in dg_boleta.Columns)
-            {
-            if (column.Header.Equals("total_pagar"))
-            {
 
-                    MessageBox.Show("" + column.DisplayIndex);
-                }
-            }*/
 
-            /*for (int i = 0; i < dg_boleta.Items.Count - 1; i++)
-            {
-                var Id_Producto = (dg_boleta.Items[i]);
+            /* for (int i = 0; i < dg_boleta.Items.Count - 1; i++)
+             {
+                 foreach (DataGridColumn column in dg_boleta.Columns)
+                 {
+                     if (column.Header.Equals("total_pagar"))
+                     {
 
-            }
-  
-            */
+                         string s = dg_boleta.Items[i].ToString();
+                         MessageBox.Show("" + column.Header + " " + s);
+                     }
+                 }
+
+             }*/
+           
+
 
         }
 

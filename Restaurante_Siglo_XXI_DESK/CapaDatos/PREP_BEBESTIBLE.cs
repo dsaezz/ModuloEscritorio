@@ -15,7 +15,7 @@ namespace CapaDatos
     public partial class PREP_BEBESTIBLE
     {
         public decimal PRODUCTO_ID_PRODUCTO { get; set; }
-        public decimal PRODUCTO_UNIDAD_MEDIDA_ID_M { get; set; }
+        public decimal PRODUCTO_ID_M { get; set; }
         public decimal CANTIDAD_PRO_BEBEST { get; set; }
         public decimal BEBESTIBLE_ID_BEBESTIBLE { get; set; }
         public string DESCRIPCION { get; set; }

@@ -46,13 +46,13 @@ namespace Restaurante_Siglo_XXI_DESK
                     int numAsientos = Convert.ToInt32(tbox_numAsientos.Text);
 
                     if (cb_estado.SelectedIndex.Equals(0)) {
-                        u.agregarMesa(id, numAsientos,"1");
+                        u.agregarMesa(numAsientos,"1");
                         await this.ShowMessageAsync("Exito!", "La mesa se agrego correctamente");
                         Limpiar();
                     }
                     else
                     {
-                        u.agregarMesa(id, numAsientos,"0");
+                        u.agregarMesa(numAsientos,"0");
                         await this.ShowMessageAsync("Exito!", "La mesa se agrego correctamente");
                         Limpiar();
                     }
