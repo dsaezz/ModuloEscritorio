@@ -18,8 +18,8 @@ namespace CapaDatos
         public decimal PRECIO_UNITARIO { get; set; }
         public decimal PRODUCTO_ID_PRODUCTO { get; set; }
         public decimal PRODUCTO_UNIDAD_MEDIDA_ID_M { get; set; }
-        public decimal FACTURA_PROV_ID_PROVEEDOR { get; set; }
-        public decimal FACTURA_PROVEEDOR_ID_FACTURA { get; set; }
+        public decimal FACT_ID_FACTURA { get; set; }
+        public string PROV_RUT_PROVEEDOR { get; set; }
     
         public virtual FACTURA_PROVEEDOR FACTURA_PROVEEDOR { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

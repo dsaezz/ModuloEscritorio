@@ -42,7 +42,7 @@
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center" />
         </Button>
-        <PasswordBox x:Name="tbox_contrasena" Grid.Column="1" HorizontalAlignment="Left" Margin="2.2,339,0,0" VerticalAlignment="Top" Height="30" Width="191"/>
+        <PasswordBox x:Name="tbox_contrasena" Controls:TextBoxHelper.Watermark="Contraseña" Grid.Column="1" HorizontalAlignment="Left" Margin="0.2,332,0,0" VerticalAlignment="Top" Height="30" Width="193"/>
 
 
 

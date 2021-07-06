@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="BEBESTIBLE">
     <Key>
       <PropertyRef Name="ID_BEBESTIBLE" />
@@ -7,16 +7,12 @@
     <Property Name="ID_BEBESTIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TIPO_BEBESTIBLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_NRO_ORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_BEBESTIBLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="IMAGEN" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
     <Property Name="USUARIO_RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_BE" Type="Decimal" Precision="38" Scale="0" />
-    <NavigationProperty Name="ORDEN" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="BEBESTIBLE" ToRole="ORDEN" />
     <NavigationProperty Name="USUARIO" Relationship="Self.BEBESTIBLE_USUARIO_FK" FromRole="BEBESTIBLE" ToRole="USUARIO" />
+    <NavigationProperty Name="ORDEN" Relationship="Self.ORDEN_BEBESTIBLE_FK" FromRole="BEBESTIBLE" ToRole="ORDEN" />
     <NavigationProperty Name="PREP_BEBESTIBLE" Relationship="Self.PREP_BEBESTIBLE_BEBESTIBLE_FK" FromRole="BEBESTIBLE" ToRole="PREP_BEBESTIBLE" />
   </EntityType>
   <EntityType Name="BOLETA">
@@ -29,9 +25,9 @@
     <Property Name="FECHA_BOLETA" Type="DateTime" Nullable="false" />
     <Property Name="CAMBIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PEDIDO_MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="NRO_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="METODO_PAGO" Relationship="Self.BOLETA_METODO_PAGO_FK1" FromRole="BOLETA" ToRole="METODO_PAGO" />
+    <Property Name="PEDIDO_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="METODO_PAGO_NRO_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="METODO_PAGO" Relationship="Self.BOLETA_METODO_PAGO_FK" FromRole="BOLETA" ToRole="METODO_PAGO" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.BOLETA_PEDIDO_FK" FromRole="BOLETA" ToRole="PEDIDO" />
   </EntityType>
   <EntityType Name="CLIENTE">
@@ -52,26 +48,26 @@
     <Key>
       <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
       <PropertyRef Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" />
-      <PropertyRef Name="FACTURA_PROV_ID_PROVEEDOR" />
-      <PropertyRef Name="FACTURA_PROVEEDOR_ID_FACTURA" />
+      <PropertyRef Name="FACT_ID_FACTURA" />
+      <PropertyRef Name="PROV_RUT_PROVEEDOR" />
     </Key>
     <Property Name="CANTIDAD_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PRECIO_UNITARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PRODUCTO_ID_PRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FACTURA_PROV_ID_PROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FACTURA_PROVEEDOR_ID_FACTURA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FACT_ID_FACTURA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PROV_RUT_PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="FACTURA_PROVEEDOR" Relationship="Self.DETALLE_F_FACTURA_PROVEEDOR_FK" FromRole="DETALLE_F" ToRole="FACTURA_PROVEEDOR" />
     <NavigationProperty Name="PRODUCTO" Relationship="Self.DETALLE_F_PRODUCTO_FK" FromRole="DETALLE_F" ToRole="PRODUCTO" />
   </EntityType>
   <EntityType Name="FACTURA_PROVEEDOR">
     <Key>
       <PropertyRef Name="ID_FACTURA" />
-      <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
+      <PropertyRef Name="PROVEEDOR_RUT_PROVEEDOR" />
     </Key>
     <Property Name="ID_FACTURA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="FECHA_PEDIDO" Type="DateTime" Nullable="false" />
-    <Property Name="PROVEEDOR_ID_PROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PROVEEDOR_RUT_PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="DETALLE_F" Relationship="Self.DETALLE_F_FACTURA_PROVEEDOR_FK" FromRole="FACTURA_PROVEEDOR" ToRole="DETALLE_F" />
     <NavigationProperty Name="PROVEEDOR" Relationship="Self.FACTURA_PROVEEDOR_PROVEEDOR_FK" FromRole="FACTURA_PROVEEDOR" ToRole="PROVEEDOR" />
   </EntityType>
@@ -87,7 +83,7 @@
     <Property Name="ACTIVO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="USUARIO" Relationship="Self.MESA_USUARIO_FK" FromRole="MESA" ToRole="USUARIO" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_MESA_FK" FromRole="MESA" ToRole="PEDIDO" />
-    <NavigationProperty Name="RESERVA" Relationship="Self.MESA_RESERVA" FromRole="MESA" ToRole="RESERVA" />
+    <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_MESA_FK" FromRole="MESA" ToRole="RESERVA" />
   </EntityType>
   <EntityType Name="METODO_PAGO">
     <Key>
@@ -96,20 +92,24 @@
     <Property Name="NRO_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TIPO_PAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ACTIVO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="BOLETA" Relationship="Self.BOLETA_METODO_PAGO_FK1" FromRole="METODO_PAGO" ToRole="BOLETA" />
+    <NavigationProperty Name="BOLETA" Relationship="Self.BOLETA_METODO_PAGO_FK" FromRole="METODO_PAGO" ToRole="BOLETA" />
   </EntityType>
   <EntityType Name="ORDEN">
     <Key>
       <PropertyRef Name="NRO_ORDEN" />
       <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-      <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
+      <PropertyRef Name="PEDIDO_ID_MESA" />
     </Key>
     <Property Name="NRO_ORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_PLA" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="CANTIDAD_BEB" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PEDIDO_MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="BEBESTIBLE" Relationship="Self.BEBESTIBLE_ORDEN_FK" FromRole="ORDEN" ToRole="BEBESTIBLE" />
+    <Property Name="PEDIDO_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PLATO_ID_PLATO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BEBESTIBLE_ID_BEBESTIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="BEBESTIBLE" Relationship="Self.ORDEN_BEBESTIBLE_FK" FromRole="ORDEN" ToRole="BEBESTIBLE" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.ORDEN_PEDIDO_FK" FromRole="ORDEN" ToRole="PEDIDO" />
-    <NavigationProperty Name="PLATO" Relationship="Self.PLATO_ORDEN_FK" FromRole="ORDEN" ToRole="PLATO" />
+    <NavigationProperty Name="PLATO" Relationship="Self.ORDEN_PLATO_FK" FromRole="ORDEN" ToRole="PLATO" />
   </EntityType>
   <EntityType Name="PEDIDO">
     <Key>
@@ -131,25 +131,21 @@
     <Property Name="ID_PLATO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IMAGEN_PLATO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
     <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_NRO_ORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PLATO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="USUARIO_RUT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_PLA" Type="Decimal" Precision="38" Scale="0" />
-    <NavigationProperty Name="ORDEN" Relationship="Self.PLATO_ORDEN_FK" FromRole="PLATO" ToRole="ORDEN" />
+    <NavigationProperty Name="ORDEN" Relationship="Self.ORDEN_PLATO_FK" FromRole="PLATO" ToRole="ORDEN" />
     <NavigationProperty Name="USUARIO" Relationship="Self.PLATO_USUARIO_FK" FromRole="PLATO" ToRole="USUARIO" />
     <NavigationProperty Name="PREP_PLATO" Relationship="Self.PREP_PLATO_PLATO_FK" FromRole="PLATO" ToRole="PREP_PLATO" />
   </EntityType>
   <EntityType Name="PREP_BEBESTIBLE">
     <Key>
       <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
-      <PropertyRef Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" />
+      <PropertyRef Name="PRODUCTO_ID_M" />
       <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
     </Key>
     <Property Name="PRODUCTO_ID_PRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PRODUCTO_ID_M" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD_PRO_BEBEST" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="BEBESTIBLE_ID_BEBESTIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -189,12 +185,11 @@
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
-      <PropertyRef Name="ID_PROVEEDOR" />
+      <PropertyRef Name="RUT_PROVEEDOR" />
     </Key>
-    <Property Name="ID_PROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RUT_PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="TIPO_PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RUT_PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
@@ -209,10 +204,11 @@
     <Property Name="FHORA_LLEGADA" Type="DateTime" Nullable="false" />
     <Property Name="FHORA_SALIDA" Type="DateTime" Nullable="false" />
     <Property Name="ESTADO_RESERVA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="CLIENTE_ID_CLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ACTIVO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CLIENTE_ID_CLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="RESERVA" ToRole="CLIENTE" />
-    <NavigationProperty Name="MESA" Relationship="Self.MESA_RESERVA" FromRole="RESERVA" ToRole="MESA" />
+    <NavigationProperty Name="MESA" Relationship="Self.RESERVA_MESA_FK" FromRole="RESERVA" ToRole="MESA" />
   </EntityType>
   <EntityType Name="ROL">
     <Key>
@@ -244,29 +240,13 @@
     <Property Name="ROL_ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CORREO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CLAVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ACTIVO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CLAVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="BEBESTIBLE" Relationship="Self.BEBESTIBLE_USUARIO_FK" FromRole="USUARIO" ToRole="BEBESTIBLE" />
     <NavigationProperty Name="MESA" Relationship="Self.MESA_USUARIO_FK" FromRole="USUARIO" ToRole="MESA" />
     <NavigationProperty Name="PLATO" Relationship="Self.PLATO_USUARIO_FK" FromRole="USUARIO" ToRole="PLATO" />
     <NavigationProperty Name="ROL" Relationship="Self.USUARIO_ROL_FK" FromRole="USUARIO" ToRole="ROL" />
   </EntityType>
-  <Association Name="BEBESTIBLE_ORDEN_FK">
-    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
-    <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ORDEN">
-        <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
-        <PropertyRef Name="NRO_ORDEN" />
-      </Principal>
-      <Dependent Role="BEBESTIBLE">
-        <PropertyRef Name="ORDEN_PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="ORDEN_PEDIDO_ID_MESA" />
-        <PropertyRef Name="ORDEN_NRO_ORDEN" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="BEBESTIBLE_USUARIO_FK">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="*" />
@@ -278,6 +258,18 @@
       <Dependent Role="BEBESTIBLE">
         <PropertyRef Name="USUARIO_RUT" />
         <PropertyRef Name="USUARIO_ROL_ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ORDEN_BEBESTIBLE_FK">
+    <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BEBESTIBLE">
+        <PropertyRef Name="ID_BEBESTIBLE" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -293,7 +285,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BOLETA_METODO_PAGO_FK1">
+  <Association Name="BOLETA_METODO_PAGO_FK">
     <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="1" />
     <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
     <ReferentialConstraint>
@@ -301,7 +293,7 @@
         <PropertyRef Name="NRO_PAGO" />
       </Principal>
       <Dependent Role="BOLETA">
-        <PropertyRef Name="NRO_PAGO" />
+        <PropertyRef Name="METODO_PAGO_NRO_PAGO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -315,7 +307,7 @@
       </Principal>
       <Dependent Role="BOLETA">
         <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
+        <PropertyRef Name="PEDIDO_ID_MESA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -336,12 +328,12 @@
     <End Role="DETALLE_F" Type="Self.DETALLE_F" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FACTURA_PROVEEDOR">
-        <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
         <PropertyRef Name="ID_FACTURA" />
+        <PropertyRef Name="PROVEEDOR_RUT_PROVEEDOR" />
       </Principal>
       <Dependent Role="DETALLE_F">
-        <PropertyRef Name="FACTURA_PROV_ID_PROVEEDOR" />
-        <PropertyRef Name="FACTURA_PROVEEDOR_ID_FACTURA" />
+        <PropertyRef Name="FACT_ID_FACTURA" />
+        <PropertyRef Name="PROV_RUT_PROVEEDOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -364,10 +356,10 @@
     <End Role="FACTURA_PROVEEDOR" Type="Self.FACTURA_PROVEEDOR" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PROVEEDOR">
-        <PropertyRef Name="ID_PROVEEDOR" />
+        <PropertyRef Name="RUT_PROVEEDOR" />
       </Principal>
       <Dependent Role="FACTURA_PROVEEDOR">
-        <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
+        <PropertyRef Name="PROVEEDOR_RUT_PROVEEDOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -397,6 +389,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="RESERVA_MESA_FK">
+    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MESA">
+        <PropertyRef Name="ID_MESA" />
+      </Principal>
+      <Dependent Role="RESERVA">
+        <PropertyRef Name="MESA_ID_MESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="ORDEN_PEDIDO_FK">
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
     <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
@@ -407,23 +411,19 @@
       </Principal>
       <Dependent Role="ORDEN">
         <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
+        <PropertyRef Name="PEDIDO_ID_MESA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PLATO_ORDEN_FK">
-    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
-    <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
+  <Association Name="ORDEN_PLATO_FK">
+    <End Role="PLATO" Type="Self.PLATO" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ORDEN">
-        <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
-        <PropertyRef Name="NRO_ORDEN" />
+      <Principal Role="PLATO">
+        <PropertyRef Name="ID_PLATO" />
       </Principal>
-      <Dependent Role="PLATO">
-        <PropertyRef Name="ORDEN_PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="ORDEN_PEDIDO_ID_MESA" />
-        <PropertyRef Name="ORDEN_NRO_ORDEN" />
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="PLATO_ID_PLATO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -463,7 +463,7 @@
       </Principal>
       <Dependent Role="PREP_BEBESTIBLE">
         <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
-        <PropertyRef Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" />
+        <PropertyRef Name="PRODUCTO_ID_M" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -505,10 +505,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="MESA_RESERVA">
-    <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
-    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BEBESTIBLE" EntityType="Self.BEBESTIBLE" />
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" />
@@ -528,19 +524,19 @@
     <EntitySet Name="ROL" EntityType="Self.ROL" />
     <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
-    <AssociationSet Name="BEBESTIBLE_ORDEN_FK" Association="Self.BEBESTIBLE_ORDEN_FK">
-      <End Role="ORDEN" EntitySet="ORDEN" />
-      <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
-    </AssociationSet>
     <AssociationSet Name="BEBESTIBLE_USUARIO_FK" Association="Self.BEBESTIBLE_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
+    </AssociationSet>
+    <AssociationSet Name="ORDEN_BEBESTIBLE_FK" Association="Self.ORDEN_BEBESTIBLE_FK">
+      <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
     </AssociationSet>
     <AssociationSet Name="PREP_BEBESTIBLE_BEBESTIBLE_FK" Association="Self.PREP_BEBESTIBLE_BEBESTIBLE_FK">
       <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
       <End Role="PREP_BEBESTIBLE" EntitySet="PREP_BEBESTIBLE" />
     </AssociationSet>
-    <AssociationSet Name="BOLETA_METODO_PAGO_FK1" Association="Self.BOLETA_METODO_PAGO_FK1">
+    <AssociationSet Name="BOLETA_METODO_PAGO_FK" Association="Self.BOLETA_METODO_PAGO_FK">
       <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
       <End Role="BOLETA" EntitySet="BOLETA" />
     </AssociationSet>
@@ -572,13 +568,17 @@
       <End Role="MESA" EntitySet="MESA" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
     </AssociationSet>
+    <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
+      <End Role="MESA" EntitySet="MESA" />
+      <End Role="RESERVA" EntitySet="RESERVA" />
+    </AssociationSet>
     <AssociationSet Name="ORDEN_PEDIDO_FK" Association="Self.ORDEN_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
       <End Role="ORDEN" EntitySet="ORDEN" />
     </AssociationSet>
-    <AssociationSet Name="PLATO_ORDEN_FK" Association="Self.PLATO_ORDEN_FK">
-      <End Role="ORDEN" EntitySet="ORDEN" />
+    <AssociationSet Name="ORDEN_PLATO_FK" Association="Self.ORDEN_PLATO_FK">
       <End Role="PLATO" EntitySet="PLATO" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
     </AssociationSet>
     <AssociationSet Name="PLATO_USUARIO_FK" Association="Self.PLATO_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
@@ -604,19 +604,6 @@
       <End Role="ROL" EntitySet="ROL" />
       <End Role="USUARIO" EntitySet="USUARIO" />
     </AssociationSet>
-    <AssociationSet Name="MESA_RESERVA" Association="Self.MESA_RESERVA">
-      <End Role="MESA" EntitySet="MESA" />
-      <End Role="RESERVA" EntitySet="RESERVA" />
-    </AssociationSet>
-    <FunctionImport Name="AGREGARBOLETA">
-      <Parameter Name="TOTALPAGAR" Mode="In" Type="Decimal" />
-      <Parameter Name="MONTOPAGADO" Mode="In" Type="Decimal" />
-      <Parameter Name="FECHABOLETA" Mode="In" Type="DateTime" />
-      <Parameter Name="CAMBIO" Mode="In" Type="Decimal" />
-      <Parameter Name="IDPEDIDO" Mode="In" Type="Decimal" />
-      <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
-      <Parameter Name="NROPAGO" Mode="In" Type="Decimal" />
-    </FunctionImport>
     <FunctionImport Name="AGREGARCLIENTE">
       <Parameter Name="RUT" Mode="In" Type="String" />
       <Parameter Name="NOMBRES" Mode="In" Type="String" />
@@ -636,7 +623,6 @@
     <FunctionImport Name="AGREGARMETODOPAGO">
       <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
       <Parameter Name="TIPOPAGO" Mode="In" Type="String" />
-      <Parameter Name="BOLETAID" Mode="In" Type="Decimal" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AGREGARPRODUCTO">
@@ -647,10 +633,9 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AGREGARPROVEEDOR">
-      <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="RUT" Mode="In" Type="String" />
       <Parameter Name="TIPOPROVEEDOR" Mode="In" Type="String" />
       <Parameter Name="NOMBRES" Mode="In" Type="String" />
-      <Parameter Name="RUT" Mode="In" Type="String" />
       <Parameter Name="APELLIDO" Mode="In" Type="String" />
       <Parameter Name="FONO" Mode="In" Type="String" />
       <Parameter Name="DIRECCION" Mode="In" Type="String" />
@@ -660,8 +645,9 @@
       <Parameter Name="HORALLEGADA" Mode="In" Type="DateTime" />
       <Parameter Name="HORASALIDA" Mode="In" Type="DateTime" />
       <Parameter Name="ESTADORESERVA" Mode="In" Type="String" />
-      <Parameter Name="CLIENTEID" Mode="In" Type="Decimal" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
+      <Parameter Name="CLIENTEID" Mode="In" Type="Decimal" />
+      <Parameter Name="MESAID" Mode="In" Type="Decimal" />
     </FunctionImport>
     <FunctionImport Name="AGREGARROL">
       <Parameter Name="IDROL" Mode="In" Type="Decimal" />
@@ -684,9 +670,6 @@
       <Parameter Name="CLAVES" Mode="In" Type="String" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="DETALLEORDEN">
-      <Parameter Name="ID_MESA" Mode="In" Type="Decimal" />
-    </FunctionImport>
     <FunctionImport Name="ELIMINARCLIENTE">
       <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
     </FunctionImport>
@@ -700,7 +683,7 @@
       <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
     </FunctionImport>
     <FunctionImport Name="ELIMINARPROVEEDOR">
-      <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="RUT" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ELIMINARRESERVA">
       <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
@@ -724,6 +707,7 @@
     <FunctionImport Name="LISTARUNIDADMEDIDA" />
     <FunctionImport Name="LISTARUSUARIO" />
     <FunctionImport Name="MODIFICARCLIENTE">
+      <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
       <Parameter Name="RUT" Mode="In" Type="String" />
       <Parameter Name="NOMBRES" Mode="In" Type="String" />
       <Parameter Name="APELLIDO" Mode="In" Type="String" />
@@ -733,6 +717,7 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARMESA">
+      <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
       <Parameter Name="NUMASIENTO" Mode="In" Type="Decimal" />
       <Parameter Name="ESTADOMESA" Mode="In" Type="String" />
       <Parameter Name="USERRUT" Mode="In" Type="String" />
@@ -742,7 +727,6 @@
     <FunctionImport Name="MODIFICARMETODOPAGO">
       <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
       <Parameter Name="TIPOPAGO" Mode="In" Type="String" />
-      <Parameter Name="BOLETAID" Mode="In" Type="Decimal" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARPRODUCTO">
@@ -753,21 +737,22 @@
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARPROVEEDOR">
-      <Parameter Name="IDPROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="RUT" Mode="In" Type="String" />
       <Parameter Name="TIPOPROVEEDOR" Mode="In" Type="String" />
       <Parameter Name="NOMBRES" Mode="In" Type="String" />
-      <Parameter Name="RUT" Mode="In" Type="String" />
       <Parameter Name="APELLIDO" Mode="In" Type="String" />
       <Parameter Name="FONO" Mode="In" Type="String" />
       <Parameter Name="DIRECCION" Mode="In" Type="String" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARRESERVA">
+      <Parameter Name="RESERVAID" Mode="In" Type="Decimal" />
       <Parameter Name="HORALLEGADA" Mode="In" Type="DateTime" />
       <Parameter Name="HORASALIDA" Mode="In" Type="DateTime" />
       <Parameter Name="ESTADORESERVA" Mode="In" Type="String" />
-      <Parameter Name="CLIENTEID" Mode="In" Type="Decimal" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
+      <Parameter Name="CLIENTEID" Mode="In" Type="Decimal" />
+      <Parameter Name="MESAID" Mode="In" Type="Decimal" />
     </FunctionImport>
     <FunctionImport Name="MODIFICARROL">
       <Parameter Name="IDROL" Mode="In" Type="Decimal" />
@@ -789,6 +774,10 @@
       <Parameter Name="DIRECCIONES" Mode="In" Type="String" />
       <Parameter Name="CLAVES" Mode="In" Type="String" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RPPLATO">
+      <Parameter Name="FECHAINI" Mode="In" Type="String" />
+      <Parameter Name="FECHAFIN" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

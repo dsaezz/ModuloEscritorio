@@ -27,6 +27,7 @@ namespace Restaurante_Siglo_XXI_DESK
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private async void btn_ingresar_Click(object sender, RoutedEventArgs e)
@@ -41,7 +42,7 @@ namespace Restaurante_Siglo_XXI_DESK
         
                 await this.ShowMessageAsync("","" + u.ValidarUsuario(usuario, password));
 
-            ModuloCaja form = new ModuloCaja();
+            VentanaReportes form = new VentanaReportes();
             form.Show();
             this.Hide();
 

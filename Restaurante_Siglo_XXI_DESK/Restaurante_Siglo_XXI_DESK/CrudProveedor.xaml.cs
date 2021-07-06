@@ -40,13 +40,13 @@ namespace Restaurante_Siglo_XXI_DESK
             {
                 try
                 {
-                    int id = Convert.ToInt32(tbox_idProveedor.Text);
-                    var message = await this.ShowMessageAsync("Pregunta", "Esta seguro que desea elimirar el proveedor Numero " + "*" + id + "*", MessageDialogStyle.AffirmativeAndNegative);
+                    string rut = tbox_idProveedor.Text;
+                    var message = await this.ShowMessageAsync("Pregunta", "Esta seguro que desea elimirar el proveedor Numero " + "*" + rut + "*", MessageDialogStyle.AffirmativeAndNegative);
 
 
                     if (message == MessageDialogResult.Affirmative)
                     {
-                        p.eliminarProveedor(id);
+                        p.eliminarProveedor(rut);
                         await this.ShowMessageAsync("Exito!", "El proveedor se elimino de forma correcta");
                     }
 

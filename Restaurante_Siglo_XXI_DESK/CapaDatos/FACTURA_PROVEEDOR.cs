@@ -21,7 +21,7 @@ namespace CapaDatos
     
         public decimal ID_FACTURA { get; set; }
         public System.DateTime FECHA_PEDIDO { get; set; }
-        public decimal PROVEEDOR_ID_PROVEEDOR { get; set; }
+        public string PROVEEDOR_RUT_PROVEEDOR { get; set; }
     
         public virtual ICollection<DETALLE_F> DETALLE_F { get; set; }
         public virtual PROVEEDOR PROVEEDOR { get; set; }

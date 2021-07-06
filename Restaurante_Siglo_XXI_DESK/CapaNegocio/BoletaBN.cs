@@ -1,7 +1,9 @@
 ﻿using CapaDatos;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +36,7 @@ namespace CapaNegocio
         public void agregarBoleta(Int32 total_pagar, Int32 monto_pagado, DateTime fecha_boleta, Int32 cambio, Int32 pedido_id_pedido, Int32 pedido_mesa_id_mesa, Int32 nropago)
         {
 
-        conexion.AGREGARBOLETA(total_pagar, monto_pagado, fecha_boleta, cambio, pedido_id_pedido, pedido_mesa_id_mesa,nropago);
+        //conexion.AGREGARBOLETA(total_pagar, monto_pagado, fecha_boleta, cambio, pedido_id_pedido, pedido_mesa_id_mesa,nropago);
         conexion.SaveChanges();
         }
 
@@ -82,6 +84,59 @@ namespace CapaNegocio
 
 
         }
+        public DataTable RePCLIENTEMENSUAL(string fechaini, string fechafin)
+        {
+            OracleConnection conn = new OracleConnection("PASSWORD=1234;USER ID= SIGLOXXI;DATA SOURCE=localhost:1521/orcl;");
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("RPCLIENTEMENSUAL", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("REG", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("FECHAINI", OracleDbType.Varchar2).Value = fechaini;
+            cmd.Parameters.Add("FECHAFIN", OracleDbType.Varchar2).Value = fechafin;
+
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
+        public DataTable RPENGRESO()
+        {
+            OracleConnection conn = new OracleConnection("PASSWORD=1234;USER ID= SIGLOXXI;DATA SOURCE=localhost:1521/orcl;");
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("RPENGRESO", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("REG", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            
+
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
+        public DataTable RPINGRESO()
+        {
+            OracleConnection conn = new OracleConnection("PASSWORD=1234;USER ID= SIGLOXXI;DATA SOURCE=localhost:1521/orcl;");
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("RPINGRESO", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("REG", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
+
 
     }
 }

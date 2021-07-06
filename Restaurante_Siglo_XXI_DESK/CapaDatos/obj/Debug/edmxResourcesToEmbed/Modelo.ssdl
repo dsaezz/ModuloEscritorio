@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Modelo.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BEBESTIBLE">
     <Key>
       <PropertyRef Name="ID_BEBESTIBLE" />
@@ -7,14 +7,10 @@
     <Property Name="ID_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TIPO_BEBESTIBLE" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="PRECIO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_NRO_ORDEN" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_BEBESTIBLE" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="IMAGEN" Type="blob" Nullable="false" />
     <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_BE" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="BOLETA">
     <Key>
@@ -26,8 +22,8 @@
     <Property Name="FECHA_BOLETA" Type="date" Nullable="false" />
     <Property Name="CAMBIO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PEDIDO_MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="NRO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PEDIDO_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="METODO_PAGO_NRO_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="CLIENTE">
     <Key>
@@ -46,24 +42,24 @@
     <Key>
       <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
       <PropertyRef Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" />
-      <PropertyRef Name="FACTURA_PROV_ID_PROVEEDOR" />
-      <PropertyRef Name="FACTURA_PROVEEDOR_ID_FACTURA" />
+      <PropertyRef Name="FACT_ID_FACTURA" />
+      <PropertyRef Name="PROV_RUT_PROVEEDOR" />
     </Key>
     <Property Name="CANTIDAD_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PRECIO_UNITARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PRODUCTO_ID_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FACTURA_PROV_ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FACTURA_PROVEEDOR_ID_FACTURA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FACT_ID_FACTURA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PROV_RUT_PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="FACTURA_PROVEEDOR">
     <Key>
       <PropertyRef Name="ID_FACTURA" />
-      <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
+      <PropertyRef Name="PROVEEDOR_RUT_PROVEEDOR" />
     </Key>
     <Property Name="ID_FACTURA" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="FECHA_PEDIDO" Type="date" Nullable="false" />
-    <Property Name="PROVEEDOR_ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PROVEEDOR_RUT_PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="MESA">
     <Key>
@@ -75,14 +71,6 @@
     <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ACTIVO" Type="char" MaxLength="1" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MESA_RESERVA">
-    <Key>
-      <PropertyRef Name="MESA_ID_MESA" />
-      <PropertyRef Name="RESERVA_ID_RESERVA" />
-    </Key>
-    <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="RESERVA_ID_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="METODO_PAGO">
     <Key>
@@ -96,11 +84,15 @@
     <Key>
       <PropertyRef Name="NRO_ORDEN" />
       <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-      <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
+      <PropertyRef Name="PEDIDO_ID_MESA" />
     </Key>
     <Property Name="NRO_ORDEN" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD_PLA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CANTIDAD_BEB" Type="number" Precision="38" Scale="0" />
     <Property Name="PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PEDIDO_MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PEDIDO_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PLATO_ID_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BEBESTIBLE_ID_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PEDIDO">
     <Key>
@@ -119,22 +111,18 @@
     <Property Name="ID_PLATO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IMAGEN_PLATO" Type="blob" Nullable="false" />
     <Property Name="PRECIO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_PEDIDO_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="ORDEN_NRO_ORDEN" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PLATO" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="USUARIO_RUT" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="USUARIO_ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD_PLA" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="PREP_BEBESTIBLE">
     <Key>
       <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
-      <PropertyRef Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" />
+      <PropertyRef Name="PRODUCTO_ID_M" />
       <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
     </Key>
     <Property Name="PRODUCTO_ID_PRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PRODUCTO_ID_M" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD_PRO_BEBEST" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="BEBESTIBLE_ID_BEBESTIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION" Type="varchar2" MaxLength="250" Nullable="false" />
@@ -166,12 +154,11 @@
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
-      <PropertyRef Name="ID_PROVEEDOR" />
+      <PropertyRef Name="RUT_PROVEEDOR" />
     </Key>
-    <Property Name="ID_PROVEEDOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RUT_PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="TIPO_PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="RUT_PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="APELLIDO" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="TELEFONO" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
@@ -185,8 +172,9 @@
     <Property Name="FHORA_LLEGADA" Type="date" Nullable="false" />
     <Property Name="FHORA_SALIDA" Type="date" Nullable="false" />
     <Property Name="ESTADO_RESERVA" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="CLIENTE_ID_CLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ACTIVO" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="CLIENTE_ID_CLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="ROL">
     <Key>
@@ -216,25 +204,9 @@
     <Property Name="ROL_ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CORREO" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
-    <Property Name="CLAVE" Type="varchar2" MaxLength="200" Nullable="false" />
     <Property Name="ACTIVO" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="CLAVE" Type="varchar2" MaxLength="200" Nullable="false" />
   </EntityType>
-  <Association Name="BEBESTIBLE_ORDEN_FK">
-    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
-    <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ORDEN">
-        <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
-        <PropertyRef Name="NRO_ORDEN" />
-      </Principal>
-      <Dependent Role="BEBESTIBLE">
-        <PropertyRef Name="ORDEN_PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="ORDEN_PEDIDO_ID_MESA" />
-        <PropertyRef Name="ORDEN_NRO_ORDEN" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="BEBESTIBLE_USUARIO_FK">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="*" />
@@ -249,7 +221,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BOLETA_METODO_PAGO_FK1">
+  <Association Name="BOLETA_METODO_PAGO_FK">
     <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="1" />
     <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
     <ReferentialConstraint>
@@ -257,7 +229,7 @@
         <PropertyRef Name="NRO_PAGO" />
       </Principal>
       <Dependent Role="BOLETA">
-        <PropertyRef Name="NRO_PAGO" />
+        <PropertyRef Name="METODO_PAGO_NRO_PAGO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -271,7 +243,7 @@
       </Principal>
       <Dependent Role="BOLETA">
         <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
+        <PropertyRef Name="PEDIDO_ID_MESA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -280,12 +252,12 @@
     <End Role="DETALLE_F" Type="Self.DETALLE_F" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FACTURA_PROVEEDOR">
-        <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
         <PropertyRef Name="ID_FACTURA" />
+        <PropertyRef Name="PROVEEDOR_RUT_PROVEEDOR" />
       </Principal>
       <Dependent Role="DETALLE_F">
-        <PropertyRef Name="FACTURA_PROV_ID_PROVEEDOR" />
-        <PropertyRef Name="FACTURA_PROVEEDOR_ID_FACTURA" />
+        <PropertyRef Name="FACT_ID_FACTURA" />
+        <PropertyRef Name="PROV_RUT_PROVEEDOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -308,10 +280,10 @@
     <End Role="FACTURA_PROVEEDOR" Type="Self.FACTURA_PROVEEDOR" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PROVEEDOR">
-        <PropertyRef Name="ID_PROVEEDOR" />
+        <PropertyRef Name="RUT_PROVEEDOR" />
       </Principal>
       <Dependent Role="FACTURA_PROVEEDOR">
-        <PropertyRef Name="PROVEEDOR_ID_PROVEEDOR" />
+        <PropertyRef Name="PROVEEDOR_RUT_PROVEEDOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -329,6 +301,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ORDEN_BEBESTIBLE_FK">
+    <End Role="BEBESTIBLE" Type="Self.BEBESTIBLE" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BEBESTIBLE">
+        <PropertyRef Name="ID_BEBESTIBLE" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="BEBESTIBLE_ID_BEBESTIBLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="ORDEN_PEDIDO_FK">
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
     <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
@@ -339,7 +323,19 @@
       </Principal>
       <Dependent Role="ORDEN">
         <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
+        <PropertyRef Name="PEDIDO_ID_MESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ORDEN_PLATO_FK">
+    <End Role="PLATO" Type="Self.PLATO" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLATO">
+        <PropertyRef Name="ID_PLATO" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="PLATO_ID_PLATO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -352,22 +348,6 @@
       </Principal>
       <Dependent Role="PEDIDO">
         <PropertyRef Name="MESA_ID_MESA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PLATO_ORDEN_FK">
-    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
-    <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ORDEN">
-        <PropertyRef Name="PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="PEDIDO_MESA_ID_MESA" />
-        <PropertyRef Name="NRO_ORDEN" />
-      </Principal>
-      <Dependent Role="PLATO">
-        <PropertyRef Name="ORDEN_PEDIDO_ID_PEDIDO" />
-        <PropertyRef Name="ORDEN_PEDIDO_ID_MESA" />
-        <PropertyRef Name="ORDEN_NRO_ORDEN" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -407,7 +387,7 @@
       </Principal>
       <Dependent Role="PREP_BEBESTIBLE">
         <PropertyRef Name="PRODUCTO_ID_PRODUCTO" />
-        <PropertyRef Name="PRODUCTO_UNIDAD_MEDIDA_ID_M" />
+        <PropertyRef Name="PRODUCTO_ID_M" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -449,30 +429,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RELATION_13_MESA_FK">
-    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
-    <End Role="MESA_RESERVA" Type="Self.MESA_RESERVA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MESA">
-        <PropertyRef Name="ID_MESA" />
-      </Principal>
-      <Dependent Role="MESA_RESERVA">
-        <PropertyRef Name="MESA_ID_MESA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RELATION_13_RESERVA_FK">
-    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
-    <End Role="MESA_RESERVA" Type="Self.MESA_RESERVA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RESERVA">
-        <PropertyRef Name="ID_RESERVA" />
-      </Principal>
-      <Dependent Role="MESA_RESERVA">
-        <PropertyRef Name="RESERVA_ID_RESERVA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="RESERVA_CLIENTE_FK">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
     <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
@@ -482,6 +438,18 @@
       </Principal>
       <Dependent Role="RESERVA">
         <PropertyRef Name="CLIENTE_ID_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RESERVA_MESA_FK">
+    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MESA">
+        <PropertyRef Name="ID_MESA" />
+      </Principal>
+      <Dependent Role="RESERVA">
+        <PropertyRef Name="MESA_ID_MESA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -497,16 +465,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="AGREGARBOLETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="TOTALPAGAR" Type="number" Mode="In" />
-    <Parameter Name="MONTOPAGADO" Type="number" Mode="In" />
-    <Parameter Name="FECHABOLETA" Type="date" Mode="In" />
-    <Parameter Name="CAMBIO" Type="number" Mode="In" />
-    <Parameter Name="IDPEDIDO" Type="number" Mode="In" />
-    <Parameter Name="IDMESA" Type="number" Mode="In" />
-    <Parameter Name="NROPAGO" Type="number" Mode="In" />
-  </Function>
-  <Function Name="AGREGARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
     <Parameter Name="APELLIDO" Type="varchar2" Mode="In" />
@@ -515,54 +474,53 @@
     <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
     <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
     <Parameter Name="USERRUT" Type="varchar2" Mode="In" />
     <Parameter Name="USERIDROL" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="NUMPAGO" Type="number" Mode="In" />
     <Parameter Name="TIPOPAGO" Type="varchar2" Mode="In" />
-    <Parameter Name="BOLETAID" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDPRODUCTO" Type="number" Mode="In" />
     <Parameter Name="STOCK" Type="number" Mode="In" />
     <Parameter Name="TIPOPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="UNIDADMEDIDAID" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDPROVEEDOR" Type="number" Mode="In" />
+  <Function Name="AGREGARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="TIPOPROVEEDOR" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
-    <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="APELLIDO" Type="varchar2" Mode="In" />
     <Parameter Name="FONO" Type="varchar2" Mode="In" />
     <Parameter Name="DIRECCION" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="HORALLEGADA" Type="date" Mode="In" />
     <Parameter Name="HORASALIDA" Type="date" Mode="In" />
     <Parameter Name="ESTADORESERVA" Type="char" Mode="In" />
-    <Parameter Name="CLIENTEID" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
+    <Parameter Name="CLIENTEID" Type="number" Mode="In" />
+    <Parameter Name="MESAID" Type="number" Mode="In" />
   </Function>
-  <Function Name="AGREGARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDROL" Type="number" Mode="In" />
     <Parameter Name="TIPOROL" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDUNIDAD" Type="number" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="AGREGARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="AGREGARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
     <Parameter Name="APELLIDOP" Type="varchar2" Mode="In" />
@@ -573,46 +531,44 @@
     <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="DETALLEORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="ID_MESA" Type="number" Mode="In" />
-  </Function>
-  <Function Name="ELIMINARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="ELIMINARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDCLIENTE" Type="number" Mode="In" />
   </Function>
-  <Function Name="ELIMINARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="ELIMINARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDMESA" Type="number" Mode="In" />
   </Function>
-  <Function Name="ELIMINARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="ELIMINARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="NUMPAGO" Type="number" Mode="In" />
   </Function>
-  <Function Name="ELIMINARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="ELIMINARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDPRODUCTO" Type="number" Mode="In" />
   </Function>
-  <Function Name="ELIMINARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDPROVEEDOR" Type="number" Mode="In" />
-  </Function>
-  <Function Name="ELIMINARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
-  </Function>
-  <Function Name="ELIMINARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDROL" Type="number" Mode="In" />
-  </Function>
-  <Function Name="ELIMINARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDUNIDAD" Type="number" Mode="In" />
-  </Function>
-  <Function Name="ELIMINARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="ELIMINARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
   </Function>
-  <Function Name="LISTARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="LISTARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL" />
-  <Function Name="MODIFICARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="ELIMINARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="IDRESERVA" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="IDROL" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="IDUNIDAD" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="RUT" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="LISTARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="LISTARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI" />
+  <Function Name="MODIFICARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="IDCLIENTE" Type="number" Mode="In" />
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
     <Parameter Name="APELLIDO" Type="varchar2" Mode="In" />
@@ -621,54 +577,55 @@
     <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARMESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="IDMESA" Type="number" Mode="In" />
     <Parameter Name="NUMASIENTO" Type="number" Mode="In" />
     <Parameter Name="ESTADOMESA" Type="char" Mode="In" />
     <Parameter Name="USERRUT" Type="varchar2" Mode="In" />
     <Parameter Name="USERIDROL" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARMETODOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="NUMPAGO" Type="number" Mode="In" />
     <Parameter Name="TIPOPAGO" Type="varchar2" Mode="In" />
-    <Parameter Name="BOLETAID" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDPRODUCTO" Type="number" Mode="In" />
     <Parameter Name="STOCK" Type="number" Mode="In" />
     <Parameter Name="TIPOPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="UNIDADMEDIDAID" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
-    <Parameter Name="IDPROVEEDOR" Type="number" Mode="In" />
+  <Function Name="MODIFICARPROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="TIPOPROVEEDOR" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
-    <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="APELLIDO" Type="varchar2" Mode="In" />
     <Parameter Name="FONO" Type="varchar2" Mode="In" />
     <Parameter Name="DIRECCION" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARRESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="RESERVAID" Type="number" Mode="In" />
     <Parameter Name="HORALLEGADA" Type="date" Mode="In" />
     <Parameter Name="HORASALIDA" Type="date" Mode="In" />
     <Parameter Name="ESTADORESERVA" Type="char" Mode="In" />
-    <Parameter Name="CLIENTEID" Type="number" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
+    <Parameter Name="CLIENTEID" Type="number" Mode="In" />
+    <Parameter Name="MESAID" Type="number" Mode="In" />
   </Function>
-  <Function Name="MODIFICARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARROL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDROL" Type="number" Mode="In" />
     <Parameter Name="TIPOROL" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARUNIDADMEDIDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="IDUNIDAD" Type="number" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <Function Name="MODIFICARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ANGEL">
+  <Function Name="MODIFICARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
     <Parameter Name="RUT" Type="varchar2" Mode="In" />
     <Parameter Name="NOMBRES" Type="varchar2" Mode="In" />
     <Parameter Name="APELLIDOP" Type="varchar2" Mode="In" />
@@ -679,35 +636,34 @@
     <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
-  <EntityContainer Name="ModelStoreContainer">
-    <EntitySet Name="BEBESTIBLE" EntityType="Self.BEBESTIBLE" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="DETALLE_F" EntityType="Self.DETALLE_F" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="FACTURA_PROVEEDOR" EntityType="Self.FACTURA_PROVEEDOR" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="MESA" EntityType="Self.MESA" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="MESA_RESERVA" EntityType="Self.MESA_RESERVA" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="METODO_PAGO" EntityType="Self.METODO_PAGO" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="PLATO" EntityType="Self.PLATO" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="PREP_BEBESTIBLE" EntityType="Self.PREP_BEBESTIBLE" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="PREP_PLATO" EntityType="Self.PREP_PLATO" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" Schema="ANGEL" store:Type="Tables" />
-    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="ANGEL" store:Type="Tables" />
-    <AssociationSet Name="BEBESTIBLE_ORDEN_FK" Association="Self.BEBESTIBLE_ORDEN_FK">
-      <End Role="ORDEN" EntitySet="ORDEN" />
-      <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
-    </AssociationSet>
+  <Function Name="RPPLATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="FECHAINI" Type="varchar2" Mode="In" />
+    <Parameter Name="FECHAFIN" Type="varchar2" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModeloStoreContainer">
+    <EntitySet Name="BEBESTIBLE" EntityType="Self.BEBESTIBLE" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="DETALLE_F" EntityType="Self.DETALLE_F" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="FACTURA_PROVEEDOR" EntityType="Self.FACTURA_PROVEEDOR" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="MESA" EntityType="Self.MESA" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="METODO_PAGO" EntityType="Self.METODO_PAGO" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="PLATO" EntityType="Self.PLATO" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="PREP_BEBESTIBLE" EntityType="Self.PREP_BEBESTIBLE" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="PREP_PLATO" EntityType="Self.PREP_PLATO" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" Schema="SIGLOXXI" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="SIGLOXXI" store:Type="Tables" />
     <AssociationSet Name="BEBESTIBLE_USUARIO_FK" Association="Self.BEBESTIBLE_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
     </AssociationSet>
-    <AssociationSet Name="BOLETA_METODO_PAGO_FK1" Association="Self.BOLETA_METODO_PAGO_FK1">
+    <AssociationSet Name="BOLETA_METODO_PAGO_FK" Association="Self.BOLETA_METODO_PAGO_FK">
       <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
       <End Role="BOLETA" EntitySet="BOLETA" />
     </AssociationSet>
@@ -731,17 +687,21 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="MESA" EntitySet="MESA" />
     </AssociationSet>
+    <AssociationSet Name="ORDEN_BEBESTIBLE_FK" Association="Self.ORDEN_BEBESTIBLE_FK">
+      <End Role="BEBESTIBLE" EntitySet="BEBESTIBLE" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
     <AssociationSet Name="ORDEN_PEDIDO_FK" Association="Self.ORDEN_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="ORDEN_PLATO_FK" Association="Self.ORDEN_PLATO_FK">
+      <End Role="PLATO" EntitySet="PLATO" />
       <End Role="ORDEN" EntitySet="ORDEN" />
     </AssociationSet>
     <AssociationSet Name="PEDIDO_MESA_FK" Association="Self.PEDIDO_MESA_FK">
       <End Role="MESA" EntitySet="MESA" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
-    </AssociationSet>
-    <AssociationSet Name="PLATO_ORDEN_FK" Association="Self.PLATO_ORDEN_FK">
-      <End Role="ORDEN" EntitySet="ORDEN" />
-      <End Role="PLATO" EntitySet="PLATO" />
     </AssociationSet>
     <AssociationSet Name="PLATO_USUARIO_FK" Association="Self.PLATO_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
@@ -767,16 +727,12 @@
       <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
     </AssociationSet>
-    <AssociationSet Name="RELATION_13_MESA_FK" Association="Self.RELATION_13_MESA_FK">
-      <End Role="MESA" EntitySet="MESA" />
-      <End Role="MESA_RESERVA" EntitySet="MESA_RESERVA" />
-    </AssociationSet>
-    <AssociationSet Name="RELATION_13_RESERVA_FK" Association="Self.RELATION_13_RESERVA_FK">
-      <End Role="RESERVA" EntitySet="RESERVA" />
-      <End Role="MESA_RESERVA" EntitySet="MESA_RESERVA" />
-    </AssociationSet>
     <AssociationSet Name="RESERVA_CLIENTE_FK" Association="Self.RESERVA_CLIENTE_FK">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="RESERVA" EntitySet="RESERVA" />
+    </AssociationSet>
+    <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
+      <End Role="MESA" EntitySet="MESA" />
       <End Role="RESERVA" EntitySet="RESERVA" />
     </AssociationSet>
     <AssociationSet Name="USUARIO_ROL_FK" Association="Self.USUARIO_ROL_FK">

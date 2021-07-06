@@ -14,19 +14,15 @@ namespace CapaDatos
     
     public partial class RESERVA
     {
-        public RESERVA()
-        {
-            this.MESA = new HashSet<MESA>();
-        }
-    
         public decimal ID_RESERVA { get; set; }
         public System.DateTime FHORA_LLEGADA { get; set; }
         public System.DateTime FHORA_SALIDA { get; set; }
         public string ESTADO_RESERVA { get; set; }
-        public decimal CLIENTE_ID_CLIENTE { get; set; }
         public string ACTIVO { get; set; }
+        public decimal CLIENTE_ID_CLIENTE { get; set; }
+        public decimal MESA_ID_MESA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
-        public virtual ICollection<MESA> MESA { get; set; }
+        public virtual MESA MESA { get; set; }
     }
 }

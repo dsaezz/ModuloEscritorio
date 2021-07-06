@@ -47,39 +47,6 @@ namespace CapaDatos
         public DbSet<UNIDAD_MEDIDA> UNIDAD_MEDIDA { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
     
-        public virtual int AGREGARBOLETA(Nullable<decimal> tOTALPAGAR, Nullable<decimal> mONTOPAGADO, Nullable<System.DateTime> fECHABOLETA, Nullable<decimal> cAMBIO, Nullable<decimal> iDPEDIDO, Nullable<decimal> iDMESA, Nullable<decimal> nROPAGO)
-        {
-            var tOTALPAGARParameter = tOTALPAGAR.HasValue ?
-                new ObjectParameter("TOTALPAGAR", tOTALPAGAR) :
-                new ObjectParameter("TOTALPAGAR", typeof(decimal));
-    
-            var mONTOPAGADOParameter = mONTOPAGADO.HasValue ?
-                new ObjectParameter("MONTOPAGADO", mONTOPAGADO) :
-                new ObjectParameter("MONTOPAGADO", typeof(decimal));
-    
-            var fECHABOLETAParameter = fECHABOLETA.HasValue ?
-                new ObjectParameter("FECHABOLETA", fECHABOLETA) :
-                new ObjectParameter("FECHABOLETA", typeof(System.DateTime));
-    
-            var cAMBIOParameter = cAMBIO.HasValue ?
-                new ObjectParameter("CAMBIO", cAMBIO) :
-                new ObjectParameter("CAMBIO", typeof(decimal));
-    
-            var iDPEDIDOParameter = iDPEDIDO.HasValue ?
-                new ObjectParameter("IDPEDIDO", iDPEDIDO) :
-                new ObjectParameter("IDPEDIDO", typeof(decimal));
-    
-            var iDMESAParameter = iDMESA.HasValue ?
-                new ObjectParameter("IDMESA", iDMESA) :
-                new ObjectParameter("IDMESA", typeof(decimal));
-    
-            var nROPAGOParameter = nROPAGO.HasValue ?
-                new ObjectParameter("NROPAGO", nROPAGO) :
-                new ObjectParameter("NROPAGO", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARBOLETA", tOTALPAGARParameter, mONTOPAGADOParameter, fECHABOLETAParameter, cAMBIOParameter, iDPEDIDOParameter, iDMESAParameter, nROPAGOParameter);
-        }
-    
         public virtual int AGREGARCLIENTE(string rUT, string nOMBRES, string aPELLIDO, string cORREOS, string dIRECCIONES, string cLAVES, string aCTIVO)
         {
             var rUTParameter = rUT != null ?
@@ -138,7 +105,7 @@ namespace CapaDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARMESA", nUMASIENTOParameter, eSTADOMESAParameter, uSERRUTParameter, uSERIDROLParameter, aCTIVOParameter);
         }
     
-        public virtual int AGREGARMETODOPAGO(Nullable<decimal> nUMPAGO, string tIPOPAGO, Nullable<decimal> bOLETAID, string aCTIVO)
+        public virtual int AGREGARMETODOPAGO(Nullable<decimal> nUMPAGO, string tIPOPAGO, string aCTIVO)
         {
             var nUMPAGOParameter = nUMPAGO.HasValue ?
                 new ObjectParameter("NUMPAGO", nUMPAGO) :
@@ -148,15 +115,11 @@ namespace CapaDatos
                 new ObjectParameter("TIPOPAGO", tIPOPAGO) :
                 new ObjectParameter("TIPOPAGO", typeof(string));
     
-            var bOLETAIDParameter = bOLETAID.HasValue ?
-                new ObjectParameter("BOLETAID", bOLETAID) :
-                new ObjectParameter("BOLETAID", typeof(decimal));
-    
             var aCTIVOParameter = aCTIVO != null ?
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARMETODOPAGO", nUMPAGOParameter, tIPOPAGOParameter, bOLETAIDParameter, aCTIVOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARMETODOPAGO", nUMPAGOParameter, tIPOPAGOParameter, aCTIVOParameter);
         }
     
         public virtual int AGREGARPRODUCTO(Nullable<decimal> iDPRODUCTO, Nullable<decimal> sTOCK, string tIPOPRODUCTO, Nullable<decimal> uNIDADMEDIDAID, string aCTIVO)
@@ -184,11 +147,11 @@ namespace CapaDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARPRODUCTO", iDPRODUCTOParameter, sTOCKParameter, tIPOPRODUCTOParameter, uNIDADMEDIDAIDParameter, aCTIVOParameter);
         }
     
-        public virtual int AGREGARPROVEEDOR(Nullable<decimal> iDPROVEEDOR, string tIPOPROVEEDOR, string nOMBRES, string rUT, string aPELLIDO, string fONO, string dIRECCION, string aCTIVO)
+        public virtual int AGREGARPROVEEDOR(string rUT, string tIPOPROVEEDOR, string nOMBRES, string aPELLIDO, string fONO, string dIRECCION, string aCTIVO)
         {
-            var iDPROVEEDORParameter = iDPROVEEDOR.HasValue ?
-                new ObjectParameter("IDPROVEEDOR", iDPROVEEDOR) :
-                new ObjectParameter("IDPROVEEDOR", typeof(decimal));
+            var rUTParameter = rUT != null ?
+                new ObjectParameter("RUT", rUT) :
+                new ObjectParameter("RUT", typeof(string));
     
             var tIPOPROVEEDORParameter = tIPOPROVEEDOR != null ?
                 new ObjectParameter("TIPOPROVEEDOR", tIPOPROVEEDOR) :
@@ -197,10 +160,6 @@ namespace CapaDatos
             var nOMBRESParameter = nOMBRES != null ?
                 new ObjectParameter("NOMBRES", nOMBRES) :
                 new ObjectParameter("NOMBRES", typeof(string));
-    
-            var rUTParameter = rUT != null ?
-                new ObjectParameter("RUT", rUT) :
-                new ObjectParameter("RUT", typeof(string));
     
             var aPELLIDOParameter = aPELLIDO != null ?
                 new ObjectParameter("APELLIDO", aPELLIDO) :
@@ -218,10 +177,10 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARPROVEEDOR", iDPROVEEDORParameter, tIPOPROVEEDORParameter, nOMBRESParameter, rUTParameter, aPELLIDOParameter, fONOParameter, dIRECCIONParameter, aCTIVOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARPROVEEDOR", rUTParameter, tIPOPROVEEDORParameter, nOMBRESParameter, aPELLIDOParameter, fONOParameter, dIRECCIONParameter, aCTIVOParameter);
         }
     
-        public virtual int AGREGARRESERVA(Nullable<System.DateTime> hORALLEGADA, Nullable<System.DateTime> hORASALIDA, string eSTADORESERVA, Nullable<decimal> cLIENTEID, string aCTIVO)
+        public virtual int AGREGARRESERVA(Nullable<System.DateTime> hORALLEGADA, Nullable<System.DateTime> hORASALIDA, string eSTADORESERVA, string aCTIVO, Nullable<decimal> cLIENTEID, Nullable<decimal> mESAID)
         {
             var hORALLEGADAParameter = hORALLEGADA.HasValue ?
                 new ObjectParameter("HORALLEGADA", hORALLEGADA) :
@@ -235,15 +194,19 @@ namespace CapaDatos
                 new ObjectParameter("ESTADORESERVA", eSTADORESERVA) :
                 new ObjectParameter("ESTADORESERVA", typeof(string));
     
-            var cLIENTEIDParameter = cLIENTEID.HasValue ?
-                new ObjectParameter("CLIENTEID", cLIENTEID) :
-                new ObjectParameter("CLIENTEID", typeof(decimal));
-    
             var aCTIVOParameter = aCTIVO != null ?
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARRESERVA", hORALLEGADAParameter, hORASALIDAParameter, eSTADORESERVAParameter, cLIENTEIDParameter, aCTIVOParameter);
+            var cLIENTEIDParameter = cLIENTEID.HasValue ?
+                new ObjectParameter("CLIENTEID", cLIENTEID) :
+                new ObjectParameter("CLIENTEID", typeof(decimal));
+    
+            var mESAIDParameter = mESAID.HasValue ?
+                new ObjectParameter("MESAID", mESAID) :
+                new ObjectParameter("MESAID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARRESERVA", hORALLEGADAParameter, hORASALIDAParameter, eSTADORESERVAParameter, aCTIVOParameter, cLIENTEIDParameter, mESAIDParameter);
         }
     
         public virtual int AGREGARROL(Nullable<decimal> iDROL, string tIPOROL, string aCTIVO)
@@ -321,15 +284,6 @@ namespace CapaDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AGREGARUSUARIO", rUTParameter, nOMBRESParameter, aPELLIDOPParameter, aPELLIDOMParameter, rOLIDROLParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
         }
     
-        public virtual int DETALLEORDEN(Nullable<decimal> iD_MESA)
-        {
-            var iD_MESAParameter = iD_MESA.HasValue ?
-                new ObjectParameter("ID_MESA", iD_MESA) :
-                new ObjectParameter("ID_MESA", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DETALLEORDEN", iD_MESAParameter);
-        }
-    
         public virtual int ELIMINARCLIENTE(Nullable<decimal> iDCLIENTE)
         {
             var iDCLIENTEParameter = iDCLIENTE.HasValue ?
@@ -366,13 +320,13 @@ namespace CapaDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ELIMINARPRODUCTO", iDPRODUCTOParameter);
         }
     
-        public virtual int ELIMINARPROVEEDOR(Nullable<decimal> iDPROVEEDOR)
+        public virtual int ELIMINARPROVEEDOR(string rUT)
         {
-            var iDPROVEEDORParameter = iDPROVEEDOR.HasValue ?
-                new ObjectParameter("IDPROVEEDOR", iDPROVEEDOR) :
-                new ObjectParameter("IDPROVEEDOR", typeof(decimal));
+            var rUTParameter = rUT != null ?
+                new ObjectParameter("RUT", rUT) :
+                new ObjectParameter("RUT", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ELIMINARPROVEEDOR", iDPROVEEDORParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ELIMINARPROVEEDOR", rUTParameter);
         }
     
         public virtual int ELIMINARRESERVA(Nullable<decimal> iDRESERVA)
@@ -456,8 +410,12 @@ namespace CapaDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LISTARUSUARIO");
         }
     
-        public virtual int MODIFICARCLIENTE(string rUT, string nOMBRES, string aPELLIDO, string cORREOS, string dIRECCIONES, string cLAVES, string aCTIVO)
+        public virtual int MODIFICARCLIENTE(Nullable<decimal> iDCLIENTE, string rUT, string nOMBRES, string aPELLIDO, string cORREOS, string dIRECCIONES, string cLAVES, string aCTIVO)
         {
+            var iDCLIENTEParameter = iDCLIENTE.HasValue ?
+                new ObjectParameter("IDCLIENTE", iDCLIENTE) :
+                new ObjectParameter("IDCLIENTE", typeof(decimal));
+    
             var rUTParameter = rUT != null ?
                 new ObjectParameter("RUT", rUT) :
                 new ObjectParameter("RUT", typeof(string));
@@ -486,11 +444,15 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARCLIENTE", rUTParameter, nOMBRESParameter, aPELLIDOParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARCLIENTE", iDCLIENTEParameter, rUTParameter, nOMBRESParameter, aPELLIDOParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
         }
     
-        public virtual int MODIFICARMESA(Nullable<decimal> nUMASIENTO, string eSTADOMESA, string uSERRUT, Nullable<decimal> uSERIDROL, string aCTIVO)
+        public virtual int MODIFICARMESA(Nullable<decimal> iDMESA, Nullable<decimal> nUMASIENTO, string eSTADOMESA, string uSERRUT, Nullable<decimal> uSERIDROL, string aCTIVO)
         {
+            var iDMESAParameter = iDMESA.HasValue ?
+                new ObjectParameter("IDMESA", iDMESA) :
+                new ObjectParameter("IDMESA", typeof(decimal));
+    
             var nUMASIENTOParameter = nUMASIENTO.HasValue ?
                 new ObjectParameter("NUMASIENTO", nUMASIENTO) :
                 new ObjectParameter("NUMASIENTO", typeof(decimal));
@@ -511,10 +473,10 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARMESA", nUMASIENTOParameter, eSTADOMESAParameter, uSERRUTParameter, uSERIDROLParameter, aCTIVOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARMESA", iDMESAParameter, nUMASIENTOParameter, eSTADOMESAParameter, uSERRUTParameter, uSERIDROLParameter, aCTIVOParameter);
         }
     
-        public virtual int MODIFICARMETODOPAGO(Nullable<decimal> nUMPAGO, string tIPOPAGO, Nullable<decimal> bOLETAID, string aCTIVO)
+        public virtual int MODIFICARMETODOPAGO(Nullable<decimal> nUMPAGO, string tIPOPAGO, string aCTIVO)
         {
             var nUMPAGOParameter = nUMPAGO.HasValue ?
                 new ObjectParameter("NUMPAGO", nUMPAGO) :
@@ -524,15 +486,11 @@ namespace CapaDatos
                 new ObjectParameter("TIPOPAGO", tIPOPAGO) :
                 new ObjectParameter("TIPOPAGO", typeof(string));
     
-            var bOLETAIDParameter = bOLETAID.HasValue ?
-                new ObjectParameter("BOLETAID", bOLETAID) :
-                new ObjectParameter("BOLETAID", typeof(decimal));
-    
             var aCTIVOParameter = aCTIVO != null ?
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARMETODOPAGO", nUMPAGOParameter, tIPOPAGOParameter, bOLETAIDParameter, aCTIVOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARMETODOPAGO", nUMPAGOParameter, tIPOPAGOParameter, aCTIVOParameter);
         }
     
         public virtual int MODIFICARPRODUCTO(Nullable<decimal> iDPRODUCTO, Nullable<decimal> sTOCK, string tIPOPRODUCTO, Nullable<decimal> uNIDADMEDIDAID, string aCTIVO)
@@ -560,11 +518,11 @@ namespace CapaDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARPRODUCTO", iDPRODUCTOParameter, sTOCKParameter, tIPOPRODUCTOParameter, uNIDADMEDIDAIDParameter, aCTIVOParameter);
         }
     
-        public virtual int MODIFICARPROVEEDOR(Nullable<decimal> iDPROVEEDOR, string tIPOPROVEEDOR, string nOMBRES, string rUT, string aPELLIDO, string fONO, string dIRECCION, string aCTIVO)
+        public virtual int MODIFICARPROVEEDOR(string rUT, string tIPOPROVEEDOR, string nOMBRES, string aPELLIDO, string fONO, string dIRECCION, string aCTIVO)
         {
-            var iDPROVEEDORParameter = iDPROVEEDOR.HasValue ?
-                new ObjectParameter("IDPROVEEDOR", iDPROVEEDOR) :
-                new ObjectParameter("IDPROVEEDOR", typeof(decimal));
+            var rUTParameter = rUT != null ?
+                new ObjectParameter("RUT", rUT) :
+                new ObjectParameter("RUT", typeof(string));
     
             var tIPOPROVEEDORParameter = tIPOPROVEEDOR != null ?
                 new ObjectParameter("TIPOPROVEEDOR", tIPOPROVEEDOR) :
@@ -573,10 +531,6 @@ namespace CapaDatos
             var nOMBRESParameter = nOMBRES != null ?
                 new ObjectParameter("NOMBRES", nOMBRES) :
                 new ObjectParameter("NOMBRES", typeof(string));
-    
-            var rUTParameter = rUT != null ?
-                new ObjectParameter("RUT", rUT) :
-                new ObjectParameter("RUT", typeof(string));
     
             var aPELLIDOParameter = aPELLIDO != null ?
                 new ObjectParameter("APELLIDO", aPELLIDO) :
@@ -594,11 +548,15 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARPROVEEDOR", iDPROVEEDORParameter, tIPOPROVEEDORParameter, nOMBRESParameter, rUTParameter, aPELLIDOParameter, fONOParameter, dIRECCIONParameter, aCTIVOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARPROVEEDOR", rUTParameter, tIPOPROVEEDORParameter, nOMBRESParameter, aPELLIDOParameter, fONOParameter, dIRECCIONParameter, aCTIVOParameter);
         }
     
-        public virtual int MODIFICARRESERVA(Nullable<System.DateTime> hORALLEGADA, Nullable<System.DateTime> hORASALIDA, string eSTADORESERVA, Nullable<decimal> cLIENTEID, string aCTIVO)
+        public virtual int MODIFICARRESERVA(Nullable<decimal> rESERVAID, Nullable<System.DateTime> hORALLEGADA, Nullable<System.DateTime> hORASALIDA, string eSTADORESERVA, string aCTIVO, Nullable<decimal> cLIENTEID, Nullable<decimal> mESAID)
         {
+            var rESERVAIDParameter = rESERVAID.HasValue ?
+                new ObjectParameter("RESERVAID", rESERVAID) :
+                new ObjectParameter("RESERVAID", typeof(decimal));
+    
             var hORALLEGADAParameter = hORALLEGADA.HasValue ?
                 new ObjectParameter("HORALLEGADA", hORALLEGADA) :
                 new ObjectParameter("HORALLEGADA", typeof(System.DateTime));
@@ -611,15 +569,19 @@ namespace CapaDatos
                 new ObjectParameter("ESTADORESERVA", eSTADORESERVA) :
                 new ObjectParameter("ESTADORESERVA", typeof(string));
     
-            var cLIENTEIDParameter = cLIENTEID.HasValue ?
-                new ObjectParameter("CLIENTEID", cLIENTEID) :
-                new ObjectParameter("CLIENTEID", typeof(decimal));
-    
             var aCTIVOParameter = aCTIVO != null ?
                 new ObjectParameter("ACTIVO", aCTIVO) :
                 new ObjectParameter("ACTIVO", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARRESERVA", hORALLEGADAParameter, hORASALIDAParameter, eSTADORESERVAParameter, cLIENTEIDParameter, aCTIVOParameter);
+            var cLIENTEIDParameter = cLIENTEID.HasValue ?
+                new ObjectParameter("CLIENTEID", cLIENTEID) :
+                new ObjectParameter("CLIENTEID", typeof(decimal));
+    
+            var mESAIDParameter = mESAID.HasValue ?
+                new ObjectParameter("MESAID", mESAID) :
+                new ObjectParameter("MESAID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARRESERVA", rESERVAIDParameter, hORALLEGADAParameter, hORASALIDAParameter, eSTADORESERVAParameter, aCTIVOParameter, cLIENTEIDParameter, mESAIDParameter);
         }
     
         public virtual int MODIFICARROL(Nullable<decimal> iDROL, string tIPOROL, string aCTIVO)
@@ -695,6 +657,19 @@ namespace CapaDatos
                 new ObjectParameter("ACTIVO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARUSUARIO", rUTParameter, nOMBRESParameter, aPELLIDOPParameter, aPELLIDOMParameter, rOLIDROLParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
+        }
+    
+        public virtual int RPPLATO(string fECHAINI, string fECHAFIN)
+        {
+            var fECHAINIParameter = fECHAINI != null ?
+                new ObjectParameter("FECHAINI", fECHAINI) :
+                new ObjectParameter("FECHAINI", typeof(string));
+    
+            var fECHAFINParameter = fECHAFIN != null ?
+                new ObjectParameter("FECHAFIN", fECHAFIN) :
+                new ObjectParameter("FECHAFIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RPPLATO", fECHAINIParameter, fECHAFINParameter);
         }
     }
 }
