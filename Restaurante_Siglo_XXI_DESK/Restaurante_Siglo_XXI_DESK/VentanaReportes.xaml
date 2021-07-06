@@ -8,13 +8,13 @@ xmlns:Controls ="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="Reportes" Height="450" Width="800">
     <Grid>
-        <Controls:Tile x:Name="btn_line" Margin="184,157,469.6,123" Title="Administrar Usuario" TitleFontSize="12" HorizontalTitleAlignment="Center" Click="btn_line_Click">
+        <Controls:Tile x:Name="btn_line" Margin="184,157,469.6,123" Title="Clientes atendidos" TitleFontSize="12" HorizontalTitleAlignment="Center" Click="btn_line_Click">
             <Image Source="Iconos/line.png" Height="100" Width="100"/>
         </Controls:Tile>
-        <Controls:Tile x:Name="btn_bar" Margin="509,157,144.6,123" Title="Administrar Mesas" TitleFontSize="12" HorizontalTitleAlignment="Center" Click="btn_bar_Click" >
+        <Controls:Tile x:Name="btn_bar" Margin="509,157,144.6,123" Title="Ingresos Historicos" TitleFontSize="12" HorizontalTitleAlignment="Center" Click="btn_bar_Click" >
             <Image Source="Iconos/bar.png" Height="100" Width="100"/>
         </Controls:Tile>
-        <Controls:Tile x:Name="btn_pie" Margin="346,157,307.6,123" Title="Administrar Proveedor" TitleFontSize="12" HorizontalTitleAlignment="Center" Click="btn_pie_Click"  >
+        <Controls:Tile x:Name="btn_pie" Margin="346,157,307.6,123" Title="Platos Consumidos" TitleFontSize="12" HorizontalTitleAlignment="Center" Click="btn_pie_Click"  >
             <Image Source="Iconos/pie.png" Height="83" Width="100"/>
         </Controls:Tile>
         <TextBlock HorizontalAlignment="Left" Margin="201,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="440" FontSize="48" FontFamily="Fonts/#Luckybones"><Run Text="Restaurant"/><Run Text=" Siglo XXI"/></TextBlock>
