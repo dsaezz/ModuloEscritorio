@@ -55,6 +55,7 @@ namespace CapaNegocio
         }
         public void agregarMesa( Int32 num_asiento, string estadoMesa)
         {
+            UsuarioBN u = new UsuarioBN();
             conexion.AGREGARMESA(num_asiento,  estadoMesa, "00.000.000-0", 2,"1");
             conexion.SaveChanges();
         }
@@ -63,9 +64,11 @@ namespace CapaNegocio
             conexion.ELIMINARMESA(id);
             conexion.SaveChanges();
         }
-        public void modificarMesa(Int32 num_asiento, string estadoMesa, string rut, Int32 rol)
+        
+        public void modificarMesa(Int32 id,Int32 num_asiento, string estadoMesa, string rut, Int32 rol)
         {
-            conexion.MODIFICARMESA( num_asiento, estadoMesa, rut, rol, "1");
+           
+            conexion.MODIFICARMESA(id,num_asiento, estadoMesa, rut, rol, "1");
             conexion.SaveChanges();
 
         }

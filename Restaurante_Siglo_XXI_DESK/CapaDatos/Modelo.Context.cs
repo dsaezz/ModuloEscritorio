@@ -658,5 +658,18 @@ namespace CapaDatos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICARUSUARIO", rUTParameter, nOMBRESParameter, aPELLIDOPParameter, aPELLIDOMParameter, rOLIDROLParameter, cORREOSParameter, dIRECCIONESParameter, cLAVESParameter, aCTIVOParameter);
         }
+    
+        public virtual int RPPLATO(string fECHAINI, string fECHAFIN)
+        {
+            var fECHAINIParameter = fECHAINI != null ?
+                new ObjectParameter("FECHAINI", fECHAINI) :
+                new ObjectParameter("FECHAINI", typeof(string));
+    
+            var fECHAFINParameter = fECHAFIN != null ?
+                new ObjectParameter("FECHAFIN", fECHAFIN) :
+                new ObjectParameter("FECHAFIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RPPLATO", fECHAINIParameter, fECHAFINParameter);
+        }
     }
 }

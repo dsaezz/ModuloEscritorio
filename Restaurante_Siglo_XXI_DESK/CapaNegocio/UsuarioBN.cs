@@ -35,7 +35,7 @@ namespace CapaNegocio
         {
             conexion = new DBEntities();
         }
-        /*public UsuarioBN(USUARIO usuarioBD)
+        public UsuarioBN(USUARIO usuarioBD)
         {
             rut = usuarioBD.RUT;
             nombre = usuarioBD.NOMBRE;
@@ -45,7 +45,7 @@ namespace CapaNegocio
             correo = usuarioBD.CORREO;
             direccion = usuarioBD.DIRECCION;
             contrasena = usuarioBD.CLAVE;
-        }*/
+        }
 
 
         public string ValidarUsuario(string usuario, string clave)
@@ -101,6 +101,14 @@ namespace CapaNegocio
         {
             conexion.MODIFICARUSUARIO(rut, nombre, apellidoP, apellidoM, rol, correo, direccion, clave,"1");
             conexion.SaveChanges();
+        }
+        public decimal BuscarRolUser(string rut)
+        {
+            var resultado = (from u in conexion.USUARIO
+                             where u.RUT == rut
+                             select new { u.ROL_ID_ROL }).Single();
+            decimal rol = resultado.ROL_ID_ROL;
+            return rol;
         }
     }
 }

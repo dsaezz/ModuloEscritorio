@@ -636,6 +636,10 @@
     <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
     <Parameter Name="ACTIVO" Type="char" Mode="In" />
   </Function>
+  <Function Name="RPPLATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+    <Parameter Name="FECHAINI" Type="varchar2" Mode="In" />
+    <Parameter Name="FECHAFIN" Type="varchar2" Mode="In" />
+  </Function>
   <EntityContainer Name="ModeloStoreContainer">
     <EntitySet Name="BEBESTIBLE" EntityType="Self.BEBESTIBLE" Schema="SIGLOXXI" store:Type="Tables" />
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="SIGLOXXI" store:Type="Tables" />

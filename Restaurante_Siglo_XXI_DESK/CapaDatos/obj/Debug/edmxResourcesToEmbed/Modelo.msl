@@ -249,5 +249,6 @@
     <FunctionImportMapping FunctionImportName="MODIFICARROL" FunctionName="Modelo.Store.MODIFICARROL" />
     <FunctionImportMapping FunctionImportName="MODIFICARUNIDADMEDIDA" FunctionName="Modelo.Store.MODIFICARUNIDADMEDIDA" />
     <FunctionImportMapping FunctionImportName="MODIFICARUSUARIO" FunctionName="Modelo.Store.MODIFICARUSUARIO" />
+    <FunctionImportMapping FunctionImportName="RPPLATO" FunctionName="Modelo.Store.RPPLATO" />
   </EntityContainerMapping>
 </Mapping>

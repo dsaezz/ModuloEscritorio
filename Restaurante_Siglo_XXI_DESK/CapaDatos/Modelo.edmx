@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Modelo.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Modelo.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BEBESTIBLE">
           <Key>
             <PropertyRef Name="ID_BEBESTIBLE" />
@@ -641,6 +641,10 @@
           <Parameter Name="CLAVES" Type="varchar2" Mode="In" />
           <Parameter Name="ACTIVO" Type="char" Mode="In" />
         </Function>
+        <Function Name="RPPLATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SIGLOXXI">
+          <Parameter Name="FECHAINI" Type="varchar2" Mode="In" />
+          <Parameter Name="FECHAFIN" Type="varchar2" Mode="In" />
+        </Function>
         <EntityContainer Name="ModeloStoreContainer">
           <EntitySet Name="BEBESTIBLE" EntityType="Self.BEBESTIBLE" Schema="SIGLOXXI" store:Type="Tables" />
           <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="SIGLOXXI" store:Type="Tables" />
@@ -741,8 +745,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1417,31 +1420,31 @@
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARCLIENTE">
-            <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
+          <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARMESA">
-            <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
+          <Parameter Name="IDMESA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARMETODOPAGO">
-            <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
+          <Parameter Name="NUMPAGO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARPRODUCTO">
-            <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
+          <Parameter Name="IDPRODUCTO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARPROVEEDOR">
-            <Parameter Name="RUT" Mode="In" Type="String" />
+          <Parameter Name="RUT" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARRESERVA">
-            <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
+          <Parameter Name="IDRESERVA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARROL">
-            <Parameter Name="IDROL" Mode="In" Type="Decimal" />
+          <Parameter Name="IDROL" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARUNIDADMEDIDA">
-            <Parameter Name="IDUNIDAD" Mode="In" Type="Decimal" />
+          <Parameter Name="IDUNIDAD" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ELIMINARUSUARIO">
-            <Parameter Name="RUT" Mode="In" Type="String" />
+          <Parameter Name="RUT" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="LISTARCLIENTE" />
           <FunctionImport Name="LISTARMESA" />
@@ -1520,6 +1523,10 @@
             <Parameter Name="DIRECCIONES" Mode="In" Type="String" />
             <Parameter Name="CLAVES" Mode="In" Type="String" />
             <Parameter Name="ACTIVO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RPPLATO">
+            <Parameter Name="FECHAINI" Mode="In" Type="String" />
+            <Parameter Name="FECHAFIN" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -1776,6 +1783,7 @@
           <FunctionImportMapping FunctionImportName="MODIFICARROL" FunctionName="Modelo.Store.MODIFICARROL" />
           <FunctionImportMapping FunctionImportName="MODIFICARUNIDADMEDIDA" FunctionName="Modelo.Store.MODIFICARUNIDADMEDIDA" />
           <FunctionImportMapping FunctionImportName="MODIFICARUSUARIO" FunctionName="Modelo.Store.MODIFICARUSUARIO" />
+          <FunctionImportMapping FunctionImportName="RPPLATO" FunctionName="Modelo.Store.RPPLATO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

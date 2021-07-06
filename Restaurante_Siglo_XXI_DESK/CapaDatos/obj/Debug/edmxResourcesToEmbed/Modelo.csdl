@@ -775,5 +775,9 @@
       <Parameter Name="CLAVES" Mode="In" Type="String" />
       <Parameter Name="ACTIVO" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="RPPLATO">
+      <Parameter Name="FECHAINI" Mode="In" Type="String" />
+      <Parameter Name="FECHAFIN" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

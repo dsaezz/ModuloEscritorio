@@ -33,21 +33,21 @@ namespace CapaNegocio
             conn.Close();
             return dt;
         }
-        public void agregarProveedor(Int32 id, string tipo, string nombre,string rut, string apellido,string fono,string direccion)
+        public void agregarProveedor(string rut, string tipo, string nombre, string apellido,string fono,string direccion)
         {
-            conexion.AGREGARPROVEEDOR(id,tipo,nombre,rut,apellido,fono,direccion,"1");
+            conexion.AGREGARPROVEEDOR(rut, tipo,nombre,apellido,fono,direccion,"1");
             conexion.SaveChanges();
         }
 
-        public void eliminarProveedor(Int32 id)
+        public void eliminarProveedor(string rut)
         {
-            conexion.ELIMINARPROVEEDOR(id);
+            conexion.ELIMINARPROVEEDOR(rut);
             conexion.SaveChanges();
         }
 
-        public void modificarProveedor(Int32 id, string tipo, string nombre, string rut, string apellido, string fono, string direccion)
+        public void modificarProveedor(string rut, string tipo, string nombre, string apellido, string fono, string direccion)
         {
-            conexion.MODIFICARPROVEEDOR(id,tipo,nombre,rut,apellido,fono,direccion,"1");
+            conexion.MODIFICARPROVEEDOR(rut, tipo, nombre, apellido, fono, direccion, "1");
             conexion.SaveChanges();
         }
     }
